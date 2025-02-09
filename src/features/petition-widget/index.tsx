@@ -9,6 +9,10 @@ import { NoteFooter } from '@/features/note-widget/components/note-footer';
 import { NoteHeader } from '@/features/note-widget/components/note-header';
 import { PetitionContent } from './components/petition-content';
 
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/shared/components/ui/card';
+import { PetitionPicture } from './components/petition-picture';
+import { PetitionName } from './components/petition-name';
+
 export const PetitionByEvent = memo(
   ({ event }: { event: NDKEvent | null | undefined }) => {
     if (event === undefined) {
@@ -22,13 +26,20 @@ export const PetitionByEvent = memo(
     if (event) {
       return (
         <>
-          <div className="px-2">
-            <div className="px-2 border rounded-sm shadow-md bg-background transition-colors duration-500 ease-out hover:border-primary/30">
-              <NoteHeader event={event} />
-              <PetitionContent event={event} />
-              <NoteFooter event={event} />
+            <div className="px-2">
+            <Card className="border rounded-sm shadow-md bg-background transition-colors duration-500 ease-out hover:border-primary/30">
+              <CardHeader>
+                <CardTitle><PetitionName event={event}/> </CardTitle>
+              </CardHeader>
+              <CardContent className = "flex flex-col gap-2">
+                <PetitionPicture event={event} />
+                <PetitionContent event={event} />
+              </CardContent>
+              <CardFooter>
+               <NoteHeader event={event} />
+              </CardFooter>
+            </Card>
             </div>
-          </div>
         </>
       );
     }
@@ -36,23 +47,23 @@ export const PetitionByEvent = memo(
   (prev, next) => prev.event?.id === next.event?.id,
 );
 
-export const NoteByNoteId = memo(
-  ({ noteId }: { noteId: string | undefined }) => {
+export const PetitionByPetitionId = memo(
+  ({ petitionId }: { petitionId: string | undefined }) => {
     const [event, setEvent] = useState<NDKEvent | null | undefined>(undefined);
 
     const { ndk } = useNdk();
 
     useEffect(() => {
-      if (!ndk || !noteId) {
+      if (!ndk || !petitionId) {
         return;
       }
 
-      ndk.fetchEvent(noteId).then((event) => {
+      ndk.fetchEvent(petitionId).then((event) => {
         setEvent(event);
       });
-    }, [noteId, ndk, setEvent]);
+    }, [petitionId, ndk, setEvent]);
 
     return <PetitionByEvent event={event} />;
   },
-  (prev, next) => prev.noteId === next.noteId,
+  (prev, next) => prev.petitionId === next.petitionId,
 );
