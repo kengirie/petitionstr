@@ -11,6 +11,7 @@ import { Spinner } from '@/shared/components/spinner';
 
 import { NewNoteWidget } from '@/features/new-note-widget';
 import { NoteByEvent } from '@/features/note-widget';
+import { PetitionByEvent } from '../petition-widget';
 
 import { usePetitionsFeedWidget } from './hooks';
 import { PetitionFeedView } from './types';
@@ -27,12 +28,13 @@ export const PetitionsFeedWidget = () => {
         ) : processedEvents ? (
           <div className="pt-2 flex flex-col gap-2">
             {processedEvents.map((event) => (
-              <NoteByEvent event={event} />
+
+              <PetitionByEvent event={event} />
             ))}
           </div>
         ) : (
           <div className="pt-2 px-2">
-            <p>No events found. Follow some users to see their notes here.</p>
+            <p>No events found.</p>
           </div>
         )}
 

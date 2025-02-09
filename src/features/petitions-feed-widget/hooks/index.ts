@@ -42,7 +42,7 @@ export const usePetitionsFeedWidget = () => {
         {
           kinds: [40],
           limit: 10,
-          authors: [activeUser.pubkey, ...(follows || []).map((u) => u.pubkey)],
+          /*authors: [activeUser.pubkey, ...(follows || []).map((u) => u.pubkey)],*/
         },
       ],
       opts: { groupableDelay: 500 },
