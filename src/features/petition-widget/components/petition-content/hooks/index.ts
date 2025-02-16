@@ -14,13 +14,18 @@ export const usePetitionContent = (content: string) => {
 
   useEffect(() => {
     let petitionContent;
-    try {
+   try {
       petitionContent = JSON.parse(content);
+      if (!petitionContent?.about) {
+        setChunks([]);
+        return;
+      }
+      setChunks(parseChunks(petitionContent.about));
     }
     catch (e) {
       console.error('Failed to parse petition content', e);
+      setChunks([]);
     }
-    setChunks(parseChunks(petitionContent.about));
   }, [content]);
 
   return { chunks, ref, inView };

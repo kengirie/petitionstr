@@ -11,6 +11,9 @@ import {
   MoonIcon,
   SearchIcon,
   SunIcon,
+  ScrollTextIcon,
+  ClipboardSignatureIcon,
+  FileTextIcon,
 } from 'lucide-react';
 import { useActiveUser, useNdk } from 'nostr-hooks';
 import { Link, Outlet, createBrowserRouter } from 'react-router-dom';
@@ -69,16 +72,16 @@ const Layout = () => {
             </Link>
 
             <Link
-              to="/"
+              to="/petitions"
               className="flex items-center gap-2 p-2 transition-colors duration-500 ease-out text-primary/60 hover:text-primary w-full rounded-lg hover:bg-secondary"
             >
               <div>
-                <CompassIcon size={24} />
+                <FileTextIcon size={24} />
               </div>
 
-              <span className="hidden xl:block">Explore</span>
+              <span className="hidden xl:block">Petitions</span>
             </Link>
-
+{/* 
             <Link
               to="/messages"
               className="flex items-center gap-2 p-2 transition-colors duration-500 ease-out text-primary/60 hover:text-primary w-full rounded-lg hover:bg-secondary"
@@ -88,7 +91,7 @@ const Layout = () => {
               </div>
 
               <span className="hidden xl:block">Messages</span>
-            </Link>
+            </Link> */}
 
             <Link
               to="/"
@@ -284,7 +287,7 @@ const Layout = () => {
           id="rightbar"
           className="hidden border-l flex-col gap-2 overflow-hidden items-center p-2 lg:flex lg:col-span-3"
         >
-          <TrendingNotesWidget />
+          {/* <TrendingNotesWidget /> */}
         </div>
       </div>
     </>

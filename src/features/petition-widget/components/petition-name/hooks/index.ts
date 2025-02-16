@@ -6,13 +6,18 @@ export const usePetitionName = (content: string) => {
 
   useEffect(() => {
     let petitionContent;
-    try {
+     try {
       petitionContent = JSON.parse(content);
+      if (!petitionContent?.name) {
+        setName(undefined);
+        return;
+      }
+      setName(petitionContent.name);
     }
     catch (e) {
       console.error('Failed to parse petition content', e);
+      setName(undefined);
     }
-    setName(petitionContent.name);
   }, [content]);
 
   return { name };

@@ -14,11 +14,16 @@ export const usePetitionPicture = (content: string) => {
     let petitionContent;
     try {
       petitionContent = JSON.parse(content);
+      if (!petitionContent?.picture) {
+        setUrl(undefined);
+        return;
+      }
+      setUrl(petitionContent.picture);
     }
     catch (e) {
       console.error('Failed to parse petition content', e);
+      setUrl(undefined);
     }
-    setUrl(petitionContent.picture);
   }, [content]);
 
   return { url, ref, inView };
