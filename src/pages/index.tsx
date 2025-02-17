@@ -14,6 +14,9 @@ import {
   ScrollTextIcon,
   ClipboardSignatureIcon,
   FileTextIcon,
+  PlusIcon,
+  Pencil,
+  Plus,
 } from 'lucide-react';
 import { useActiveUser, useNdk } from 'nostr-hooks';
 import { Link, Outlet, createBrowserRouter } from 'react-router-dom';
@@ -47,16 +50,18 @@ const Layout = () => {
   return (
     <>
       <div className="h-full w-full max-w-screen-xl mx-auto overflow-hidden grid grid-cols-1 md:grid-cols-12">
+
         <div
           id="sidebar"
           className="hidden flex-col gap-2 overflow-hidden items-center w-full p-2 border-r md:flex md:col-span-1 xl:items-start xl:col-span-2"
         >
+
           <Link to="/" className="flex items-center gap-2 p-2">
             <div className="w-8 h-8">
-              <img src="/nostribe-64.png" alt="Nostribe" className="w-8 h-8 object-contain" />
+              <img src="/nostribe-64.png" alt="PetitioNstr" className="w-8 h-8 object-contain" />
             </div>
 
-            <span className="text-lg font-bold hidden xl:block">Nostribe</span>
+            <span className="text-lg font-bold hidden xl:block">PetitioNstr</span>
           </Link>
 
           <div className="flex flex-col gap-2 items-center xl:w-full xl:items-start">
@@ -81,7 +86,7 @@ const Layout = () => {
 
               <span className="hidden xl:block">Petitions</span>
             </Link>
-{/* 
+{/*
             <Link
               to="/messages"
               className="flex items-center gap-2 p-2 transition-colors duration-500 ease-out text-primary/60 hover:text-primary w-full rounded-lg hover:bg-secondary"
@@ -115,7 +120,7 @@ const Layout = () => {
               <span className="hidden xl:block">Notifications</span>
             </Link>
 
-            <SearchWidget>
+             <SearchWidget>
               <div className="flex items-center gap-2 p-2 transition-colors duration-500 ease-out text-primary/60 hover:text-primary w-full rounded-lg hover:bg-secondary hover:cursor-pointer">
                 <div>
                   <SearchIcon size={24} />
@@ -124,19 +129,24 @@ const Layout = () => {
                 <span className="hidden xl:block">Search</span>
               </div>
             </SearchWidget>
+
+            <Link
+              to="/petitioning"
+              className="flex items-center gap-2 p-2 transition-colors duration-500 ease-out text-primary/60 hover:text-primary w-full rounded-lg hover:bg-secondary"
+            >
+              <div>
+                <Plus size={24} />
+              </div>
+
+              <span className="hidden xl:block">Petitioning</span>
+            </Link>
+
+
           </div>
 
           <div className="mt-auto w-full">
-            <div className="flex flex-col gap-4 w-full items-center">
-              {sepehr && (
-                <ZapWidget target={sepehr}>
-                  <div className="flex items-center gap-2 p-2 rounded-lg hover:bg-muted hover:cursor-pointer">
-                    <span className="text-xs hidden xl:block">Buy me a coffee</span>
 
-                    <CoffeeIcon className="w-5 h-5 xl:w-4 xl:h-4" />
-                  </div>
-                </ZapWidget>
-              )}
+            <div className="flex flex-col gap-4 w-full items-center">
 
               <div>{activeUser ? <ActiveUserWidget /> : <LoginWidget />}</div>
             </div>
@@ -157,7 +167,7 @@ const Layout = () => {
                   <img src="/nostribe-64.png" alt="Nostribe" className="w-8 h-8 object-contain" />
                 </div>
 
-                <span className="text-lg font-bold">Nostribe</span>
+                <span className="text-lg font-bold">PetitioNstr</span>
               </Link>
             </div>
 
@@ -183,11 +193,11 @@ const Layout = () => {
               </Link>
 
               <Link
-                to="/explore"
+                to="/petitions"
                 className="flex items-center gap-2 transition-colors duration-500 ease-out text-primary/60 hover:text-primary"
               >
                 <div>
-                  <CompassIcon size={28} strokeWidth={1.4} />
+                  <FileTextIcon size={28} strokeWidth={1.4} />
                 </div>
               </Link>
 
@@ -199,14 +209,14 @@ const Layout = () => {
                 </div>
               </SearchWidget>
 
-              <Link
+              {/* <Link
                 to="/messages"
                 className="flex items-center gap-2 transition-colors duration-500 ease-out text-primary/60 hover:text-primary"
               >
                 <div>
                   <MailIcon size={28} strokeWidth={1.4} />
                 </div>
-              </Link>
+              </Link> */}
 
               <Link
                 to="/notifications"
@@ -344,6 +354,12 @@ export const router = createBrowserRouter([
       },
       {
         path: '/petitions',
+        async lazy() {
+          return { Component: (await PetitionsPage()).PetitionsPage };
+        },
+      },
+      {
+        path: '/petitioning',
         async lazy() {
           return { Component: (await PetitionsPage()).PetitionsPage };
         },
