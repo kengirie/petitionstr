@@ -8,9 +8,7 @@ export const usePetitionsFeedWidget = () => {
 
   const { activeUser } = useActiveUser();
 
-  const { follows } = useFollows({ pubkey: activeUser?.pubkey });
-
-  const subId = activeUser ? `notes-feed-${activeUser.pubkey}` : undefined;
+  const subId = activeUser ? `notes-feed-${activeUser.pubkey}` : `notes-feed-not-logged-in`;
 
   const { createSubscription, events, loadMore, hasMore, isLoading } = useSubscription(subId);
 
@@ -33,9 +31,6 @@ export const usePetitionsFeedWidget = () => {
   );
 
   useEffect(() => {
-    if (!activeUser || follows === undefined) {
-      return;
-    }
 
     createSubscription({
       filters: [
@@ -47,7 +42,7 @@ export const usePetitionsFeedWidget = () => {
       ],
       opts: { groupableDelay: 500 },
     });
-  }, [createSubscription, follows, activeUser]);
+  }, [createSubscription]);
 
   return { processedEvents, loadMore, hasMore, isLoading, setView, view };
 };

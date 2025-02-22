@@ -138,7 +138,7 @@ const Layout = () => {
                 <Plus size={24} />
               </div>
 
-              <span className="hidden xl:block">Petitioning</span>
+              <span className="hidden xl:block">Start a Petition</span>
             </Link>
 
 
