@@ -81,7 +81,7 @@ const Layout = () => {
 
               <span className="hidden xl:block">Petitions</span>
             </Link>
-{/* 
+{/*
             <Link
               to="/messages"
               className="flex items-center gap-2 p-2 transition-colors duration-500 ease-out text-primary/60 hover:text-primary w-full rounded-lg hover:bg-secondary"
