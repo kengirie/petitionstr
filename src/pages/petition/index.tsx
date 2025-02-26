@@ -4,29 +4,15 @@ import { useParams } from 'react-router-dom';
 import { Spinner } from '@/shared/components/spinner';
 
 import { PetitionDetailWidget } from "@/features/petition-detail-widget";
+import { PetitionByPetitionId } from '@/features/petition-widget';
 
 export const PetitionPage = () => {
+    const { petitionId } = useParams();
 
-    const { npub } = useParams();
-
-    const { activeUser } = useActiveUser();
-
-    if (activeUser === undefined) {
-      return <Spinner />;
-    }
-
-    if (activeUser === null) {
-      return (
-        <div className="flex flex-col h-full w-full items-center justify-center">
-          <h3>Please Login</h3>
-        </div>
-      );
-    }
 
   return (
-    <>
-      <PetitionDetailWidget npub={npub} />
-
-    </>
+        <div className="pt-2 h-full w-full overflow-y-auto">
+      <PetitionByPetitionId petitionId={petitionId} />
+</div>
   );
 };

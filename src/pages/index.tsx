@@ -359,12 +359,12 @@ export const router = createBrowserRouter([
           return { Component: (await PetitionsPage()).PetitionsPage };
         },
       },
-      {
-        path: '/petitioning',
-        async lazy() {
-          return { Component: (await PetitionsPage()).PetitionsPage };
-        },
-      },
+      // {
+      //   path: '/petitioning',
+      //   async lazy() {
+      //     return { Component: (await PetitionsPage()).PetitionsPage };
+      //   },
+      // },
       {
         path: '/petition/:petitionId',
         async lazy() {
