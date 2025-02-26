@@ -21,6 +21,8 @@ import {
 import { useActiveUser, useNdk } from 'nostr-hooks';
 import { Link, Outlet, createBrowserRouter } from 'react-router-dom';
 
+import { ErrorBoundary } from './error';
+
 import { Button } from '@/shared/components/ui/button';
 import {
   DropdownMenu,
@@ -316,6 +318,13 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+     errorElement: (
+      <ErrorBoundary>
+        <div className="p-4 text-center">
+          <h1>404 Not Found</h1>
+        </div>
+      </ErrorBoundary>
+    ),
     children: [
       {
         path: '/',
