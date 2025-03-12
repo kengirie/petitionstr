@@ -1,0 +1,42 @@
+{
+  "common": {
+    "home": "Home",
+    "petition": "Petition",
+    "explore": "Explore",
+    "notifications": "Notifications",
+    "search": "Search",
+    "user": "User",
+    "profile": "Profile",
+    "bookmarks": "Bookmarks",
+    "startPetition": "Start Petition",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "language": "Language",
+    "menu": "Menu",
+    "quickAccess": "Quick Access",
+    "trends": "Trends",
+    "popularPetitions": "Popular Petitions",
+    "announcements": "Announcements",
+    "welcomeToPetitionstr": "Welcome to PetitioNstr",
+    "createPetitionMessage": "Create a petition and make your voice heard.",
+    "viewOnGithub": "View on GitHub",
+    "pageNotFound": "Page Not Found",
+    "backToHome": "Back to Home",
+    "poweredBy": "Powered by Osty",
+    "viewProfile": "View Profile",
+    "noTrendsAvailable": "No trends available at the moment",
+    "switchToLightMode": "Switch to Light Mode",
+    "switchToDarkMode": "Switch to Dark Mode",
+    "github": "GitHub"
+  },
+  "notifications": {
+    "checkReactions": "Check reactions and mentions to your posts"
+  },
+  "search": {
+    "searchUsersAndPosts": "Search for users and posts"
+  },
+  "petition": {
+    "startPetitionDesc": "Create a new petition and make your voice heard"
+  }
+}

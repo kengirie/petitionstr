@@ -3,11 +3,12 @@ import { useNdk } from 'nostr-hooks';
 import { memo, useEffect, useState } from 'react';
 
 import { Spinner } from '@/shared/components/spinner';
-
+import { Link, Outlet, createBrowserRouter } from 'react-router-dom';
 import { NoteContent } from '@/features/note-widget/components/note-content';
 import { NoteFooter } from '@/features/note-widget/components/note-footer';
 import { NoteHeader } from '@/features/note-widget/components/note-header';
 import { PetitionContent } from './components/petition-content';
+import { useNoteHeader } from './components/petition-header/hooks';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/shared/components/ui/card';
 import { PetitionPicture } from './components/petition-picture';
@@ -15,6 +16,7 @@ import { PetitionName } from './components/petition-name';
 
 export const PetitionByEvent = memo(
   ({ event }: { event: NDKEvent | null | undefined }) => {
+
     if (event === undefined) {
       return <Spinner />;
     }
@@ -24,9 +26,11 @@ export const PetitionByEvent = memo(
     }
 
     if (event) {
+       const {nevent} = useNoteHeader(event);
       return (
         <>
-            <div className="px-2">
+          <div className="px-2">
+           <Link to={`/petition/${nevent}`} className="block no-underline text-inherit">
             <Card className="border rounded-sm shadow-md bg-background transition-colors duration-500 ease-out hover:border-primary/30">
               <CardHeader>
                 <CardTitle><PetitionName event={event}/> </CardTitle>
@@ -38,7 +42,8 @@ export const PetitionByEvent = memo(
               <CardFooter>
                <NoteHeader event={event} />
               </CardFooter>
-            </Card>
+              </Card>
+              </Link>
             </div>
         </>
       );
@@ -63,7 +68,9 @@ export const PetitionByPetitionId = memo(
       });
     }, [petitionId, ndk, setEvent]);
 
-    return <PetitionByEvent event={event} />;
+    return (
+        <PetitionByEvent event={event} />
+      );
   },
   (prev, next) => prev.petitionId === next.petitionId,
 );

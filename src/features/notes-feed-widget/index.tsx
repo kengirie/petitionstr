@@ -20,7 +20,7 @@ export const NotesFeedWidget = () => {
 
   return (
     <>
-      <div className="w-full h-full overflow-y-auto">
+      <div className="w-full">
         <div className="py-2">
           <NewNoteWidget />
         </div>
