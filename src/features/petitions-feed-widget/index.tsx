@@ -21,7 +21,7 @@ export const PetitionsFeedWidget = () => {
 
   return (
     <>
-      <div className="w-full h-full overflow-y-auto">
+      <div className="w-full">
 
         {isLoading ? (
           <Spinner />

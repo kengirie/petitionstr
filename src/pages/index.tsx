@@ -91,7 +91,7 @@ const Layout = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background">
       {/* ヘッダー - デスクトップ */}
       <header
         className={`hidden md:flex w-full border-b sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ${
@@ -382,10 +382,10 @@ const Layout = () => {
       </header>
 
       {/* メインコンテンツ */}
-      <main className="container py-4 md:py-6 lg:py-8">
+      <main className="container py-4 md:py-6 lg:py-8 pb-16 md:pb-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* サイドバー - デスクトップ */}
-          <aside className="hidden md:block md:col-span-3 lg:col-span-2 space-y-6">
+          <aside className="hidden md:block md:col-span-3 space-y-6 sticky top-20 self-start">
             <Card>
               <CardHeader className="pb-2">
                 <CardTitle className="text-lg">{t('common.quickAccess')}</CardTitle>
@@ -453,49 +453,9 @@ const Layout = () => {
           </aside>
 
           {/* メインコンテンツエリア */}
-          <div className="md:col-span-9 lg:col-span-7">
+          <div className="md:col-span-9 h-auto">
             <Outlet />
           </div>
-
-          {/* 右サイドバー - デスクトップ */}
-          <aside className="hidden lg:block lg:col-span-3 space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>{t('common.trends')}</CardTitle>
-                <CardDescription>{t('common.popularPetitions')}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {/* ここにトレンドコンテンツを表示 */}
-                  <p className="text-center text-muted-foreground py-4">{t('common.noTrendsAvailable')}</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>{t('common.announcements')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <div className="rounded-lg bg-muted p-3">
-                    <h4 className="font-medium mb-1">{t('common.welcomeToPetitionstr')}</h4>
-                    <p className="text-sm text-muted-foreground">
-                      {t('common.createPetitionMessage')}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full" asChild>
-                  <a href="https://github.com/ostyjs/create-osty" target="_blank" rel="noreferrer">
-                    <GitHubLogoIcon className="mr-2 h-4 w-4" />
-                    {t('common.viewOnGithub')}
-                  </a>
-                </Button>
-              </CardFooter>
-            </Card>
-          </aside>
         </div>
       </main>
 
@@ -532,29 +492,7 @@ const Layout = () => {
         </div>
       </nav>
 
-      {/* フッター */}
-      <footer className="border-t mt-12 py-6 md:py-0">
-        <div className="container flex flex-col md:flex-row justify-between items-center gap-4 md:h-16">
-          <div className="flex items-center gap-2">
-            <img src="/nostribe-64.png" alt="PetitioNstr" className="w-6 h-6 object-contain" />
-            <span className="text-sm font-medium">PetitioNstr</span>
-          </div>
 
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" asChild>
-              <a href="https://osty.dev" target="_blank" rel="noreferrer" className="text-xs md:text-sm">
-                {t('common.poweredBy')}
-              </a>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <a href="https://github.com/ostyjs/create-osty" target="_blank" rel="noreferrer" className="text-xs md:text-sm">
-                <GitHubLogoIcon className="mr-2 h-3 w-3" />
-                {t('common.github')}
-              </a>
-            </Button>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
