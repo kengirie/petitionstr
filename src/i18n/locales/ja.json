@@ -1,0 +1,42 @@
+{
+  "common": {
+    "home": "ホーム",
+    "petition": "請願",
+    "explore": "探索",
+    "notifications": "通知",
+    "search": "検索",
+    "user": "ユーザー",
+    "profile": "プロフィール",
+    "bookmarks": "ブックマーク",
+    "startPetition": "請願を始める",
+    "theme": "テーマ",
+    "light": "ライト",
+    "dark": "ダーク",
+    "language": "言語",
+    "menu": "メニュー",
+    "quickAccess": "クイックアクセス",
+    "trends": "トレンド",
+    "popularPetitions": "人気の請願",
+    "announcements": "お知らせ",
+    "welcomeToPetitionstr": "PetitioNstrへようこそ",
+    "createPetitionMessage": "請願を作成して、あなたの声を届けましょう。",
+    "viewOnGithub": "GitHubで詳細を見る",
+    "pageNotFound": "ページが見つかりませんでした",
+    "backToHome": "ホームに戻る",
+    "poweredBy": "Powered by Osty",
+    "viewProfile": "プロフィールを見る",
+    "noTrendsAvailable": "現在トレンドはありません",
+    "switchToLightMode": "ライトモードに切り替え",
+    "switchToDarkMode": "ダークモードに切り替え",
+    "github": "GitHub"
+  },
+  "notifications": {
+    "checkReactions": "あなたの投稿に対する反応やメンションを確認できます"
+  },
+  "search": {
+    "searchUsersAndPosts": "ユーザーや投稿を検索できます"
+  },
+  "petition": {
+    "startPetitionDesc": "新しい請願を作成して、あなたの声を届けましょう"
+  }
+}
