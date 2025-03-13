@@ -28,7 +28,9 @@
     "noTrendsAvailable": "No trends available at the moment",
     "switchToLightMode": "Switch to Light Mode",
     "switchToDarkMode": "Switch to Dark Mode",
-    "github": "GitHub"
+    "github": "GitHub",
+    "freedomSpeechSlogan": "Let's take back our freedom of speech",
+    "petitionstrDescription": "PetitioNstr is an online political petition site built on a censorship-resistant SNS protocol"
   },
   "notifications": {
     "checkReactions": "Check reactions and mentions to your posts"
