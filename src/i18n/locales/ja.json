@@ -39,6 +39,13 @@
     "searchUsersAndPosts": "ユーザーや投稿を検索できます"
   },
   "petition": {
-    "startPetitionDesc": "新しい請願を作成して、あなたの声を届けましょう"
+    "startPetitionDesc": "新しい請願を作成して、あなたの声を届けましょう",
+    "name": "名前",
+    "about": "内容",
+    "picture": "画像URL",
+    "post": "投稿",
+    "namePlaceholder": "請願のタイトルを入力してください",
+    "aboutPlaceholder": "請願の内容を入力してください",
+    "picturePlaceholder": "画像のURLを入力してください"
   }
 }
