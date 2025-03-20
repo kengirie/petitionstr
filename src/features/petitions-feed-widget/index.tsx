@@ -29,7 +29,7 @@ export const PetitionsFeedWidget = () => {
           <div className="pt-2 flex flex-col gap-2">
             {processedEvents.map((event) => (
 
-              <PetitionByEvent event={event} />
+              <PetitionByEvent key={event.id} event={event} />
             ))}
           </div>
         ) : (
