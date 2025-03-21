@@ -504,6 +504,7 @@ const MessagesPage = () => import('./messages');
 const NotificationsPage = () => import('./notifications');
 const PetitionsPage = () => import('./petitions-list');
 const PetitionPage = () => import('./petition');
+const PetitioningPage = () => import('./petitioning');
 
 export const router = createBrowserRouter([
   {
@@ -561,6 +562,12 @@ export const router = createBrowserRouter([
         path: '/petition/:petitionId',
         async lazy() {
           return { Component: (await PetitionPage()).PetitionPage };
+        }
+      },
+      {
+        path: 'petitioning',
+        async lazy() {
+          return { Component: (await PetitioningPage()).PetitioningPage };
         }
       }
     ],

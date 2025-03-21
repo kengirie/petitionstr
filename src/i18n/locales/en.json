@@ -39,6 +39,13 @@
     "searchUsersAndPosts": "Search for users and posts"
   },
   "petition": {
-    "startPetitionDesc": "Create a new petition and make your voice heard"
+    "startPetitionDesc": "Create a new petition and make your voice heard",
+    "name": "Name",
+    "about": "About",
+    "picture": "Image URL",
+    "post": "Post",
+    "namePlaceholder": "Enter petition title",
+    "aboutPlaceholder": "Enter petition content",
+    "picturePlaceholder": "Enter image URL"
   }
 }
