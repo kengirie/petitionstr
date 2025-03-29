@@ -8,11 +8,11 @@ import { ellipsis } from '@/shared/utils';
 
 import { NoteByNoteId } from '@/features/note-widget';
 
-import { usePetitionContent } from './hooks';
+import { usePetitionSummary } from './hooks';
 
-export const PetitionContent = memo(
+export const PetitionSummary = memo(
   ({ event }: { event: NDKEvent }) => {
-    const { chunks, inView, ref } = usePetitionContent(event.content);
+    const { chunks, inView, ref } = usePetitionSummary(event);
 
     return (
       <div ref={ref}>
