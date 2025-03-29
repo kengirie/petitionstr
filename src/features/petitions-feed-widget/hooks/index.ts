@@ -35,7 +35,7 @@ export const usePetitionsFeedWidget = () => {
     createSubscription({
       filters: [
         {
-          kinds: [40],
+          kinds: [30023],
           limit: 10,
           /*authors: [activeUser.pubkey, ...(follows || []).map((u) => u.pubkey)],*/
         },
