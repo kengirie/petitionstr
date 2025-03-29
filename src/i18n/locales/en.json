@@ -9,6 +9,7 @@
     "profile": "Profile",
     "bookmarks": "Bookmarks",
     "startPetition": "Start Petition",
+    "newNote": "New Post",
     "theme": "Theme",
     "light": "Light",
     "dark": "Dark",
@@ -41,11 +42,13 @@
   "petition": {
     "startPetitionDesc": "Create a new petition and make your voice heard",
     "name": "Name",
-    "about": "About",
+    "about": "Summary",
     "picture": "Image URL",
+    "content": "Content",
     "post": "Post",
     "namePlaceholder": "Enter petition title",
-    "aboutPlaceholder": "Enter petition content",
-    "picturePlaceholder": "Enter image URL"
+    "aboutPlaceholder": "Enter petition summary",
+    "picturePlaceholder": "Enter image URL",
+    "contentPlaceholder": "Enter petition details"
   }
 }
