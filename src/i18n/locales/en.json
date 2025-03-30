@@ -51,6 +51,11 @@
     "namePlaceholder": "Enter petition title",
     "aboutPlaceholder": "Enter petition summary",
     "picturePlaceholder": "Enter image URL",
-    "contentPlaceholder": "Enter petition details"
+    "contentPlaceholder": "Enter petition details",
+    "detail": {
+      "publishedDate": "Published Date",
+      "summary": "Summary",
+      "content": "Content Details"
+    }
   }
 }

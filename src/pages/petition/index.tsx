@@ -12,7 +12,7 @@ export const PetitionPage = () => {
 
   return (
         <div className="pt-2 h-full w-full overflow-y-auto">
-      <PetitionByPetitionId petitionId={petitionId} />
+      <PetitionDetailWidget petitionId={petitionId} />
 </div>
   );
 };

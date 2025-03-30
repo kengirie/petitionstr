@@ -51,6 +51,11 @@
     "namePlaceholder": "請願のタイトルを入力してください",
     "aboutPlaceholder": "請願の概要を入力してください",
     "picturePlaceholder": "画像のURLを入力してください",
-    "contentPlaceholder": "請願の詳細を入力してください"
+    "contentPlaceholder": "請願の詳細を入力してください",
+    "detail": {
+      "publishedDate": "公開日",
+      "summary": "概要",
+      "content": "詳細内容"
+    }
   }
 }
