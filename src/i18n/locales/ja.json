@@ -9,6 +9,7 @@
     "profile": "プロフィール",
     "bookmarks": "ブックマーク",
     "startPetition": "請願を始める",
+    "newNote": "新規投稿",
     "theme": "テーマ",
     "light": "ライト",
     "dark": "ダーク",
@@ -30,7 +31,9 @@
     "switchToDarkMode": "ダークモードに切り替え",
     "github": "GitHub",
     "freedomSpeechSlogan": "言論の自由を我々の手に取り戻そう",
-    "petitionstrDescription": "PetitioNstrは検閲耐性を持つSNSプロトコル上に作られたオンラインの政治署名サイトです"
+    "petitionstrDescription": "PetitioNstrは検閲耐性を持つSNSプロトコル上に作られたオンラインの政治署名サイトです",
+    "edit": "編集",
+    "preview": "プレビュー"
   },
   "notifications": {
     "checkReactions": "あなたの投稿に対する反応やメンションを確認できます"
@@ -41,11 +44,13 @@
   "petition": {
     "startPetitionDesc": "新しい請願を作成して、あなたの声を届けましょう",
     "name": "名前",
-    "about": "内容",
+    "about": "概要",
     "picture": "画像URL",
+    "content": "詳細",
     "post": "投稿",
     "namePlaceholder": "請願のタイトルを入力してください",
-    "aboutPlaceholder": "請願の内容を入力してください",
-    "picturePlaceholder": "画像のURLを入力してください"
+    "aboutPlaceholder": "請願の概要を入力してください",
+    "picturePlaceholder": "画像のURLを入力してください",
+    "contentPlaceholder": "請願の詳細を入力してください"
   }
 }

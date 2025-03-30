@@ -9,6 +9,7 @@
     "profile": "Profile",
     "bookmarks": "Bookmarks",
     "startPetition": "Start Petition",
+    "newNote": "New Post",
     "theme": "Theme",
     "light": "Light",
     "dark": "Dark",
@@ -30,7 +31,9 @@
     "switchToDarkMode": "Switch to Dark Mode",
     "github": "GitHub",
     "freedomSpeechSlogan": "Let's take back our freedom of speech",
-    "petitionstrDescription": "PetitioNstr is an online political petition site built on a censorship-resistant SNS protocol"
+    "petitionstrDescription": "PetitioNstr is an online political petition site built on a censorship-resistant SNS protocol",
+    "edit": "Edit",
+    "preview": "Preview"
   },
   "notifications": {
     "checkReactions": "Check reactions and mentions to your posts"
@@ -41,11 +44,13 @@
   "petition": {
     "startPetitionDesc": "Create a new petition and make your voice heard",
     "name": "Name",
-    "about": "About",
+    "about": "Summary",
     "picture": "Image URL",
+    "content": "Content",
     "post": "Post",
     "namePlaceholder": "Enter petition title",
-    "aboutPlaceholder": "Enter petition content",
-    "picturePlaceholder": "Enter image URL"
+    "aboutPlaceholder": "Enter petition summary",
+    "picturePlaceholder": "Enter image URL",
+    "contentPlaceholder": "Enter petition details"
   }
 }
