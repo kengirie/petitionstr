@@ -102,7 +102,7 @@ const Layout = () => {
           <div className="flex items-center gap-6">
             <Link to="/" className="flex items-center gap-2">
               <div className="w-8 h-8">
-                <img src="/nostribe-64.png" alt="PetitioNstr" className="w-8 h-8 object-contain" />
+                <img src="/petitionstr.png" alt="PetitioNstr" className="w-8 h-8 object-contain" />
               </div>
               <span className="text-xl font-bold">PetitioNstr</span>
             </Link>
@@ -258,7 +258,7 @@ const Layout = () => {
               <SheetHeader>
                 <SheetTitle>
                   <Link to="/" className="flex items-center gap-2">
-                    <img src="/nostribe-64.png" alt="PetitioNstr" className="w-8 h-8 object-contain" />
+                    <img src="/petitionstr.png" alt="PetitioNstr" className="w-8 h-8 object-contain" />
                     <span className="text-xl font-bold">PetitioNstr</span>
                   </Link>
                 </SheetTitle>
@@ -354,7 +354,7 @@ const Layout = () => {
           </Sheet>
 
           <Link to="/" className="flex items-center gap-2">
-            <img src="/nostribe-64.png" alt="PetitioNstr" className="w-7 h-7 object-contain" />
+            <img src="/petitionstr.png" alt="PetitioNstr" className="w-7 h-7 object-contain" />
             <span className="text-lg font-bold">PetitioNstr</span>
           </Link>
 
