@@ -31,7 +31,9 @@
     "switchToDarkMode": "Switch to Dark Mode",
     "github": "GitHub",
     "freedomSpeechSlogan": "Let's take back our freedom of speech",
-    "petitionstrDescription": "PetitioNstr is an online political petition site built on a censorship-resistant SNS protocol"
+    "petitionstrDescription": "PetitioNstr is an online political petition site built on a censorship-resistant SNS protocol",
+    "edit": "Edit",
+    "preview": "Preview"
   },
   "notifications": {
     "checkReactions": "Check reactions and mentions to your posts"

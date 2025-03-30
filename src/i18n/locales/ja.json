@@ -31,7 +31,9 @@
     "switchToDarkMode": "ダークモードに切り替え",
     "github": "GitHub",
     "freedomSpeechSlogan": "言論の自由を我々の手に取り戻そう",
-    "petitionstrDescription": "PetitioNstrは検閲耐性を持つSNSプロトコル上に作られたオンラインの政治署名サイトです"
+    "petitionstrDescription": "PetitioNstrは検閲耐性を持つSNSプロトコル上に作られたオンラインの政治署名サイトです",
+    "edit": "編集",
+    "preview": "プレビュー"
   },
   "notifications": {
     "checkReactions": "あなたの投稿に対する反応やメンションを確認できます"

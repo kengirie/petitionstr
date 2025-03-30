@@ -1,6 +1,11 @@
 import { NDKEvent } from '@nostr-dev-kit/ndk';
 import { CornerDownRightIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
+import SimpleMDE from 'react-simplemde-editor';
+import 'easymde/dist/easymde.min.css';
+import { useCallback, useRef } from 'react';
+import type EasyMDE from 'easymde';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/avatar';
 import { Button } from '@/shared/components/ui/button';
@@ -12,8 +17,23 @@ import { cn } from '@/shared/utils';
 import { useNewPetitionWidget } from './hooks';
 
 export const NewPetitionWidget = () => {
-  const { title, summary, image, content, setTitle, setSummary, setImage, setContent, post, profile } = useNewPetitionWidget();
+  const {
+    title,
+    summary,
+    image,
+    content,
+    setTitle,
+    setSummary,
+    setImage,
+    setContent,
+    post,
+    profile,
+  } = useNewPetitionWidget();
   const { t } = useTranslation();
+
+  const onChange = useCallback((content: string) => {
+    setContent(content);
+  }, []);
 
   return (
     <>
@@ -67,15 +87,13 @@ export const NewPetitionWidget = () => {
             <label htmlFor="petition-content" className="text-sm font-medium">
               {t('petition.content')}
             </label>
-            <Textarea
-              id="petition-content"
-              className="bg-background min-h-[150px]"
-              placeholder={t('petition.contentPlaceholder')}
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
+            <div className="bg-background rounded-md">
+              <SimpleMDE
+                value={content}
+                onChange={onChange}
+              />
+            </div>
           </div>
-
 
           <div className="w-full flex gap-2 justify-end">
             <Button className="px-8" size="sm" onClick={post}>
