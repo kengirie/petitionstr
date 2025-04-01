@@ -93,8 +93,15 @@
   * {
     @apply border-border;
   }
+  html {
+    overflow-y: scroll;
+    /* スクロールバーを常に表示させる */
+    scrollbar-gutter: stable;
+  }
   body {
     @apply bg-background text-foreground;
+    /* ドロップダウンメニューが開かれたときにページがずれないようにする */
+    overflow-y: scroll;
   }
   h1 {
     @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
