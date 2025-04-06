@@ -52,6 +52,8 @@
     "aboutPlaceholder": "Enter petition summary",
     "picturePlaceholder": "Enter image URL",
     "contentPlaceholder": "Enter petition details",
+    "uploadImage": "Upload Image",
+    "imagePreview": "Image Preview",
     "detail": {
       "publishedDate": "Published Date",
       "summary": "Summary",
