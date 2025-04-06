@@ -84,13 +84,29 @@ export const ProfileEditor = ({
     const file = e.target.files[0];
     console.log('Selected file:', file);
 
-    // フォームデータを作成
-    const formData = new FormData();
-    formData.append('fileToUpload', file);
-
     try {
       // アップロード中フラグを設定
       setIsUploadingMedia(true);
+
+      // browser-image-compressionを使用して画像を処理
+      const imageCompression = await import('browser-image-compression');
+
+      // 圧縮オプション
+      const options = {
+        maxSizeMB: 1,              // 最大ファイルサイズ
+        maxWidthOrHeight: 1920,    // 最大幅/高さ
+        useWebWorker: true,        // WebWorkerを使用
+        initialQuality: 0.8,       // 初期品質
+        alwaysKeepResolution: true // 解像度を維持
+      };
+
+      // 画像を圧縮・処理
+      const compressedFile = await imageCompression.default(file, options);
+      console.log('Compressed file:', compressedFile);
+
+      // フォームデータを作成
+      const formData = new FormData();
+      formData.append('fileToUpload', compressedFile);
 
       // NIP-98トークンを取得
       const token = await getToken({
