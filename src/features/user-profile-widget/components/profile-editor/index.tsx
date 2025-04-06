@@ -120,7 +120,7 @@ export const ProfileEditor = ({
       if (data.status === 'success') {
         if (data.nip94_event && Array.isArray(data.nip94_event.tags)) {
           // URLタグを探す (通常は最初のタグ)
-          const urlTag = data.nip94_event.tags.find((tag) => tag[0] === 'url');
+          const urlTag = data.nip94_event.tags.find((tag: [string, string]) => tag[0] === 'url');
           if (urlTag && urlTag[1]) {
             imageUrl = urlTag[1];
           }
@@ -157,7 +157,7 @@ export const ProfileEditor = ({
       }
     }
   };
-  
+
   return (
     <>
       {/* 非表示のファイル入力要素 */}
