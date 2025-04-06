@@ -106,11 +106,11 @@ export const NewPetitionWidget = () => {
             {image && (
               <div className="mt-2">
                 <p className="text-sm text-muted-foreground mb-1">{t('petition.imagePreview')}</p>
-                <div className="relative w-full h-40 overflow-hidden rounded-md border">
+                <div className="relative w-full h-60 rounded-md border">
                   <img
                     src={image}
                     alt={t('petition.imagePreview')}
-                    className="object-cover w-full h-full"
+                    className="object-contain w-full h-full"
                     onError={(e) => {
                       // エラー時に代替テキストを表示
                       const target = e.target as HTMLImageElement;
@@ -141,10 +141,7 @@ export const NewPetitionWidget = () => {
               {t('petition.content')}
             </label>
             <div className="bg-background rounded-md">
-              <SimpleMDE
-                value={content}
-                onChange={onChange}
-              />
+              <SimpleMDE value={content} onChange={onChange} />
             </div>
           </div>
 
