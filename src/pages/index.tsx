@@ -184,12 +184,6 @@ const Layout = () => {
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link to="/petitioning" className="flex items-center">
-                      <Plus className="mr-2 h-4 w-4" />
-                      {t('common.startPetition')}
-                    </Link>
-                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={logout}>
                     <PowerIcon className="w-4 h-4 mr-2" />
                     Logout
@@ -330,8 +324,6 @@ const Layout = () => {
                     </Button>
                   </div>
                 </div>
-                <Separator />
-                <div>{activeUser ? <ActiveUserWidget /> : <LoginWidget />}</div>
               </div>
             </SheetContent>
           </Sheet>
@@ -349,14 +341,29 @@ const Layout = () => {
             </SearchWidget>
 
             {activeUser ? (
-              <Button variant="ghost" size="icon" asChild>
-                <Link to={`/profile/${activeUser.npub}`}>
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage src={profile?.image} alt={profile?.displayName || 'ユーザー'} />
-                    <AvatarFallback>{profile?.displayName?.charAt(0) || 'U'}</AvatarFallback>
-                  </Avatar>
-                </Link>
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={profile?.image} alt={profile?.displayName || 'ユーザー'} />
+                      <AvatarFallback>{profile?.displayName?.charAt(0) || 'U'}</AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem asChild>
+                    <Link to={`/profile/${activeUser.npub}`} className="flex items-center">
+                      <User className="mr-2 h-4 w-4" />
+                      {t('common.profile')}
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={logout}>
+                    <PowerIcon className="w-4 h-4 mr-2" />
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <LoginWidget />
             )}
