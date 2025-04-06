@@ -44,7 +44,8 @@
   "profile": {
     "petitions": "請願",
     "replies": "返信",
-    "notes": "投稿"
+    "notes": "投稿",
+    "reactions": "リアクション"
   },
   "petition": {
     "startPetitionDesc": "新しい請願を作成して、あなたの声を届けましょう",

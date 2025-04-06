@@ -8,6 +8,7 @@ import {
   ProfileBanner,
   ProfileEditor,
   ProfileNotes,
+  ProfileReactions,
   ProfileSummary,
   ProfileViewSwitcher,
 } from './components';
@@ -55,6 +56,7 @@ export const UserProfileWidget = ({
                 {view == 'petitions' && <ProfilePetitions user={user} />}
               {view == 'replies' && <ProfileNotes user={user} repliesOnly />}
               {view == 'notes' && <ProfileNotes user={user} notesOnly />}
+              {view == 'reactions' && <ProfileReactions user={user} />}
             </div>
           </>
         )}

@@ -41,6 +41,14 @@ export const ProfileViewSwitcher = ({
         >
           {t('profile.notes')}
         </Button>
+        <Button
+          onClick={() => setView('reactions')}
+          size="sm"
+          variant="link"
+          className={cn(view == 'reactions' ? 'underline underline-offset-8' : 'hover:no-underline')}
+        >
+          {t('profile.reactions')}
+        </Button>
       </div>
     </>
   );

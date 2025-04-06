@@ -1,1 +1,1 @@
-export type ProfileView = 'petitions' | 'replies' | 'notes';
+export type ProfileView = 'petitions' | 'replies' | 'notes' | 'reactions';
