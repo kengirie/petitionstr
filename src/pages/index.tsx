@@ -2,7 +2,6 @@ import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import {
   ArrowRightIcon,
   BellIcon,
-  BookmarkIcon,
   CoffeeIcon,
   CompassIcon,
   HomeIcon,
@@ -184,12 +183,6 @@ const Layout = () => {
                       {t('common.profile')}
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/bookmarks" className="flex items-center">
-                      <BookmarkIcon className="mr-2 h-4 w-4" />
-                      {t('common.bookmarks')}
-                    </Link>
-                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
                     <Link to="/petitioning" className="flex items-center">
@@ -233,6 +226,23 @@ const Layout = () => {
                 </SheetTitle>
               </SheetHeader>
               <div className="mt-6 flex flex-col gap-4">
+                {activeUser && (
+                  <SheetClose asChild>
+                    <Link
+                      to={`/profile/${activeUser.npub}`}
+                      className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-accent"
+                    >
+                      <Avatar className="h-5 w-5">
+                        <AvatarImage
+                          src={profile?.image}
+                          alt={profile?.displayName || 'ユーザー'}
+                        />
+                        <AvatarFallback>{profile?.displayName?.charAt(0) || 'U'}</AvatarFallback>
+                      </Avatar>
+                      <span>{t('common.profile')}</span>
+                    </Link>
+                  </SheetClose>
+                )}
                 <SheetClose asChild>
                   <Link
                     to="/"
@@ -258,15 +268,6 @@ const Layout = () => {
                   >
                     <BellIcon className="h-5 w-5" />
                     <span>{t('common.notifications')}</span>
-                  </Link>
-                </SheetClose>
-                <SheetClose asChild>
-                  <Link
-                    to="/bookmarks"
-                    className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-accent"
-                  >
-                    <BookmarkIcon className="h-5 w-5" />
-                    <span>{t('common.bookmarks')}</span>
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
@@ -317,7 +318,7 @@ const Layout = () => {
                       onClick={() => i18n.changeLanguage('ja')}
                       className={i18n.language === 'ja' ? 'bg-accent' : ''}
                     >
-                      🇯🇵 日本語
+                      日本語
                     </Button>
                     <Button
                       variant="outline"
@@ -325,7 +326,7 @@ const Layout = () => {
                       onClick={() => i18n.changeLanguage('en')}
                       className={i18n.language === 'en' ? 'bg-accent' : ''}
                     >
-                      🇺🇸 English
+                      English
                     </Button>
                   </div>
                 </div>
@@ -394,19 +395,24 @@ const Layout = () => {
                   <BellIcon className="h-5 w-5" />
                   <span>{t('common.notifications')}</span>
                 </Link>
-                <Link
-                  to="/bookmarks"
-                  className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors"
-                >
-                  <BookmarkIcon className="h-5 w-5" />
-                  <span>{t('common.bookmarks')}</span>
-                </Link>
                 <SearchWidget>
                   <div className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors cursor-pointer">
                     <SearchIcon className="h-5 w-5" />
                     <span>{t('common.search')}</span>
                   </div>
                 </SearchWidget>
+                {activeUser && (
+                  <Link
+                    to={`/profile/${activeUser.npub}`}
+                    className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors"
+                  >
+                    <Avatar className="h-5 w-5">
+                      <AvatarImage src={profile?.image} alt={profile?.displayName || 'ユーザー'} />
+                      <AvatarFallback>{profile?.displayName?.charAt(0) || 'U'}</AvatarFallback>
+                    </Avatar>
+                    <span>{t('common.profile')}</span>
+                  </Link>
+                )}
               </CardContent>
               <CardFooter>
                 <Button className="w-full" asChild>
@@ -417,36 +423,6 @@ const Layout = () => {
                 </Button>
               </CardFooter>
             </Card>
-
-            {activeUser && (
-              <Card>
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">{t('common.profile')}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-col items-center gap-3">
-                    <Avatar className="h-16 w-16">
-                      <AvatarImage
-                        src={profile?.image}
-                        alt={profile?.displayName || t('common.user')}
-                      />
-                      <AvatarFallback>{profile?.displayName?.charAt(0) || 'U'}</AvatarFallback>
-                    </Avatar>
-                    <div className="text-center">
-                      <h3 className="font-medium">{profile?.displayName || t('common.user')}</h3>
-                      <p className="text-sm text-muted-foreground">
-                        @{activeUser.profile?.name || activeUser.npub.slice(0, 8)}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter className="flex justify-center">
-                  <Button variant="outline" size="sm" asChild>
-                    <Link to={`/profile/${activeUser.npub}`}>{t('common.viewProfile')}</Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            )}
           </aside>
 
           {/* メインコンテンツエリア */}
@@ -480,12 +456,25 @@ const Layout = () => {
             <span className="text-xs">{t('common.notifications')}</span>
           </Link>
 
-          <SearchWidget>
-            <div className="flex flex-col items-center gap-1 p-1 cursor-pointer">
-              <SearchIcon className="h-6 w-6" />
-              <span className="text-xs">{t('common.search')}</span>
-            </div>
-          </SearchWidget>
+          {activeUser ? (
+            <Link
+              to={`/profile/${activeUser.npub}`}
+              className="flex flex-col items-center gap-1 p-1"
+            >
+              <Avatar className="h-6 w-6">
+                <AvatarImage src={profile?.image} alt={profile?.displayName || 'ユーザー'} />
+                <AvatarFallback>{profile?.displayName?.charAt(0) || 'U'}</AvatarFallback>
+              </Avatar>
+              <span className="text-xs">{t('common.profile')}</span>
+            </Link>
+          ) : (
+            <SearchWidget>
+              <div className="flex flex-col items-center gap-1 p-1 cursor-pointer">
+                <SearchIcon className="h-6 w-6" />
+                <span className="text-xs">{t('common.search')}</span>
+              </div>
+            </SearchWidget>
+          )}
         </div>
       </nav>
     </div>
