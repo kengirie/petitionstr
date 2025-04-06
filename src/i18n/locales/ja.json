@@ -41,6 +41,11 @@
   "search": {
     "searchUsersAndPosts": "ユーザーや投稿を検索できます"
   },
+  "profile": {
+    "petitions": "請願",
+    "replies": "返信",
+    "notes": "投稿"
+  },
   "petition": {
     "startPetitionDesc": "新しい請願を作成して、あなたの声を届けましょう",
     "name": "名前",
