@@ -1,4 +1,5 @@
 import { Button } from '@/shared/components/ui/button';
+import { useTranslation } from 'react-i18next';
 
 import { cn } from '@/shared/utils';
 
@@ -11,16 +12,18 @@ export const ProfileViewSwitcher = ({
   view: ProfileView;
   setView: React.Dispatch<React.SetStateAction<ProfileView>>;
 }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="flex items-center justify-between gap-2 border-y px-1">
         <Button
-          onClick={() => setView('notes')}
+          onClick={() => setView('petitions')}
           size="sm"
           variant="link"
-          className={cn(view == 'notes' ? 'underline underline-offset-8' : 'hover:no-underline')}
+          className={cn(view == 'petitions' ? 'underline underline-offset-8' : 'hover:no-underline')}
         >
-          Notes
+          {t('profile.petitions')}
         </Button>
         <Button
           onClick={() => setView('replies')}
@@ -28,15 +31,23 @@ export const ProfileViewSwitcher = ({
           variant="link"
           className={cn(view == 'replies' ? 'underline underline-offset-8' : 'hover:no-underline')}
         >
-          Replies
+          {t('profile.replies')}
         </Button>
         <Button
-          onClick={() => setView('relays')}
+          onClick={() => setView('notes')}
           size="sm"
           variant="link"
-          className={cn(view == 'relays' ? 'underline underline-offset-8' : 'hover:no-underline')}
+          className={cn(view == 'notes' ? 'underline underline-offset-8' : 'hover:no-underline')}
         >
-          Relays
+          {t('profile.notes')}
+        </Button>
+        <Button
+          onClick={() => setView('reactions')}
+          size="sm"
+          variant="link"
+          className={cn(view == 'reactions' ? 'underline underline-offset-8' : 'hover:no-underline')}
+        >
+          {t('profile.reactions')}
         </Button>
       </div>
     </>

@@ -8,9 +8,12 @@ import {
   ProfileBanner,
   ProfileEditor,
   ProfileNotes,
+  ProfileReactions,
   ProfileSummary,
   ProfileViewSwitcher,
 } from './components';
+
+import { ProfilePetitions } from './components/profile-petitions';
 
 import { useUserProfileWidget } from './hooks';
 
@@ -50,9 +53,10 @@ export const UserProfileWidget = ({
             <ProfileViewSwitcher view={view} setView={setView} />
 
             <div className="p-2">
-              {view == 'notes' && <ProfileNotes user={user} notesOnly />}
+                {view == 'petitions' && <ProfilePetitions user={user} />}
               {view == 'replies' && <ProfileNotes user={user} repliesOnly />}
-              {/* {view == 'relays' && <>User Relays</>} */}
+              {view == 'notes' && <ProfileNotes user={user} notesOnly />}
+              {view == 'reactions' && <ProfileReactions user={user} />}
             </div>
           </>
         )}

@@ -41,6 +41,12 @@
   "search": {
     "searchUsersAndPosts": "Search for users and posts"
   },
+  "profile": {
+    "petitions": "Petitions",
+    "replies": "Replies",
+    "notes": "Notes",
+    "reactions": "Reactions"
+  },
   "petition": {
     "startPetitionDesc": "Create a new petition and make your voice heard",
     "name": "Name",
