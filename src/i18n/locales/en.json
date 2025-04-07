@@ -39,7 +39,10 @@
     "checkReactions": "Check reactions and mentions to your posts"
   },
   "search": {
-    "searchUsersAndPosts": "Search for users and posts"
+    "searchUsersAndPosts": "Search for users and posts",
+    "searchPetitions": "Search Petitions",
+    "searchPlaceholder": "Search for petitions...",
+    "noPetitionsFound": "No petitions found"
   },
   "profile": {
     "petitions": "Petitions",

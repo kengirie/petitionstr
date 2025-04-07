@@ -80,7 +80,7 @@ import { LanguageSwitcher } from '@/shared/components/language-switcher';
 
 import { ActiveUserWidget } from '@/features/active-user-widget';
 import { LoginWidget } from '@/features/login-widget';
-import { SearchWidget } from '@/features/search-widget';
+import { PetitionSearchWidget } from '@/features/petition-search-widget';
 import { TrendingNotesWidget } from '@/features/trending-notes-widget';
 import { ZapWidget } from '@/features/zap-widget';
 
@@ -126,11 +126,11 @@ const Layout = () => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <SearchWidget>
+                  <PetitionSearchWidget>
                     <Button variant="ghost" size="icon" aria-label={t('common.search')}>
                       <SearchIcon className="h-5 w-5" />
                     </Button>
-                  </SearchWidget>
+                  </PetitionSearchWidget>
                 </TooltipTrigger>
                 <TooltipContent>{t('common.search')}</TooltipContent>
               </Tooltip>
@@ -265,12 +265,12 @@ const Layout = () => {
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
-                  <SearchWidget>
+                  <PetitionSearchWidget>
                     <div className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-accent cursor-pointer">
                       <SearchIcon className="h-5 w-5" />
                       <span>{t('common.search')}</span>
                     </div>
-                  </SearchWidget>
+                  </PetitionSearchWidget>
                 </SheetClose>
                 <Separator />
                 <SheetClose asChild>
@@ -334,11 +334,11 @@ const Layout = () => {
           </Link>
 
           <div className="flex items-center gap-1">
-            <SearchWidget>
+            <PetitionSearchWidget>
               <Button variant="ghost" size="icon" aria-label={t('common.search')}>
                 <SearchIcon className="h-5 w-5" />
               </Button>
-            </SearchWidget>
+            </PetitionSearchWidget>
 
             {activeUser ? (
               <DropdownMenu>
@@ -402,12 +402,12 @@ const Layout = () => {
                   <BellIcon className="h-5 w-5" />
                   <span>{t('common.notifications')}</span>
                 </Link>
-                <SearchWidget>
+                <PetitionSearchWidget>
                   <div className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors cursor-pointer">
                     <SearchIcon className="h-5 w-5" />
                     <span>{t('common.search')}</span>
                   </div>
-                </SearchWidget>
+                </PetitionSearchWidget>
                 {activeUser && (
                   <Link
                     to={`/profile/${activeUser.npub}`}
@@ -475,12 +475,12 @@ const Layout = () => {
               <span className="text-xs">{t('common.profile')}</span>
             </Link>
           ) : (
-            <SearchWidget>
+            <PetitionSearchWidget>
               <div className="flex flex-col items-center gap-1 p-1 cursor-pointer">
                 <SearchIcon className="h-6 w-6" />
                 <span className="text-xs">{t('common.search')}</span>
               </div>
-            </SearchWidget>
+            </PetitionSearchWidget>
           )}
         </div>
       </nav>
