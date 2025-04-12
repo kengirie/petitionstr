@@ -32,12 +32,14 @@ export const PetitionByEvent = memo(
           <div className="px-2">
            <Link to={`/petition/${nevent}`} className="block no-underline text-inherit">
             <Card className="border rounded-sm shadow-md bg-background transition-colors duration-500 ease-out hover:border-primary/30">
-              <CardHeader>
-                <CardTitle><PetitionTitle event={event}/> </CardTitle>
-              </CardHeader>
-              <CardContent className = "flex flex-col gap-2">
-                <PetitionImage event={event} />
-                <PetitionSummary event={event} />
+              <CardContent className="flex gap-4 p-4">
+                <div className="w-24 flex-shrink-0">
+                  <PetitionImage event={event} />
+                </div>
+                <div className="flex-1 flex flex-col">
+                  <PetitionTitle event={event}/>
+                  <PetitionSummary event={event} />
+                </div>
               </CardContent>
               <CardFooter>
                <NoteHeader event={event} />
