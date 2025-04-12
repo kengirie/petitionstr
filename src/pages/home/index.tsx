@@ -1,13 +1,8 @@
-import { useActiveUser } from 'nostr-hooks';
 import { useTranslation } from 'react-i18next';
 
-import { NotesFeedWidget } from '@/features/notes-feed-widget';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/shared/components/ui/card';
 import { Button } from '@/shared/components/ui/button';
-import { PetitionsFeedWidget } from '@/features/petitions-feed-widget';
 
 export const HomePage = () => {
-  const { activeUser } = useActiveUser();
   const { t, i18n } = useTranslation();
   const currentLanguage = i18n.language;
 

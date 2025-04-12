@@ -1,6 +1,6 @@
 import { NDKEvent, NDKUser } from '@nostr-dev-kit/ndk';
 import { useNdk, useSubscription } from 'nostr-hooks';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useProfileReactions = ({
   user,

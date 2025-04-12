@@ -14,7 +14,7 @@ export const useProfilePetitions = ({
   const processedEvents = useMemo(
     () =>
       events
-        ?.filter((e) => {
+        ?.filter(() => {
           return true;
         })
         .reverse(),

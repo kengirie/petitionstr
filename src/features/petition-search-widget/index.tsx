@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useDebounceValue } from 'usehooks-ts';
 import { useTranslation } from 'react-i18next';
 import { SearchIcon } from 'lucide-react';

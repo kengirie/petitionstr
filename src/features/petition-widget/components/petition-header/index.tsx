@@ -20,8 +20,6 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu';
 
-import { NoteParentPreview } from '../note-parent-preview';
-
 import { useNoteHeader } from './hooks';
 
 export const NoteHeader = ({ event }: { event: NDKEvent }) => {
@@ -107,9 +105,6 @@ export const NoteHeader = ({ event }: { event: NDKEvent }) => {
         </div>
       </div>
 
-      <div className="pt-2">
-        <NoteParentPreview event={event} />
-      </div>
     </>
   );
 };

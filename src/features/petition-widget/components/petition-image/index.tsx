@@ -1,12 +1,12 @@
-import { EventPointer, NDKEvent, NDKUser } from '@nostr-dev-kit/ndk';
+import { NDKEvent} from '@nostr-dev-kit/ndk';
 
-import { memo, useMemo } from 'react';
+import { memo} from 'react';
 
 import { usePetitionImage } from './hooks';
 
 export const PetitionImage = memo(
   ({ event }: { event: NDKEvent }) => {
-    const { url, inView, ref } = usePetitionImage(event);
+    const { url, ref } = usePetitionImage(event);
     return (
       <div ref={ref} className="flex-shrink-0 w-full h-24 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-sm">
         {url ? (

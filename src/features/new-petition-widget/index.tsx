@@ -1,18 +1,12 @@
-import { NDKEvent } from '@nostr-dev-kit/ndk';
-import { CornerDownRightIcon } from 'lucide-react';
-import { UploadIcon } from '@radix-ui/react-icons';
-import { useTranslation } from 'react-i18next';
-import ReactMarkdown from 'react-markdown';
-import SimpleMDE from 'react-simplemde-editor';
-import 'easymde/dist/easymde.min.css';
-import { useCallback, useRef } from 'react';
-import type EasyMDE from 'easymde';
-
-import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/avatar';
+import { Spinner } from '@/shared/components/spinner';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
 import { Textarea } from '@/shared/components/ui/textarea';
-import { Spinner } from '@/shared/components/spinner';
+import { UploadIcon } from '@radix-ui/react-icons';
+import 'easymde/dist/easymde.min.css';
+import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import SimpleMDE from 'react-simplemde-editor';
 
 import { cn } from '@/shared/utils';
 
@@ -29,7 +23,6 @@ export const NewPetitionWidget = () => {
     setImage,
     setContent,
     post,
-    profile,
     isUploadingMedia,
     fileInputRef,
     openUploadMediaDialog,

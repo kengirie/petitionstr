@@ -1,96 +1,66 @@
-import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import {
-  ArrowRightIcon,
   BellIcon,
-  CoffeeIcon,
-  CompassIcon,
+  FileTextIcon,
   HomeIcon,
-  MailIcon,
   MenuIcon,
   MoonIcon,
+  Plus,
+  PowerIcon,
   SearchIcon,
   SunIcon,
-  PowerIcon,
-  ScrollTextIcon,
-  ClipboardSignatureIcon,
-  FileTextIcon,
-  PlusIcon,
-  Pencil,
-  Plus,
-  Settings,
-  User,
+  User
 } from 'lucide-react';
-import { useActiveUser, useNdk, useRealtimeProfile, useLogin } from 'nostr-hooks';
-import { Link, Outlet, createBrowserRouter, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useActiveUser, useLogin, useRealtimeProfile } from 'nostr-hooks';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link, Outlet, createBrowserRouter, useNavigate } from 'react-router-dom';
 
 import { ErrorBoundary } from './error';
 import { ErrorPage } from './error/error-page';
 
 // shadcn/ui コンポーネント
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/avatar';
 import { Button } from '@/shared/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '@/shared/components/ui/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
   DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from '@/shared/components/ui/navigation-menu';
+import { Separator } from '@/shared/components/ui/separator';
 import {
   Sheet,
+  SheetClose,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
-  SheetClose,
+  SheetTrigger
 } from '@/shared/components/ui/sheet';
-import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/avatar';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/shared/components/ui/card';
-import { Separator } from '@/shared/components/ui/separator';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/shared/components/ui/tooltip';
-import { Badge } from '@/shared/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs';
 
-import { useTheme } from '@/shared/components/theme-provider';
-import { useIsMobile } from '@/shared/hooks/use-mobile';
 import { LanguageSwitcher } from '@/shared/components/language-switcher';
+import { useTheme } from '@/shared/components/theme-provider';
 
-import { ActiveUserWidget } from '@/features/active-user-widget';
 import { LoginWidget } from '@/features/login-widget';
-import { PetitionSearchWidget } from '@/features/petition-search-widget';
-import { TrendingNotesWidget } from '@/features/trending-notes-widget';
-import { ZapWidget } from '@/features/zap-widget';
 
 const Layout = () => {
-  const { ndk } = useNdk();
   const { activeUser } = useActiveUser();
   const { profile } = useRealtimeProfile(activeUser?.pubkey);
   const { logout } = useLogin();
   const { setTheme, theme } = useTheme();
-  const isMobile = useIsMobile();
   const [isScrolled, setIsScrolled] = useState(false);
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();

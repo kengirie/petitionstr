@@ -1,6 +1,6 @@
-import { NDKEvent, relayListFromKind3, NDKRelayList, getRelayListForUser } from '@nostr-dev-kit/ndk';
+import { NDKEvent } from '@nostr-dev-kit/ndk';
 import { useActiveUser, useNdk, useRealtimeProfile, useNip98 } from 'nostr-hooks';
-import { useCallback, useState, useEffect, useRef } from 'react';
+import { useCallback, useState, useRef } from 'react';
 
 import { useToast } from '@/shared/components/ui/use-toast';
 
