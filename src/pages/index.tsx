@@ -276,14 +276,14 @@ const Layout = () => {
                     )}
                   </Button>
                 </div>
-                <div className="flex items-center justify-between px-2 py-1">
+                <div className="flex flex-col gap-2 px-2 py-1">
                   <span className="text-sm text-muted-foreground">{t('common.language')}</span>
-                  <div className="flex gap-2">
+                  <div className="flex gap-1">
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => i18n.changeLanguage('ja')}
-                      className={i18n.language === 'ja' ? 'bg-accent' : ''}
+                      className={`w-1/2 ${i18n.language === 'ja' ? 'bg-accent' : ''}`}
                     >
                       日本語
                     </Button>
@@ -291,7 +291,7 @@ const Layout = () => {
                       variant="outline"
                       size="sm"
                       onClick={() => i18n.changeLanguage('en')}
-                      className={i18n.language === 'en' ? 'bg-accent' : ''}
+                      className={`w-1/2 ${i18n.language === 'en' ? 'bg-accent' : ''}`}
                     >
                       English
                     </Button>
