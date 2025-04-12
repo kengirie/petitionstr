@@ -41,7 +41,7 @@ export const LoginWidget = () => {
           <Button className="w-full">{t('auth.loginSignUp')}</Button>
         </DialogTrigger>
 
-        <DialogContent className="sm:max-w-[475px]">
+        <DialogContent className="sm:max-w-[475px] overflow-hidden">
           <DialogHeader>
             <DialogTitle>{t('auth.loginSignUp')}</DialogTitle>
           </DialogHeader>
@@ -58,7 +58,7 @@ export const LoginWidget = () => {
 
             <div className="pt-2">
               {/* Login Tab */}
-              <TabsContent value="login" tabIndex={-1} className="max-h-[400px] overflow-y-auto px-2">
+              <TabsContent value="login" tabIndex={-1} className="h-[290px] overflow-hidden px-2 w-full">
                 <Tabs defaultValue="remote-signer" className="mt-2">
                   <TabsList className="w-full">
                     <TabsTrigger value="extension" className="w-full">
@@ -73,7 +73,7 @@ export const LoginWidget = () => {
                   </TabsList>
 
                   <div className="pt-2">
-                    <TabsContent value="extension" tabIndex={-1} className="min-h-[200px] px-1">
+                    <TabsContent value="extension" tabIndex={-1} className="h-[200px] px-1 w-full">
                       <div className="mt-4" />
                       <Button className="w-full" disabled={loading} onClick={handleExtensionSigner}>
                         {loading ? <Loader2 className="animate-spin" /> : t('auth.loginWithExtension')}
@@ -102,7 +102,7 @@ export const LoginWidget = () => {
                       </div>
                     </TabsContent>
 
-                    <TabsContent value="remote-signer" tabIndex={-1} className="min-h-[200px] px-1">
+                    <TabsContent value="remote-signer" tabIndex={-1} className="h-[200px] px-1 w-full">
                       <Label>{t('auth.yourNip05Address')}</Label>
                       <Input
                         className="mt-2"
@@ -128,7 +128,7 @@ export const LoginWidget = () => {
                       </div>
                     </TabsContent>
 
-                    <TabsContent value="secret-key" tabIndex={-1} className="min-h-[200px] px-1">
+                    <TabsContent value="secret-key" tabIndex={-1} className="h-[200px] px-1 w-full">
                       <Label>{t('auth.yourSecretKey')}</Label>
                       <Input
                         className="mt-2"
@@ -146,7 +146,7 @@ export const LoginWidget = () => {
               </TabsContent>
 
               {/* Sign Up Tab */}
-              <TabsContent value="signup" tabIndex={-1} className="px-2">
+              <TabsContent value="signup" tabIndex={-1} className="px-2 w-full overflow-hidden h-[290px]">
                 <div className="mt-4 text-center">
                   <Muted>
                     <span>{t('auth.createNewAccount')}</span>
