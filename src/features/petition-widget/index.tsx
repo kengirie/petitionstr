@@ -30,25 +30,25 @@ export const PetitionByEvent = memo(
       return (
         <>
           <div className="px-2">
-           <Link to={`/petition/${nevent}`} className="block no-underline text-inherit">
             <Card className="border rounded-sm shadow-md bg-background transition-colors duration-500 ease-out hover:border-primary/30">
-              <CardContent className="flex gap-4 p-4">
-                <div className="w-24 flex-shrink-0">
-                  <PetitionImage event={event} />
-                </div>
-                <div className="flex-1 flex flex-col">
-                  <PetitionTitle event={event}/>
-                  <PetitionSummary event={event} />
-                </div>
-              </CardContent>
-              <CardFooter className="justify-between">
-               <div className="w-full">
-                <PetitionFooter event={event} />
-               </div>
-              </CardFooter>
-              </Card>
+              <Link to={`/petition/${nevent}`} className="block no-underline text-inherit">
+                <CardContent className="flex gap-4 p-4">
+                  <div className="w-24 flex-shrink-0">
+                    <PetitionImage event={event} />
+                  </div>
+                  <div className="flex-1 flex flex-col">
+                    <PetitionTitle event={event}/>
+                    <PetitionSummary event={event} />
+                  </div>
+                </CardContent>
               </Link>
-            </div>
+              <CardFooter className="justify-between">
+                <div className="w-full">
+                  <PetitionFooter event={event} />
+                </div>
+              </CardFooter>
+            </Card>
+          </div>
         </>
       );
     }
