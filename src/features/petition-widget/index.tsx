@@ -5,8 +5,8 @@ import { memo, useEffect, useState } from 'react';
 import { Spinner } from '@/shared/components/spinner';
 import { Link, Outlet, createBrowserRouter } from 'react-router-dom';
 import { NoteContent } from '@/features/note-widget/components/note-content';
-import { NoteFooter } from '@/features/note-widget/components/note-footer';
 import { NoteHeader } from '@/features/note-widget/components/note-header';
+import { PetitionFooter } from './components/petition-footer';
 import { PetitionSummary } from './components/petition-summary';
 import { useNoteHeader } from './components/petition-header/hooks';
 
@@ -43,7 +43,7 @@ export const PetitionByEvent = memo(
               </CardContent>
               <CardFooter className="justify-between">
                <div className="w-full">
-                <NoteHeader event={event} />
+                <PetitionFooter event={event} />
                </div>
               </CardFooter>
               </Card>
