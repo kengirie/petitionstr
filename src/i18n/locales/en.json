@@ -68,5 +68,28 @@
       "summary": "Summary",
       "content": "Content Details"
     }
+  },
+  "auth": {
+    "loginSignUp": "Login / Sign Up",
+    "login": "Login",
+    "signUp": "Sign Up",
+    "extension": "Extension",
+    "remoteSigner": "Remote Signer",
+    "secretKey": "Secret Key",
+    "loginWithExtension": "Login With Extension",
+    "loginWithRemoteSigner": "Login With Remote Signer",
+    "loginWithSecretKey": "Login With Secret Key",
+    "signUpWithKey": "Sign Up With This Key",
+    "generateNewKey": "Generate New Secret Key",
+    "yourNip05Address": "Your NIP-05 address:",
+    "yourSecretKey": "Your Secret Key:",
+    "yourNewSecretKey": "Your New Secret Key:",
+    "dontHaveExtension": "Don't have an extension yet?",
+    "getYoursFrom": "Get yours from",
+    "dontHaveRemoteSigner": "Don't have a remote signer yet?",
+    "setUpYoursAt": "Set up yours at",
+    "createNewAccount": "Create a new Nostr account by generating a secret key",
+    "saveKeyWarning": "Important: Save your secret key somewhere safe!",
+    "onlyAccessWay": "This is the only way to access your account."
   }
 }
