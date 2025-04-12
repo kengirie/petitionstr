@@ -29,7 +29,7 @@ export const NoteHeader = ({ event }: { event: NDKEvent }) => {
 
   return (
     <>
-      <div className="pt-2 flex justify-between gap-2" ref={ref}>
+      <div className="pt-2 flex justify-between w-full" ref={ref}>
         <Avatar
           className="bg-foreground/10 hover:cursor-pointer"
           onClick={() => navigate(`/profile/${new NDKUser({ pubkey: event.pubkey }).npub}`)}
@@ -38,7 +38,7 @@ export const NoteHeader = ({ event }: { event: NDKEvent }) => {
           <AvatarFallback />
         </Avatar>
 
-        <div className="grow flex flex-col justify-center">
+        <div className="flex flex-col justify-center ml-2">
           <p
             className="w-fit font-semibold leading-tight hover:cursor-pointer"
             onClick={() => navigate(`/profile/${new NDKUser({ pubkey: event.pubkey }).npub}`)}
@@ -54,7 +54,7 @@ export const NoteHeader = ({ event }: { event: NDKEvent }) => {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 ml-auto">
           <p className="text-xs text-gray-500">
             {formatDistanceToNowStrict((event.created_at || 0) * 1000)}
           </p>

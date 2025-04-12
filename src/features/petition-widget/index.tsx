@@ -41,8 +41,10 @@ export const PetitionByEvent = memo(
                   <PetitionSummary event={event} />
                 </div>
               </CardContent>
-              <CardFooter>
-               <NoteHeader event={event} />
+              <CardFooter className="justify-between">
+               <div className="w-full">
+                <NoteHeader event={event} />
+               </div>
               </CardFooter>
               </Card>
               </Link>
