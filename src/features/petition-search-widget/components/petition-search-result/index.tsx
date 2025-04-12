@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Spinner } from '@/shared/components/spinner';
 
-import { PetitionSearchResultItem } from '../petition-search-result-item';
+import { PetitionSearchResultItem } from '../petition-search-result-item/index';
 
 export const PetitionSearchResult = memo(
   ({ input }: { input: string }) => {
@@ -27,7 +27,7 @@ export const PetitionSearchResult = memo(
         .fetchEvents(
           [{ kinds: [30023], limit: 100, search: input }],
           { closeOnEose: true },
-          NDKRelaySet.fromRelayUrls(['wss://relay.nostr.band'], ndk),
+          NDKRelaySet.fromRelayUrls(['wss://search.nos.today/'], ndk),
         )
         .then((events) => {
           setEvents([...events]);
