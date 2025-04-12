@@ -15,7 +15,7 @@ export const PetitionSummary = memo(
     const { chunks, inView, ref } = usePetitionSummary(event);
 
     return (
-      <div ref={ref}>
+      <div ref={ref} className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
         {chunks.map((chunk, index) => {
           switch (chunk.type) {
             case 'text':

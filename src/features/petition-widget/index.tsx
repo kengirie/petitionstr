@@ -5,8 +5,8 @@ import { memo, useEffect, useState } from 'react';
 import { Spinner } from '@/shared/components/spinner';
 import { Link, Outlet, createBrowserRouter } from 'react-router-dom';
 import { NoteContent } from '@/features/note-widget/components/note-content';
-import { NoteFooter } from '@/features/note-widget/components/note-footer';
 import { NoteHeader } from '@/features/note-widget/components/note-header';
+import { PetitionFooter } from './components/petition-footer';
 import { PetitionSummary } from './components/petition-summary';
 import { useNoteHeader } from './components/petition-header/hooks';
 
@@ -30,21 +30,25 @@ export const PetitionByEvent = memo(
       return (
         <>
           <div className="px-2">
-           <Link to={`/petition/${nevent}`} className="block no-underline text-inherit">
             <Card className="border rounded-sm shadow-md bg-background transition-colors duration-500 ease-out hover:border-primary/30">
-              <CardHeader>
-                <CardTitle><PetitionTitle event={event}/> </CardTitle>
-              </CardHeader>
-              <CardContent className = "flex flex-col gap-2">
-                <PetitionImage event={event} />
-                <PetitionSummary event={event} />
-              </CardContent>
-              <CardFooter>
-               <NoteHeader event={event} />
-              </CardFooter>
-              </Card>
+              <Link to={`/petition/${nevent}`} className="block no-underline text-inherit">
+                <CardContent className="flex gap-4 p-4">
+                  <div className="w-24 flex-shrink-0">
+                    <PetitionImage event={event} />
+                  </div>
+                  <div className="flex-1 flex flex-col">
+                    <PetitionTitle event={event}/>
+                    <PetitionSummary event={event} />
+                  </div>
+                </CardContent>
               </Link>
-            </div>
+              <CardFooter className="justify-between">
+                <div className="w-full">
+                  <PetitionFooter event={event} />
+                </div>
+              </CardFooter>
+            </Card>
+          </div>
         </>
       );
     }

@@ -7,6 +7,6 @@ export const PetitionTitle = ({ event }: { event: NDKEvent }) => {
   const { name } = usePetitionTitle(event);
 
   return (
-    <div className="text-2xl font-bold">{name}</div>
+    <div className="text-xl font-bold mb-1">{name}</div>
   );
 };
