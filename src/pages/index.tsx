@@ -8,7 +8,8 @@ import {
   PowerIcon,
   SearchIcon,
   SunIcon,
-  User
+  User,
+  InfoIcon
 } from 'lucide-react';
 import { useActiveUser, useLogin, useRealtimeProfile } from 'nostr-hooks';
 import { useEffect, useState } from 'react';
@@ -247,6 +248,15 @@ const Layout = () => {
                     <span>{t('common.search')}</span>
                   </Link>
                 </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    to="/about"
+                    className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-accent"
+                  >
+                    <InfoIcon className="h-5 w-5" />
+                    <span>{t('common.about')}</span>
+                  </Link>
+                </SheetClose>
                 <Separator />
                 <SheetClose asChild>
                   <Link
@@ -387,6 +397,13 @@ const Layout = () => {
                   <SearchIcon className="h-5 w-5" />
                   <span>{t('common.search')}</span>
                 </Link>
+                <Link
+                  to="/about"
+                  className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors"
+                >
+                  <InfoIcon className="h-5 w-5" />
+                  <span>{t('common.about')}</span>
+                </Link>
                 {activeUser && (
                   <Link
                     to={`/profile/${activeUser.npub}`}
@@ -474,6 +491,7 @@ const PetitionsPage = () => import('./petitions-list');
 const PetitionPage = () => import('./petition');
 const PetitioningPage = () => import('./petitioning');
 const SearchPage = () => import('./search');
+const AboutPage = () => import('./about');
 
 export const router = createBrowserRouter([
   {
@@ -543,6 +561,12 @@ export const router = createBrowserRouter([
         path: '/search',
         async lazy() {
           return { Component: (await SearchPage()).SearchPage };
+        },
+      },
+      {
+        path: '/about',
+        async lazy() {
+          return { Component: (await AboutPage()).AboutPage };
         },
       },
     ],

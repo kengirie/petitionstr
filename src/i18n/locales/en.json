@@ -33,7 +33,8 @@
     "freedomSpeechSlogan": "Let's take back our freedom of speech",
     "petitionstrDescription": "PetitioNstr is an online political petition site built on a censorship-resistant SNS protocol",
     "edit": "Edit",
-    "preview": "Preview"
+    "preview": "Preview",
+    "about": "About"
   },
   "notifications": {
     "checkReactions": "Check reactions and mentions to your posts"
@@ -91,5 +92,13 @@
     "createNewAccount": "Create a new Nostr account by generating a secret key",
     "saveKeyWarning": "Important: Save your secret key somewhere safe!",
     "onlyAccessWay": "This is the only way to access your account."
+  },
+  "about": {
+    "projectOverview": "Project Overview",
+    "sourceCode": "Source Code",
+    "reportBugs": "Report Bugs",
+    "issueTracker": "Issue Tracker",
+    "creator": "Creator",
+    "viewCreatorProfile": "View Creator Profile"
   }
 }

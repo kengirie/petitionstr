@@ -33,7 +33,8 @@
     "freedomSpeechSlogan": "言論の自由を我々の手に取り戻そう",
     "petitionstrDescription": "PetitioNstrは検閲耐性を持つSNSプロトコル上に作られたオンラインの政治署名サイトです",
     "edit": "編集",
-    "preview": "プレビュー"
+    "preview": "プレビュー",
+    "about": "このサイトについて"
   },
   "notifications": {
     "checkReactions": "あなたの投稿に対する反応やメンションを確認できます"
@@ -91,5 +92,13 @@
     "createNewAccount": "秘密鍵を生成して新しいNostrアカウントを作成",
     "saveKeyWarning": "重要: 秘密鍵を安全な場所に保存してください！",
     "onlyAccessWay": "これがあなたのアカウントにアクセスする唯一の方法です。"
+  },
+  "about": {
+    "projectOverview": "プロジェクト概要",
+    "sourceCode": "ソースコード",
+    "reportBugs": "バグ報告",
+    "issueTracker": "課題トラッカー",
+    "creator": "製作者",
+    "viewCreatorProfile": "製作者のプロフィールを見る"
   }
 }
