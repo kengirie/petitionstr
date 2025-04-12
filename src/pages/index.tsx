@@ -14,7 +14,7 @@ import {
 import { useActiveUser, useLogin, useRealtimeProfile } from 'nostr-hooks';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, Outlet, createBrowserRouter, useNavigate } from 'react-router-dom';
+import { Link, Outlet, createBrowserRouter } from 'react-router-dom';
 
 import { ErrorBoundary } from './error';
 import { ErrorPage } from './error/error-page';
@@ -64,7 +64,6 @@ const Layout = () => {
   const { setTheme, theme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
 
   // スクロール検出のためのイベントリスナー
   useEffect(() => {
