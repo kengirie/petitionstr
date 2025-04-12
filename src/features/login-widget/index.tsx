@@ -38,12 +38,12 @@ export const LoginWidget = () => {
     <>
       <Dialog open={isModalOpen} onOpenChange={(open) => setIsModalOpen(open)}>
         <DialogTrigger asChild>
-          <Button className="w-full">{t('auth.loginSignUp')}</Button>
+          <Button className="w-full">{t('auth.login')}</Button>
         </DialogTrigger>
 
         <DialogContent className="sm:max-w-[475px] overflow-hidden">
           <DialogHeader>
-            <DialogTitle>{t('auth.loginSignUp')}</DialogTitle>
+            <DialogTitle>{t('auth.login')}</DialogTitle>
           </DialogHeader>
 
           <Tabs defaultValue="login" className="mt-2">
