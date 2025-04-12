@@ -1,4 +1,4 @@
-import { useActiveUser, useFollows, useSubscription } from 'nostr-hooks';
+import { useActiveUser, useSubscription } from 'nostr-hooks';
 import { useEffect, useMemo, useState } from 'react';
 
 import { PetitionFeedView } from '../types';
