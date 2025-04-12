@@ -68,5 +68,28 @@
       "summary": "概要",
       "content": "詳細内容"
     }
+  },
+  "auth": {
+    "loginSignUp": "ログイン / 新規登録",
+    "login": "Login",
+    "signUp": "新規登録",
+    "extension": "拡張機能",
+    "remoteSigner": "リモート署名者",
+    "secretKey": "秘密鍵",
+    "loginWithExtension": "拡張機能でLogin",
+    "loginWithRemoteSigner": "リモート署名者でLogin",
+    "loginWithSecretKey": "秘密鍵でLogin",
+    "signUpWithKey": "この鍵で登録する",
+    "generateNewKey": "新しい秘密鍵を生成",
+    "yourNip05Address": "あなたのNIP-05アドレス:",
+    "yourSecretKey": "あなたの秘密鍵:",
+    "yourNewSecretKey": "あなたの新しい秘密鍵:",
+    "dontHaveExtension": "まだ拡張機能をお持ちでないですか？",
+    "getYoursFrom": "こちらから入手できます",
+    "dontHaveRemoteSigner": "まだリモート署名者をお持ちでないですか？",
+    "setUpYoursAt": "こちらで設定できます",
+    "createNewAccount": "秘密鍵を生成して新しいNostrアカウントを作成",
+    "saveKeyWarning": "重要: 秘密鍵を安全な場所に保存してください！",
+    "onlyAccessWay": "これがあなたのアカウントにアクセスする唯一の方法です。"
   }
 }

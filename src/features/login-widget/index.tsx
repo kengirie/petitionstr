@@ -1,4 +1,5 @@
 import { Loader2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -18,6 +19,7 @@ import { useLoginWidget } from './hooks';
 // Check out the `example-components` folder to see how to use this component
 
 export const LoginWidget = () => {
+  const { t } = useTranslation();
   const {
     loading,
     nip46Input,
@@ -36,117 +38,153 @@ export const LoginWidget = () => {
     <>
       <Dialog open={isModalOpen} onOpenChange={(open) => setIsModalOpen(open)}>
         <DialogTrigger asChild>
-          <Button className="w-full">Login</Button>
+          <Button className="w-full">{t('auth.login')}</Button>
         </DialogTrigger>
 
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[475px] overflow-hidden">
           <DialogHeader>
-            <DialogTitle>Login</DialogTitle>
+            <DialogTitle>{t('auth.login')}</DialogTitle>
           </DialogHeader>
 
-          <Tabs defaultValue="remote-signer" className="mt-2">
+          <Tabs defaultValue="login" className="mt-2">
             <TabsList className="w-full">
-              <TabsTrigger value="extension" className="w-full">
-                Extension
+              <TabsTrigger value="login" className="w-full">
+                {t('auth.login')}
               </TabsTrigger>
-
-              <TabsTrigger value="remote-signer" className="w-full">
-                Remote Signer
-              </TabsTrigger>
-
-              <TabsTrigger value="secret-key" className="w-full">
-                Secret Key
+              <TabsTrigger value="signup" className="w-full">
+                {t('auth.signUp')}
               </TabsTrigger>
             </TabsList>
 
             <div className="pt-2">
-              <TabsContent value="extension" tabIndex={-1}>
-                <div className="mt-4" />
+              {/* Login Tab */}
+              <TabsContent value="login" tabIndex={-1} className="h-[290px] overflow-hidden px-2 w-full">
+                <Tabs defaultValue="remote-signer" className="mt-2">
+                  <TabsList className="w-full">
+                    <TabsTrigger value="extension" className="w-full">
+                      {t('auth.extension')}
+                    </TabsTrigger>
+                    <TabsTrigger value="remote-signer" className="w-full">
+                      {t('auth.remoteSigner')}
+                    </TabsTrigger>
+                    <TabsTrigger value="secret-key" className="w-full">
+                      {t('auth.secretKey')}
+                    </TabsTrigger>
+                  </TabsList>
 
-                <Button className="w-full" disabled={loading} onClick={handleExtensionSigner}>
-                  {loading ? <Loader2 className="animate-spin" /> : `Login With Extension`}
-                </Button>
+                  <div className="pt-2">
+                    <TabsContent value="extension" tabIndex={-1} className="h-[200px] px-1 w-full">
+                      <div className="mt-4" />
+                      <Button className="w-full" disabled={loading} onClick={handleExtensionSigner}>
+                        {loading ? <Loader2 className="animate-spin" /> : t('auth.loginWithExtension')}
+                      </Button>
+                      <div className="mt-2 text-center">
+                        <Muted>
+                          <span>{t('auth.dontHaveExtension')}</span>
+                          <br />
+                          <span>{t('auth.getYoursFrom')} </span>
+                          <Button variant="link" className="p-0 text-blue-600" asChild>
+                            <a
+                              href="https://github.com/fiatjaf/nos2x"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Nos2x
+                            </a>
+                          </Button>
+                          {' or '}
+                          <Button variant="link" className="p-0 text-blue-600" asChild>
+                            <a href="https://getalby.com" target="_blank" rel="noopener noreferrer">
+                              Alby
+                            </a>
+                          </Button>
+                        </Muted>
+                      </div>
+                    </TabsContent>
 
-                <div className="mt-2 text-center">
-                  <Muted>
-                    <span>Don't have an extension yet?</span>
-                    <br />
-                    <span>Get yours from </span>
-                    <Button variant="link" className="p-0 text-blue-600" asChild>
-                      <a
-                        href="https://github.com/fiatjaf/nos2x"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Nos2x
-                      </a>
-                    </Button>
-                    {' or '}
-                    <Button variant="link" className="p-0 text-blue-600" asChild>
-                      <a href="https://getalby.com" target="_blank" rel="noopener noreferrer">
-                        Alby
-                      </a>
-                    </Button>
-                  </Muted>
-                </div>
+                    <TabsContent value="remote-signer" tabIndex={-1} className="h-[200px] px-1 w-full">
+                      <Label>{t('auth.yourNip05Address')}</Label>
+                      <Input
+                        className="mt-2"
+                        placeholder="you@nsec.app"
+                        value={nip46Input}
+                        onChange={(e) => setNip46Input(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && handleRemoteSigner()}
+                      />
+                      <Button className="mt-4 w-full" disabled={loading} onClick={handleRemoteSigner}>
+                        {loading ? <Loader2 className="animate-spin" /> : t('auth.loginWithRemoteSigner')}
+                      </Button>
+                      <div className="mt-2 text-center">
+                        <Muted>
+                          <span>{t('auth.dontHaveRemoteSigner')}</span>
+                          <br />
+                          <span>{t('auth.setUpYoursAt')} </span>
+                          <Button variant="link" className="p-0 text-blue-600" asChild>
+                            <a href="https://nsec.app" target="_blank" rel="noopener noreferrer">
+                              nsec.app
+                            </a>
+                          </Button>
+                        </Muted>
+                      </div>
+                    </TabsContent>
+
+                    <TabsContent value="secret-key" tabIndex={-1} className="h-[200px] px-1 w-full">
+                      <Label>{t('auth.yourSecretKey')}</Label>
+                      <Input
+                        className="mt-2"
+                        placeholder="nsec..."
+                        value={nsecInput}
+                        onChange={(e) => setNsecInput(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && handlePrivateKeySigner()}
+                      />
+                      <Button className="mt-4 w-full" disabled={loading} onClick={handlePrivateKeySigner}>
+                        {loading ? <Loader2 className="animate-spin" /> : t('auth.loginWithSecretKey')}
+                      </Button>
+                    </TabsContent>
+                  </div>
+                </Tabs>
               </TabsContent>
 
-              <TabsContent value="remote-signer" tabIndex={-1}>
-                <Label>Your NIP-05 address:</Label>
-
-                <Input
-                  className="mt-2"
-                  placeholder="you@nsec.app"
-                  value={nip46Input}
-                  onChange={(e) => setNip46Input(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleRemoteSigner()}
-                />
-
-                <Button className="mt-4 w-full" disabled={loading} onClick={handleRemoteSigner}>
-                  {loading ? <Loader2 className="animate-spin" /> : `Login With Remote Signer`}
-                </Button>
-
-                <div className="mt-2 text-center">
+              {/* Sign Up Tab */}
+              <TabsContent value="signup" tabIndex={-1} className="px-2 w-full overflow-hidden h-[290px]">
+                <div className="mt-4 text-center">
                   <Muted>
-                    <span>Don't have a remote signer yet?</span>
-                    <br />
-                    <span>Set up yours at </span>
-                    <Button variant="link" className="p-0 text-blue-600" asChild>
-                      <a href="https://nsec.app" target="_blank" rel="noopener noreferrer">
-                        nsec.app
-                      </a>
-                    </Button>
+                    <span>{t('auth.createNewAccount')}</span>
                   </Muted>
                 </div>
-              </TabsContent>
 
-              <TabsContent value="secret-key" tabIndex={-1}>
-                <Label>Your Secret Key:</Label>
+                <div className="mt-4">
+                  <Label>{t('auth.yourNewSecretKey')}</Label>
+                  <Input
+                    className="mt-2"
+                    placeholder="nsec..."
+                    value={nsecInput}
+                    onChange={(e) => setNsecInput(e.target.value)}
+                    readOnly
+                  />
 
-                <Input
-                  className="mt-2"
-                  placeholder="nsec..."
-                  value={nsecInput}
-                  onChange={(e) => setNsecInput(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handlePrivateKeySigner()}
-                />
+                  <Button
+                    className="mt-4 w-full"
+                    onClick={handlePrivateKeyGenerate}
+                  >
+                    {t('auth.generateNewKey')}
+                  </Button>
 
-                <Button className="mt-4 w-full" disabled={loading} onClick={handlePrivateKeySigner}>
-                  {loading ? <Loader2 className="animate-spin" /> : `Login With Secret Key`}
-                </Button>
+                  <Button
+                    className="mt-4 w-full"
+                    disabled={!nsecInput || loading}
+                    onClick={handlePrivateKeySigner}
+                  >
+                    {loading ? <Loader2 className="animate-spin" /> : t('auth.signUpWithKey')}
+                  </Button>
 
-                <div className="mt-2 text-center">
-                  <Muted>
-                    <span>Don't have a secret key yet?</span>
-                    <br />
-                    <Button
-                      variant="link"
-                      className="p-0 text-blue-600"
-                      onClick={handlePrivateKeyGenerate}
-                    >
-                      Generate a new secret key
-                    </Button>
-                  </Muted>
+                  <div className="mt-4 text-center">
+                    <Muted>
+                      <span>⚠️ {t('auth.saveKeyWarning')}</span>
+                      <br />
+                      <span>{t('auth.onlyAccessWay')}</span>
+                    </Muted>
+                  </div>
                 </div>
               </TabsContent>
             </div>
