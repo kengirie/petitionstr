@@ -3,14 +3,12 @@ import { useNdk } from 'nostr-hooks';
 import { memo, useEffect, useState } from 'react';
 
 import { Spinner } from '@/shared/components/spinner';
-import { Link, Outlet, createBrowserRouter } from 'react-router-dom';
-import { NoteContent } from '@/features/note-widget/components/note-content';
-import { NoteHeader } from '@/features/note-widget/components/note-header';
+import { Link } from 'react-router-dom';
 import { PetitionFooter } from './components/petition-footer';
-import { PetitionSummary } from './components/petition-summary';
 import { useNoteHeader } from './components/petition-header/hooks';
+import { PetitionSummary } from './components/petition-summary';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/shared/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/shared/components/ui/card';
 import { PetitionImage } from './components/petition-image';
 import { PetitionTitle } from './components/petition-title';
 

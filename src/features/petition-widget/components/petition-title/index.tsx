@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { EventPointer, NDKEvent, NDKUser } from '@nostr-dev-kit/ndk';
+import { NDKEvent } from '@nostr-dev-kit/ndk';
 import { usePetitionTitle } from './hooks';
 
 

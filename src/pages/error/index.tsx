@@ -1,5 +1,5 @@
 // Language: TypeScript
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ErrorInfo, ReactNode } from 'react';
 
 type ErrorBoundaryProps = {
   children: ReactNode;

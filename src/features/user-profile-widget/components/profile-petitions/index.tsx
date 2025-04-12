@@ -3,7 +3,6 @@ import { memo } from 'react';
 
 import { Button } from '@/shared/components/ui/button';
 
-import { NoteByEvent } from '@/features/note-widget';
 import { PetitionByEvent } from '@/features/petition-widget';
 
 import { useProfilePetitions } from './hooks';

@@ -1,5 +1,5 @@
+import { NDKEvent } from '@nostr-dev-kit/ndk';
 import { useEffect, useState } from 'react';
-import { EventPointer, NDKEvent, NDKUser } from '@nostr-dev-kit/ndk';
 
 export const usePetitionTitle = (event: NDKEvent) => {
   const [name, setName] = useState<string>();

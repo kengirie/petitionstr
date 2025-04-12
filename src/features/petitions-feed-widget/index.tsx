@@ -1,23 +1,13 @@
 import { Button } from '@/shared/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuTrigger,
-} from '@/shared/components/ui/dropdown-menu';
 
 import { Spinner } from '@/shared/components/spinner';
 
-import { NewNoteWidget } from '@/features/new-note-widget';
-import { NoteByEvent } from '@/features/note-widget';
 import { PetitionByEvent } from '../petition-widget';
 
 import { usePetitionsFeedWidget } from './hooks';
-import { PetitionFeedView } from './types';
 
 export const PetitionsFeedWidget = () => {
-  const { processedEvents, hasMore, loadMore, setView, view, isLoading } = usePetitionsFeedWidget();
+  const { processedEvents, hasMore, loadMore, isLoading } = usePetitionsFeedWidget();
 
   return (
     <>

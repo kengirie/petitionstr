@@ -1,10 +1,7 @@
-import { useActiveUser } from 'nostr-hooks';
 import { useParams } from 'react-router-dom';
 
-import { Spinner } from '@/shared/components/spinner';
 
 import { PetitionDetailWidget } from "@/features/petition-detail-widget";
-import { PetitionByPetitionId } from '@/features/petition-widget';
 
 export const PetitionPage = () => {
     const { petitionId } = useParams();
