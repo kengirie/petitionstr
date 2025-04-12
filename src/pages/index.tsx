@@ -21,7 +21,7 @@ import {
   User,
 } from 'lucide-react';
 import { useActiveUser, useNdk, useRealtimeProfile, useLogin } from 'nostr-hooks';
-import { Link, Outlet, createBrowserRouter } from 'react-router-dom';
+import { Link, Outlet, createBrowserRouter, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -80,7 +80,7 @@ import { LanguageSwitcher } from '@/shared/components/language-switcher';
 
 import { ActiveUserWidget } from '@/features/active-user-widget';
 import { LoginWidget } from '@/features/login-widget';
-import { SearchWidget } from '@/features/search-widget';
+import { PetitionSearchWidget } from '@/features/petition-search-widget';
 import { TrendingNotesWidget } from '@/features/trending-notes-widget';
 import { ZapWidget } from '@/features/zap-widget';
 
@@ -93,6 +93,7 @@ const Layout = () => {
   const isMobile = useIsMobile();
   const [isScrolled, setIsScrolled] = useState(false);
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   // スクロール検出のためのイベントリスナー
   useEffect(() => {
@@ -126,11 +127,14 @@ const Layout = () => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <SearchWidget>
-                    <Button variant="ghost" size="icon" aria-label={t('common.search')}>
-                      <SearchIcon className="h-5 w-5" />
-                    </Button>
-                  </SearchWidget>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    aria-label={t('common.search')}
+                    onClick={() => navigate('/search')}
+                  >
+                    <SearchIcon className="h-5 w-5" />
+                  </Button>
                 </TooltipTrigger>
                 <TooltipContent>{t('common.search')}</TooltipContent>
               </Tooltip>
@@ -265,12 +269,13 @@ const Layout = () => {
                   </Link>
                 </SheetClose>
                 <SheetClose asChild>
-                  <SearchWidget>
-                    <div className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-accent cursor-pointer">
-                      <SearchIcon className="h-5 w-5" />
-                      <span>{t('common.search')}</span>
-                    </div>
-                  </SearchWidget>
+                  <Link
+                    to="/search"
+                    className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-accent cursor-pointer"
+                  >
+                    <SearchIcon className="h-5 w-5" />
+                    <span>{t('common.search')}</span>
+                  </Link>
                 </SheetClose>
                 <Separator />
                 <SheetClose asChild>
@@ -334,11 +339,14 @@ const Layout = () => {
           </Link>
 
           <div className="flex items-center gap-1">
-            <SearchWidget>
-              <Button variant="ghost" size="icon" aria-label={t('common.search')}>
-                <SearchIcon className="h-5 w-5" />
-              </Button>
-            </SearchWidget>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={t('common.search')}
+              onClick={() => navigate('/search')}
+            >
+              <SearchIcon className="h-5 w-5" />
+            </Button>
 
             {activeUser ? (
               <DropdownMenu>
@@ -402,12 +410,13 @@ const Layout = () => {
                   <BellIcon className="h-5 w-5" />
                   <span>{t('common.notifications')}</span>
                 </Link>
-                <SearchWidget>
-                  <div className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors cursor-pointer">
-                    <SearchIcon className="h-5 w-5" />
-                    <span>{t('common.search')}</span>
-                  </div>
-                </SearchWidget>
+                <Link
+                  to="/search"
+                  className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors"
+                >
+                  <SearchIcon className="h-5 w-5" />
+                  <span>{t('common.search')}</span>
+                </Link>
                 {activeUser && (
                   <Link
                     to={`/profile/${activeUser.npub}`}
@@ -475,12 +484,10 @@ const Layout = () => {
               <span className="text-xs">{t('common.profile')}</span>
             </Link>
           ) : (
-            <SearchWidget>
-              <div className="flex flex-col items-center gap-1 p-1 cursor-pointer">
-                <SearchIcon className="h-6 w-6" />
-                <span className="text-xs">{t('common.search')}</span>
-              </div>
-            </SearchWidget>
+            <Link to="/search" className="flex flex-col items-center gap-1 p-1">
+              <SearchIcon className="h-6 w-6" />
+              <span className="text-xs">{t('common.search')}</span>
+            </Link>
           )}
         </div>
       </nav>
@@ -496,6 +503,7 @@ const NotificationsPage = () => import('./notifications');
 const PetitionsPage = () => import('./petitions-list');
 const PetitionPage = () => import('./petition');
 const PetitioningPage = () => import('./petitioning');
+const SearchPage = () => import('./search');
 
 export const router = createBrowserRouter([
   {
@@ -559,6 +567,12 @@ export const router = createBrowserRouter([
         path: 'petitioning',
         async lazy() {
           return { Component: (await PetitioningPage()).PetitioningPage };
+        },
+      },
+      {
+        path: '/search',
+        async lazy() {
+          return { Component: (await SearchPage()).SearchPage };
         },
       },
     ],

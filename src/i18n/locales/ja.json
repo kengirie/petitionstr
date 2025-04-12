@@ -39,7 +39,10 @@
     "checkReactions": "あなたの投稿に対する反応やメンションを確認できます"
   },
   "search": {
-    "searchUsersAndPosts": "ユーザーや投稿を検索できます"
+    "searchUsersAndPosts": "ユーザーや投稿を検索できます",
+    "searchPetitions": "請願を検索",
+    "searchPlaceholder": "請願を検索...",
+    "noPetitionsFound": "該当する請願が見つかりませんでした"
   },
   "profile": {
     "petitions": "請願",
