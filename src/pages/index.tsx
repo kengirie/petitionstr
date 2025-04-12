@@ -95,21 +95,7 @@ const Layout = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    aria-label={t('common.search')}
-                    onClick={() => navigate('/search')}
-                  >
-                    <SearchIcon className="h-5 w-5" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>{t('common.search')}</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            
 
             <TooltipProvider>
               <Tooltip>
@@ -230,15 +216,17 @@ const Layout = () => {
                     <span>{t('common.petition')}</span>
                   </Link>
                 </SheetClose>
-                <SheetClose asChild>
-                  <Link
-                    to="/notifications"
-                    className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-accent"
-                  >
-                    <BellIcon className="h-5 w-5" />
-                    <span>{t('common.notifications')}</span>
-                  </Link>
-                </SheetClose>
+                {activeUser && (
+                  <SheetClose asChild>
+                    <Link
+                      to="/notifications"
+                      className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-accent"
+                    >
+                      <BellIcon className="h-5 w-5" />
+                      <span>{t('common.notifications')}</span>
+                    </Link>
+                  </SheetClose>
+                )}
                 <SheetClose asChild>
                   <Link
                     to="/search"
@@ -319,14 +307,6 @@ const Layout = () => {
           </Link>
 
           <div className="flex items-center gap-1">
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label={t('common.search')}
-              onClick={() => navigate('/search')}
-            >
-              <SearchIcon className="h-5 w-5" />
-            </Button>
 
             {activeUser ? (
               <DropdownMenu>
@@ -383,13 +363,15 @@ const Layout = () => {
                   <FileTextIcon className="h-5 w-5" />
                   <span>{t('common.petition')}</span>
                 </Link>
-                <Link
-                  to="/notifications"
-                  className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors"
-                >
-                  <BellIcon className="h-5 w-5" />
-                  <span>{t('common.notifications')}</span>
-                </Link>
+                {activeUser && (
+                  <Link
+                    to="/notifications"
+                    className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors"
+                  >
+                    <BellIcon className="h-5 w-5" />
+                    <span>{t('common.notifications')}</span>
+                  </Link>
+                )}
                 <Link
                   to="/search"
                   className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors"
@@ -435,49 +417,7 @@ const Layout = () => {
         </div>
       </main>
 
-      {/* モバイルナビゲーション */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background border-t">
-        <div className="container flex items-center justify-between py-2">
-          <Link to="/" className="flex flex-col items-center gap-1 p-1">
-            <HomeIcon className="h-6 w-6" />
-            <span className="text-xs">{t('common.home')}</span>
-          </Link>
 
-          <Link to="/petitions" className="flex flex-col items-center gap-1 p-1">
-            <FileTextIcon className="h-6 w-6" />
-            <span className="text-xs">{t('common.petition')}</span>
-          </Link>
-
-          <Button variant="secondary" size="icon" className="rounded-full h-12 w-12" asChild>
-            <Link to="/petitioning">
-              <Plus className="h-6 w-6" />
-            </Link>
-          </Button>
-
-          <Link to="/notifications" className="flex flex-col items-center gap-1 p-1">
-            <BellIcon className="h-6 w-6" />
-            <span className="text-xs">{t('common.notifications')}</span>
-          </Link>
-
-          {activeUser ? (
-            <Link
-              to={`/profile/${activeUser.npub}`}
-              className="flex flex-col items-center gap-1 p-1"
-            >
-              <Avatar className="h-6 w-6">
-                <AvatarImage src={profile?.image} alt={profile?.displayName || 'ユーザー'} />
-                <AvatarFallback>{profile?.displayName?.charAt(0) || 'U'}</AvatarFallback>
-              </Avatar>
-              <span className="text-xs">{t('common.profile')}</span>
-            </Link>
-          ) : (
-            <Link to="/search" className="flex flex-col items-center gap-1 p-1">
-              <SearchIcon className="h-6 w-6" />
-              <span className="text-xs">{t('common.search')}</span>
-            </Link>
-          )}
-        </div>
-      </nav>
     </div>
   );
 };
