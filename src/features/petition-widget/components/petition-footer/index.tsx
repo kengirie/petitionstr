@@ -1,5 +1,6 @@
 import { NDKEvent, NDKUser } from '@nostr-dev-kit/ndk';
 import { formatDistanceToNowStrict } from 'date-fns';
+import { useIsMobile } from '@/shared/hooks/use-mobile';
 import {
   EllipsisIcon,
   FileJsonIcon,
@@ -24,6 +25,7 @@ import { usePetitionFooter } from './hooks';
 
 export const PetitionFooter = ({ event }: { event: NDKEvent }) => {
   const { copy, navigate, profile, nevent, ref } = usePetitionFooter(event);
+  const isMobile = useIsMobile();
 
   return (
     <div className="pt-2 flex justify-between w-full" ref={ref}>
@@ -35,26 +37,30 @@ export const PetitionFooter = ({ event }: { event: NDKEvent }) => {
         <AvatarFallback />
       </Avatar>
 
-      <div className="flex flex-col justify-center ml-2">
+      <div className="flex flex-col justify-center ml-2 min-w-0">
         <p
-          className="w-fit font-semibold leading-tight hover:cursor-pointer"
+          className="font-semibold leading-tight hover:cursor-pointer truncate max-w-[150px]"
           onClick={() => navigate(`/profile/${new NDKUser({ pubkey: event.pubkey }).npub}`)}
+          title={profile?.name?.toString()}
         >
           {profile?.name?.toString()}
         </p>
 
         <p
-          className="w-fit text-xs text-gray-500 leading-tight hover:cursor-pointer"
+          className="text-xs text-gray-500 leading-tight hover:cursor-pointer truncate max-w-[150px]"
           onClick={() => navigate(`/profile/${new NDKUser({ pubkey: event.pubkey }).npub}`)}
+          title={profile?.nip05?.toString()}
         >
           {profile?.nip05?.toString()}
         </p>
       </div>
 
       <div className="flex items-center gap-2 ml-auto">
-        <p className="text-xs text-gray-500">
-          {formatDistanceToNowStrict((event.created_at || 0) * 1000)}
-        </p>
+        {!isMobile && (
+          <p className="text-xs text-gray-500">
+            {formatDistanceToNowStrict((event.created_at || 0) * 1000)}
+          </p>
+        )}
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
