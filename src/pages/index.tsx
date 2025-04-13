@@ -55,7 +55,7 @@ import {
 import { LanguageSwitcher } from '@/shared/components/language-switcher';
 import { useTheme } from '@/shared/components/theme-provider';
 
-import { LoginWidget } from '@/features/login-widget';
+// import { LoginWidget } from '@/features/login-widget';
 
 const Layout = () => {
   const { activeUser } = useActiveUser();
@@ -151,7 +151,9 @@ const Layout = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <LoginWidget />
+              <Button asChild>
+                <Link to="/login">{t('auth.login')}</Link>
+              </Button>
             )}
           </div>
         </div>
@@ -332,7 +334,9 @@ const Layout = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <LoginWidget />
+              <Button asChild size="sm">
+                <Link to="/login">{t('auth.login')}</Link>
+              </Button>
             )}
           </div>
         </div>
@@ -431,6 +435,8 @@ const PetitionPage = () => import('./petition');
 const PetitioningPage = () => import('./petitioning');
 const SearchPage = () => import('./search');
 const AboutPage = () => import('./about');
+const LoginPage = () => import('./login');
+const SignupPage = () => import('./signup');
 
 export const router = createBrowserRouter([
   {
@@ -488,6 +494,18 @@ export const router = createBrowserRouter([
         path: '/petition/:petitionId',
         async lazy() {
           return { Component: (await PetitionPage()).PetitionPage };
+        },
+      },
+      {
+        path: '/login',
+        async lazy() {
+          return { Component: (await LoginPage()).LoginPage };
+        },
+      },
+      {
+        path: '/signup',
+        async lazy() {
+          return { Component: (await SignupPage()).SignupPage };
         },
       },
       {
