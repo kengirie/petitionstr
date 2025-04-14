@@ -68,14 +68,13 @@ export const RelaysWidget = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="relay-permission">{t('relays.permissions')}</Label>
                   <div className="flex items-center gap-2">
                     <Select
                       value={newRelayPermission}
                       onValueChange={(value) => setNewRelayPermission(value as RelayPermission)}
                     >
                       <SelectTrigger id="relay-permission" className="flex-1">
-                        <SelectValue placeholder={t('relays.permissions')} />
+                        <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="read">{t('relays.read')}</SelectItem>
