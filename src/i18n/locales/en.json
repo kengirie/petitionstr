@@ -34,7 +34,8 @@
     "petitionstrDescription": "PetitioNstr is an online political petition site built on a censorship-resistant SNS protocol",
     "edit": "Edit",
     "preview": "Preview",
-    "about": "About"
+    "about": "About",
+    "relays": "Relays"
   },
   "notifications": {
     "checkReactions": "Check reactions and mentions to your posts"
@@ -69,6 +70,27 @@
       "summary": "Summary",
       "content": "Content Details"
     }
+  },
+  "relays": {
+    "title": "Relay Settings",
+    "description": "Manage the relays you use",
+    "currentRelays": "Current Relays",
+    "addRelay": "Add Relay",
+    "editRelay": "Edit Relay",
+    "deleteRelay": "Delete Relay",
+    "saveChanges": "Save Changes",
+    "cancel": "Cancel",
+    "relayUrl": "Relay URL",
+    "relayUrlPlaceholder": "wss://relay.example.com",
+    "invalidUrl": "Invalid URL",
+    "duplicateUrl": "Relay already added",
+    "noRelays": "No relays configured",
+    "addYourFirstRelay": "Add your first relay",
+    "successfullySaved": "Relay settings saved successfully",
+    "permissions": "Permissions",
+    "read": "Read",
+    "write": "Write",
+    "readWrite": "Read/Write"
   },
   "auth": {
     "loginSignUp": "Login / Sign Up",
