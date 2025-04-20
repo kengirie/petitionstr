@@ -88,9 +88,9 @@
     "addYourFirstRelay": "最初のリレーを追加してください",
     "successfullySaved": "リレー設定を保存しました",
     "permissions": "権限",
-    "read": "読み取り",
-    "write": "書き込み",
-    "readWrite": "読み取り/書き込み"
+    "read": "read",
+    "write": "write",
+    "readWrite": "read/write"
   },
   "auth": {
     "loginSignUp": "ログイン / 新規登録",
