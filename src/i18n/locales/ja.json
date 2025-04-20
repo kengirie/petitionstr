@@ -34,7 +34,8 @@
     "petitionstrDescription": "PetitioNstrは検閲耐性を持つSNSプロトコル上に作られたオンラインの政治署名サイトです",
     "edit": "編集",
     "preview": "プレビュー",
-    "about": "このサイトについて"
+    "about": "このサイトについて",
+    "relays": "リレー"
   },
   "notifications": {
     "checkReactions": "あなたの投稿に対する反応やメンションを確認できます"
@@ -69,6 +70,27 @@
       "summary": "概要",
       "content": "詳細内容"
     }
+  },
+  "relays": {
+    "title": "リレー設定",
+    "description": "使用するリレーを管理します",
+    "currentRelays": "現在のリレー",
+    "addRelay": "リレーを追加",
+    "editRelay": "リレーを編集",
+    "deleteRelay": "リレーを削除",
+    "saveChanges": "変更を保存",
+    "cancel": "キャンセル",
+    "relayUrl": "リレーURL",
+    "relayUrlPlaceholder": "wss://relay.example.com",
+    "invalidUrl": "無効なURLです",
+    "duplicateUrl": "既に追加されているリレーです",
+    "noRelays": "リレーが設定されていません",
+    "addYourFirstRelay": "最初のリレーを追加してください",
+    "successfullySaved": "リレー設定を保存しました",
+    "permissions": "権限",
+    "read": "read",
+    "write": "write",
+    "readWrite": "read/write"
   },
   "auth": {
     "loginSignUp": "ログイン / 新規登録",
