@@ -14,16 +14,7 @@ export const usePetitionTitle = (event: NDKEvent) => {
         return;
       }
 
-      // title タグが見つからない場合は content をパースして name を取得
-      try {
-        const petitionContent = JSON.parse(event.content);
-        if (petitionContent?.name) {
-          setName(petitionContent.name);
-          return;
-        }
-      } catch (contentError) {
-        console.error('Failed to parse petition content', contentError);
-      }
+      // title タグが見つからない場合は undefined をセット
 
       // どちらも見つからない場合は undefined をセット
       setName(undefined);

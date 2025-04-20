@@ -20,20 +20,8 @@ export const usePetitionImage = (event: NDKEvent) => {
         return;
       }
 
-      // image タグが見つからない場合、content をパースして picture を取得
-      try {
-        const petitionContent = JSON.parse(event.content);
-        if (petitionContent?.picture) {
-          setUrl(petitionContent.picture);
-          return;
-        }
-
-        // どちらも見つからない場合は undefined をセット
-        setUrl(undefined);
-      } catch (contentError) {
-        console.error('Failed to parse petition content', contentError);
-        setUrl(undefined);
-      }
+      // image タグが見つからない場合は undefined をセット
+      setUrl(undefined);
     } catch (e) {
       console.error('Error processing petition event', e);
       setUrl(undefined);
