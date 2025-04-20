@@ -10,8 +10,6 @@ export const useLoginWidget = () => {
   const [nsecInput, setNsecInput] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const { loginWithExtension, loginWithRemoteSigner, loginWithPrivateKey } = useLogin();
 
   const { toast } = useToast();
@@ -26,7 +24,6 @@ export const useLoginWidget = () => {
         setLoading(false);
       },
       onSuccess: () => {
-        setIsModalOpen(false);
         setLoading(false);
       },
     });
@@ -43,7 +40,6 @@ export const useLoginWidget = () => {
         setLoading(false);
       },
       onSuccess: () => {
-        setIsModalOpen(false);
         setLoading(false);
       },
     });
@@ -60,7 +56,6 @@ export const useLoginWidget = () => {
         setLoading(false);
       },
       onSuccess: () => {
-        setIsModalOpen(false);
         setLoading(false);
         setNsecInput('');
       },
@@ -83,7 +78,5 @@ export const useLoginWidget = () => {
     handleExtensionSigner,
     handlePrivateKeySigner,
     handlePrivateKeyGenerate,
-    isModalOpen,
-    setIsModalOpen,
   };
 };
