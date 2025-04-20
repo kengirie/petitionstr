@@ -68,12 +68,12 @@ export const RelaysWidget = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
                     <Select
                       value={newRelayPermission}
                       onValueChange={(value) => setNewRelayPermission(value as RelayPermission)}
                     >
-                      <SelectTrigger id="relay-permission" className="flex-1">
+                      <SelectTrigger id="relay-permission" className="w-full sm:w-[200px]">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -83,7 +83,7 @@ export const RelaysWidget = () => {
                       </SelectContent>
                     </Select>
 
-                    <Button onClick={addRelay}>
+                    <Button onClick={addRelay} className="w-full sm:w-auto">
                       <PlusIcon className="h-4 w-4 mr-2" />
                       {t('relays.addRelay')}
                     </Button>
