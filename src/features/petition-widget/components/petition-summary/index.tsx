@@ -50,15 +50,12 @@ export const PetitionSummary = memo(
               );
             case 'url':
               return (
-                <a
+                <span
                   key={index}
-                  href={chunk.content}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-blue-700 hover:underline [overflow-wrap:anywhere]"
+                  className="text-blue-700 [overflow-wrap:anywhere]"
                 >
                   {chunk.content}
-                </a>
+                </span>
               );
             case 'nevent':
               if (!inView) {
@@ -116,9 +113,9 @@ const ProfileMention = memo(
 
     return (
       <>
-        <Link to={`/profile/${npub}`} className="text-purple-700 hover:underline">
+        <span className="text-purple-700">
           @{profile?.name || ellipsis(npub || '', 10)}
-        </Link>
+        </span>
       </>
     );
   },
