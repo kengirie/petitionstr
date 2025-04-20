@@ -91,7 +91,9 @@
     "setUpYoursAt": "こちらで設定できます",
     "createNewAccount": "秘密鍵を生成して新しいNostrアカウントを作成",
     "saveKeyWarning": "重要: 秘密鍵を安全な場所に保存してください！",
-    "onlyAccessWay": "これがあなたのアカウントにアクセスする唯一の方法です。"
+    "onlyAccessWay": "これがあなたのアカウントにアクセスする唯一の方法です。",
+    "noAccount": "アカウントをお持ちでないですか？",
+    "alreadyHaveAccount": "すでにアカウントをお持ちですか？"
   },
   "about": {
     "projectOverview": "プロジェクト概要",

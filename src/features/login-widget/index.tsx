@@ -1,5 +1,6 @@
 import { Loader2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -18,6 +19,7 @@ import { useLoginWidget } from './hooks';
 
 // Check out the `example-components` folder to see how to use this component
 
+// このコンポーネントは現在使用されていません。代わりに src/pages/login/index.tsx と src/pages/signup/index.tsx を使用してください。
 export const LoginWidget = () => {
   const { t } = useTranslation();
   const {
@@ -30,9 +32,10 @@ export const LoginWidget = () => {
     handleExtensionSigner,
     handlePrivateKeySigner,
     handlePrivateKeyGenerate,
-    isModalOpen,
-    setIsModalOpen,
   } = useLoginWidget();
+
+  // ダイアログの状態管理（このコンポーネントは現在使用されていません）
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>

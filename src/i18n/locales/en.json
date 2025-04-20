@@ -91,7 +91,9 @@
     "setUpYoursAt": "Set up yours at",
     "createNewAccount": "Create a new Nostr account by generating a secret key",
     "saveKeyWarning": "Important: Save your secret key somewhere safe!",
-    "onlyAccessWay": "This is the only way to access your account."
+    "onlyAccessWay": "This is the only way to access your account.",
+    "noAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?"
   },
   "about": {
     "projectOverview": "Project Overview",
