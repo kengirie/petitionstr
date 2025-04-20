@@ -2,7 +2,6 @@ import { EventPointer, NDKEvent, NDKUser } from '@nostr-dev-kit/ndk';
 import { useRealtimeProfile } from 'nostr-hooks';
 import { neventEncode } from 'nostr-tools/nip19';
 import { memo, useMemo } from 'react';
-import { Link } from 'react-router-dom';
 
 import { ellipsis } from '@/shared/utils';
 
