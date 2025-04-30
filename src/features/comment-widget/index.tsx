@@ -2,10 +2,9 @@ import { NDKEvent } from '@nostr-dev-kit/ndk';
 import { useNdk } from 'nostr-hooks';
 import { memo, useEffect, useState } from 'react';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/avatar';
-import { Button } from '@/shared/components/ui/button';
-import { Separator } from '@/shared/components/ui/separator';
 import { Spinner } from '@/shared/components/spinner';
+import { Avatar, AvatarImage } from '@/shared/components/ui/avatar';
+import { Separator } from '@/shared/components/ui/separator';
 
 import { CommentContent } from './components/comment-content';
 import { CommentHeader } from './components/comment-header';

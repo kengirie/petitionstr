@@ -4,11 +4,9 @@ import { Button } from '@/shared/components/ui/button';
 
 import { Spinner } from '@/shared/components/spinner';
 
-import { NewNoteWidget } from '@/features/new-note-widget';
-import { NoteByEvent } from '@/features/note-widget';
 
-import { usePetitionCommentsWidget } from './hooks';
 import { CommentByEvent } from '../comment-widget';
+import { usePetitionCommentsWidget } from './hooks';
 
 export const PetitionCommentsWidget = ({ event }: { event: NDKEvent }) => {
   const { processedEvents, hasMore, loadMore } = usePetitionCommentsWidget(event);
