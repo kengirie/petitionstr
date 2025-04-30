@@ -9,6 +9,8 @@ import { PetitionTitle } from '../petition-widget/components/petition-title';
 import { PetitionImage } from '../petition-widget/components/petition-image';
 import { PetitionSummary } from '../petition-widget/components/petition-summary';
 import { usePetitionDetail } from './hooks';
+import { NewPetitionCommentWidget } from '../new-petition-comment-widget';
+import { PetitionCommentsWidget } from '../petition-comments-widget';
 
 export const PetitionDetailWidget = memo(
   ({ petitionId }: { petitionId: string | undefined }) => {
@@ -54,6 +56,9 @@ const PetitionDetail = memo(
               {t('petition.detail.publishedDate')}: {new Date(publishedAt * 1000).toLocaleDateString()}
             </div>
           )}
+          <div className="pt-2 mt-2">
+          <NoteHeader event={event} />
+        </div>
         </div>
 
         <div className="mb-6">
@@ -75,7 +80,11 @@ const PetitionDetail = memo(
         )}
 
         <div className="border-t pt-4 mt-6">
-          <NoteHeader event={event} />
+          <NewPetitionCommentWidget replyingToEvent={event} />
+        </div>
+
+        <div className="border-t pt-4 mt-6">
+          <PetitionCommentsWidget event={event} />
         </div>
       </div>
     );
