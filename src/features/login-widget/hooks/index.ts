@@ -2,6 +2,7 @@ import { useLogin } from 'nostr-hooks';
 import { nsecEncode } from 'nostr-tools/nip19';
 import { generateSecretKey } from 'nostr-tools/pure';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useToast } from '@/shared/components/ui/use-toast';
 
@@ -9,6 +10,7 @@ export const useLoginWidget = () => {
   const [nip46Input, setNip46Input] = useState('');
   const [nsecInput, setNsecInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const { loginWithExtension, loginWithRemoteSigner, loginWithPrivateKey } = useLogin();
 
@@ -25,6 +27,8 @@ export const useLoginWidget = () => {
       },
       onSuccess: () => {
         setLoading(false);
+        toast({ title: 'Success', description: 'ログインに成功しました' });
+        navigate('/');
       },
     });
   };
@@ -41,6 +45,8 @@ export const useLoginWidget = () => {
       },
       onSuccess: () => {
         setLoading(false);
+        toast({ title: 'Success', description: 'ログインに成功しました' });
+        navigate('/');
       },
     });
   };
@@ -58,6 +64,8 @@ export const useLoginWidget = () => {
       onSuccess: () => {
         setLoading(false);
         setNsecInput('');
+        toast({ title: 'Success', description: 'ログインに成功しました' });
+        navigate('/');
       },
     });
   };
