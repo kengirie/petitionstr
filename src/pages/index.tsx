@@ -1,5 +1,4 @@
 import {
-  BellIcon,
   FileTextIcon,
   HomeIcon,
   MenuIcon,
@@ -217,17 +216,6 @@ const Layout = () => {
                     <span>{t('common.petition')}</span>
                   </Link>
                 </SheetClose>
-                {activeUser && (
-                  <SheetClose asChild>
-                    <Link
-                      to="/notifications"
-                      className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-accent"
-                    >
-                      <BellIcon className="h-5 w-5" />
-                      <span>{t('common.notifications')}</span>
-                    </Link>
-                  </SheetClose>
-                )}
                 <SheetClose asChild>
                   <Link
                     to="/search"
@@ -397,15 +385,6 @@ const Layout = () => {
                   <FileTextIcon className="h-5 w-5" />
                   <span>{t('common.petition')}</span>
                 </Link>
-                {activeUser && (
-                  <Link
-                    to="/notifications"
-                    className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors"
-                  >
-                    <BellIcon className="h-5 w-5" />
-                    <span>{t('common.notifications')}</span>
-                  </Link>
-                )}
                 <Link
                   to="/search"
                   className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors"
@@ -489,7 +468,6 @@ const HomePage = () => import('./home');
 const NotePage = () => import('./note');
 const ProfilePage = () => import('./profile');
 const MessagesPage = () => import('./messages');
-const NotificationsPage = () => import('./notifications');
 const PetitionsPage = () => import('./petitions-list');
 const PetitionPage = () => import('./petition');
 const PetitioningPage = () => import('./petitioning');
@@ -537,12 +515,6 @@ export const router = createBrowserRouter([
         path: '/messages/:npub',
         async lazy() {
           return { Component: (await MessagesPage()).MessagesPage };
-        },
-      },
-      {
-        path: '/notifications',
-        async lazy() {
-          return { Component: (await NotificationsPage()).NotificationsPage };
         },
       },
       {
