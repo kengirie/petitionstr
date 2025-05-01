@@ -1,5 +1,4 @@
 import {
-  BellIcon,
   FileTextIcon,
   HomeIcon,
   MenuIcon,
