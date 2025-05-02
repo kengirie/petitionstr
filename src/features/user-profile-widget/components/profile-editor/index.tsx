@@ -236,7 +236,7 @@ export const ProfileEditor = ({
                       onClick={() => openUploadMediaDialog('image')}
                       disabled={isUploadingMedia}
                     >
-                      {isUploadingMedia ? (
+                      {isUploadingMedia && currentUploadType === 'image' ? (
                         <Spinner />
                       ) : (
                         <>
@@ -268,7 +268,7 @@ export const ProfileEditor = ({
                       onClick={() => openUploadMediaDialog('banner')}
                       disabled={isUploadingMedia}
                     >
-                      {isUploadingMedia ? (
+                      {isUploadingMedia && currentUploadType === 'banner' ? (
                         <Spinner />
                       ) : (
                         <>
