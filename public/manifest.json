@@ -1,7 +1,7 @@
 {
-  "name": "nostribe",
-  "short_name": "nostribe",
-  "description": "nostribe",
+  "name": "petitionstr",
+  "short_name": "petitionstr",
+  "description": "petitionstr",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000",
@@ -28,7 +28,7 @@
       "type": "image/png"
     },
     {
-      "src": "/assets/144.png",
+      "src": "petitionstr.png",
       "sizes": "144x144",
       "type": "image/png"
     },
