@@ -11,6 +11,8 @@ import { PetitionSummary } from '../petition-widget/components/petition-summary'
 import { usePetitionDetail } from './hooks';
 import { NewPetitionCommentWidget } from '../new-petition-comment-widget';
 import { PetitionCommentsWidget } from '../petition-comments-widget';
+import { PetitionEndorseBtn } from './components/petition-endorse-btn';
+import { PetitionEndorsementCount } from './components/petition-endorsement-count';
 
 export const PetitionDetailWidget = memo(
   ({ petitionId }: { petitionId: string | undefined }) => {
@@ -57,8 +59,12 @@ const PetitionDetail = memo(
             </div>
           )}
           <div className="pt-2 mt-2">
-          <NoteHeader event={event} />
-        </div>
+            <NoteHeader event={event} />
+          </div>
+          <div className="mt-4 flex flex-col md:flex-row gap-4">
+            <PetitionEndorsementCount event={event} inView={true} />
+            <PetitionEndorseBtn event={event} inView={true} />
+          </div>
         </div>
 
         <div className="mb-6">

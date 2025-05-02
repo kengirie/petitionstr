@@ -3,19 +3,17 @@ import { useActiveUser, useSubscription } from 'nostr-hooks';
 import { useCallback, useEffect, useMemo } from 'react';
 
 export const usePetitionEndorseBtn = (event: NDKEvent | undefined) => {
-  const { count } = useAnybodyEndorsements(event);
+  const { isEndorsedByMe } = useMyEndorsement(event);
 
-  const { isLikedByMe } = useMyEndorsement(event);
+  const endorse = useCallback(() => !isEndorsedByMe && event?.react('+'), [event, isEndorsedByMe]);
 
-  const like = useCallback(() => !isLikedByMe && event?.react('+'), [event, isLikedByMe]);
-
-  return { count, isLikedByMe, like };
+  return { isEndorsedByMe, endorse };
 };
 
 const useMyEndorsement = (event: NDKEvent | undefined) => {
   const { activeUser } = useActiveUser();
 
-  const subId = activeUser && event ? `note-my-likes-${event.id}` : undefined;
+  const subId = activeUser && event ? `petition-my-endorsements-${event.id}` : undefined;
 
   const { createSubscription, events } = useSubscription(subId);
 
@@ -32,7 +30,7 @@ const useMyEndorsement = (event: NDKEvent | undefined) => {
       });
   }, [createSubscription, activeUser, event]);
 
-  return { isLikedByMe: validEvents && validEvents.length > 0 };
+  return { isEndorsedByMe: validEvents && validEvents.length > 0 };
 };
 
 const useAnybodyEndorsements = (event: NDKEvent | undefined) => {
