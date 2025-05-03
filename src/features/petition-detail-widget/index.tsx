@@ -1,5 +1,5 @@
 import { NDKEvent } from '@nostr-dev-kit/ndk';
-import { useNdk } from 'nostr-hooks';
+import { useNdk, useActiveUser } from 'nostr-hooks';
 import { memo, useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useTranslation } from 'react-i18next';
@@ -48,6 +48,7 @@ const PetitionDetail = memo(
   ({ event }: { event: NDKEvent }) => {
     const { publishedAt, content } = usePetitionDetail(event);
     const { t } = useTranslation();
+    const { activeUser } = useActiveUser();
 
     return (
       <div className="px-4 py-2 max-w-4xl mx-auto">
@@ -93,9 +94,11 @@ const PetitionDetail = memo(
           </div>
         )}
 
-        <div className="border-t pt-4 mt-6">
-          <NewPetitionCommentWidget replyingToEvent={event} />
-        </div>
+        {activeUser && (
+          <div className="border-t pt-4 mt-6">
+            <NewPetitionCommentWidget replyingToEvent={event} />
+          </div>
+        )}
 
         <div className="border-t pt-4 mt-6">
           <PetitionCommentsWidget event={event} />
