@@ -33,22 +33,22 @@ const useMyEndorsement = (event: NDKEvent | undefined) => {
   return { isEndorsedByMe: validEvents && validEvents.length > 0 };
 };
 
-const useAnybodyEndorsements = (event: NDKEvent | undefined) => {
-  const subId = event ? `note-endorsements-${event.id}` : undefined;
+// const useAnybodyEndorsements = (event: NDKEvent | undefined) => {
+//   const subId = event ? `note-endorsements-${event.id}` : undefined;
 
-  const { createSubscription, events } = useSubscription(subId);
+//   const { createSubscription, events } = useSubscription(subId);
 
-  const validEvents = useMemo(() => events?.filter((e) => e.content === '+'), [events]);
+//   const validEvents = useMemo(() => events?.filter((e) => e.content === '+'), [events]);
 
-  const count = useMemo(() => validEvents?.length || 0, [validEvents]);
+//   const count = useMemo(() => validEvents?.length || 0, [validEvents]);
 
-  useEffect(() => {
-    event &&
-      createSubscription({
-        filters: [{ kinds: [NDKKind.Reaction], '#e': [event.id], limit: 1000 }],
-        opts: { groupableDelay: 500 },
-      });
-  }, [createSubscription, event]);
+//   useEffect(() => {
+//     event &&
+//       createSubscription({
+//         filters: [{ kinds: [NDKKind.Reaction], '#e': [event.id], limit: 1000 }],
+//         opts: { groupableDelay: 500 },
+//       });
+//   }, [createSubscription, event]);
 
-  return { count };
-};
+//   return { count };
+//};
