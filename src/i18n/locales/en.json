@@ -68,7 +68,11 @@
     "detail": {
       "publishedDate": "Published Date",
       "summary": "Summary",
-      "content": "Content Details"
+      "content": "Content Details",
+      "endorsements": "Endorsements",
+      "endorsementsCount": "{{count}} Endorsements",
+      "endorse": "Endorse",
+      "endorsed": "Endorsed"
     }
   },
   "relays": {
