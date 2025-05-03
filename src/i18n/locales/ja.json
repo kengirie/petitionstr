@@ -68,7 +68,11 @@
     "detail": {
       "publishedDate": "公開日",
       "summary": "概要",
-      "content": "詳細内容"
+      "content": "詳細内容",
+      "endorsements": "賛同数",
+      "endorsementsCount": "賛同数：{{count}}人",
+      "endorse": "賛同する",
+      "endorsed": "賛同済み"
     }
   },
   "relays": {

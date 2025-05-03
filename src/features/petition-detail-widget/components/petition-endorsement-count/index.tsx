@@ -11,7 +11,7 @@ export const PetitionEndorsementCount = ({ event, inView }: { event: NDKEvent; i
     <div className="flex items-center gap-2 p-3 bg-muted rounded-md">
       <HandshakeIcon size={20} className="text-primary" />
       <div>
-        <div className="text-xl font-bold">{count}</div>
+        <div className="text-xl font-bold">{t('petition.detail.endorsementsCount', { count })}</div>
         <div className="text-sm text-muted-foreground">{t('petition.detail.endorsements', 'Endorsements')}</div>
       </div>
     </div>
