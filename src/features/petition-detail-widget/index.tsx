@@ -13,6 +13,8 @@ import { NewPetitionCommentWidget } from '../new-petition-comment-widget';
 import { PetitionCommentsWidget } from '../petition-comments-widget';
 import { PetitionEndorseBtn } from './components/petition-endorse-btn';
 import { PetitionEndorsementCount } from './components/petition-endorsement-count';
+import { PetitionZapBtn } from './components/petition-zap-btn';
+import { PetitionZapCount } from './components/petition-zap-count';
 
 export const PetitionDetailWidget = memo(
   ({ petitionId }: { petitionId: string | undefined }) => {
@@ -62,8 +64,14 @@ const PetitionDetail = memo(
             <NoteHeader event={event} />
           </div>
           <div className="mt-4 flex flex-col md:flex-row gap-4">
-            <PetitionEndorsementCount event={event} inView={true} />
-            <PetitionEndorseBtn event={event} inView={true} />
+            <div className="flex flex-col md:flex-row gap-4 w-full">
+              <PetitionEndorsementCount event={event} inView={true} />
+              <PetitionZapCount event={event} inView={true} />
+            </div>
+            <div className="flex flex-col md:flex-row gap-4">
+              <PetitionEndorseBtn event={event} inView={true} />
+              <PetitionZapBtn event={event} inView={true} />
+            </div>
           </div>
         </div>
 

@@ -72,7 +72,11 @@
       "endorsements": "賛同数",
       "endorsementsCount": "賛同数：{{count}}人",
       "endorse": "賛同する",
-      "endorsed": "賛同済み"
+      "endorsed": "賛同済み",
+      "zaps": "Zap数",
+      "zapsCount": "Zap数：{{count}}sats",
+      "zap": "Zapする",
+      "zapped": "Zap済み"
     }
   },
   "relays": {
