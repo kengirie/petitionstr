@@ -435,7 +435,6 @@ const Layout = () => {
                   >
                     <Avatar className="h-5 w-5">
                       <AvatarImage src={profile?.image} alt={profile?.displayName || 'ユーザー'} />
-                      <AvatarFallback>{profile?.displayName?.charAt(0) || 'U'}</AvatarFallback>
                     </Avatar>
                     <span>{t('common.profile')}</span>
                   </Link>

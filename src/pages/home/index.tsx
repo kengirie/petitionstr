@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@/shared/components/ui/button';
+import { Link } from 'react-router-dom';
 
 export const HomePage = () => {
   const { t, i18n } = useTranslation();
@@ -22,8 +23,10 @@ export const HomePage = () => {
 
         <p className="text-xl max-w-2xl mb-8">{t('common.petitionstrDescription')}</p>
 
-        <Button size="lg" className="px-10 py-6 text-lg">
-          {t('common.startPetition')}
+        <Button size="lg" className="px-10 py-6 text-lg" asChild>
+          <Link to="/petitioning">
+            {t('common.startPetition')}
+          </Link>
         </Button>
       </div>
 
