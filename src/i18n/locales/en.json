@@ -72,7 +72,11 @@
       "endorsements": "Endorsements",
       "endorsementsCount": "{{count}} Endorsements",
       "endorse": "Endorse",
-      "endorsed": "Endorsed"
+      "endorsed": "Endorsed",
+      "zaps": "Zaps",
+      "zapsCount": "{{count}} sats",
+      "zap": "Zap",
+      "zapped": "Zapped"
     }
   },
   "relays": {
