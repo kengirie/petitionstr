@@ -47,14 +47,16 @@ export const ProfileActions = ({
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Button
-          variant="secondary"
-          className="rounded-full"
-          size="icon"
-          onClick={() => navigate(`/messages/${targetUser.npub}`)}
-        >
-          <MailIcon size={18} />
-        </Button>
+        {activeUser && (
+          <Button
+            variant="secondary"
+            className="rounded-full"
+            size="icon"
+            onClick={() => navigate(`/messages/${targetUser.npub}`)}
+          >
+            <MailIcon size={18} />
+          </Button>
+        )}
 
         {activeUser && <FollowUnfollowBtn activeUser={activeUser} targetUser={targetUser} />}
 
