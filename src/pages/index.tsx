@@ -13,7 +13,7 @@ import {
 import { useActiveUser, useLogin, useRealtimeProfile } from 'nostr-hooks';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, Outlet, createBrowserRouter } from 'react-router-dom';
+import { Link, Outlet, createBrowserRouter, useNavigate } from 'react-router-dom';
 
 import { ErrorBoundary } from './error';
 import { ErrorPage } from './error/error-page';
@@ -61,6 +61,7 @@ const Layout = () => {
   const { profile } = useRealtimeProfile(activeUser?.pubkey);
   const { logout } = useLogin();
   const { setTheme, theme } = useTheme();
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const { t, i18n } = useTranslation();
 
@@ -267,13 +268,13 @@ const Layout = () => {
                 )}
                 <Separator />
                 <SheetClose asChild>
-                  <Link
-                    to="/petitioning"
-                    className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-accent"
+                  <div
+                    onClick={() => !activeUser ? navigate('/login') : navigate('/petitioning')}
+                    className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-accent cursor-pointer"
                   >
                     <Plus className="h-5 w-5" />
                     <span>{t('common.startPetition')}</span>
-                  </Link>
+                  </div>
                 </SheetClose>
                 <Separator />
                 <div className="flex items-center justify-between px-2 py-1">
@@ -441,11 +442,12 @@ const Layout = () => {
                 )}
               </CardContent>
               <CardFooter>
-                <Button className="w-full" asChild>
-                  <Link to="/petitioning">
-                    <Plus className="mr-2 h-4 w-4" />
-                    {t('common.startPetition')}
-                  </Link>
+                <Button
+                  className="w-full"
+                  onClick={() => !activeUser ? navigate('/login') : navigate('/petitioning')}
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  {t('common.startPetition')}
                 </Button>
               </CardFooter>
             </Card>
