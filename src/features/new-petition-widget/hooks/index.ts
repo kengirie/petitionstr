@@ -145,6 +145,7 @@ export const useNewPetitionWidget = () => {
       ["published_at", Math.floor(Date.now() / 1000).toString()],
       ["summary", summary],
       ["image", image],
+      ["t", 'petition']
     ];
 
     console.log(activeUser?.pubkey);
@@ -169,8 +170,7 @@ export const useNewPetitionWidget = () => {
           setContent('');
         }
       })
-      .catch((error) => {
-        console.error('Failed to post petition:', error);
+      .catch(() => {
         toast({
           title: 'Error',
           description: 'Failed to post petition',

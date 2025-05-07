@@ -54,7 +54,6 @@ import {
 import { LanguageSwitcher } from '@/shared/components/language-switcher';
 import { useTheme } from '@/shared/components/theme-provider';
 
-// import { LoginWidget } from '@/features/login-widget';
 
 const Layout = () => {
   const { activeUser } = useActiveUser();
@@ -191,7 +190,7 @@ const Layout = () => {
                       <Avatar className="h-5 w-5">
                         <AvatarImage
                           src={profile?.image}
-                          alt={profile?.displayName || 'ユーザー'}
+                          alt={profile?.displayName}
                         />
                         <AvatarFallback>{profile?.displayName?.charAt(0) || 'U'}</AvatarFallback>
                       </Avatar>

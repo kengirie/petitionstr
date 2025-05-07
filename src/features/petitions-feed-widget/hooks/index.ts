@@ -13,21 +13,8 @@ export const usePetitionsFeedWidget = () => {
   const { createSubscription, events, loadMore, hasMore, isLoading } = useSubscription(subId);
 
   const processedEvents = useMemo(
-    () =>
-      events
-        ?.filter((e) => {
-          if (view === 'Notes') {
-            return e.getMatchingTags('e').length == 0;
-          }
-
-          if (view === 'Replies') {
-            return e.getMatchingTags('e').length > 0;
-          }
-
-          return true;
-        })
-        .reverse(),
-    [events, view],
+    () => [...(events || [])].reverse(),
+    [events]
   );
 
   useEffect(() => {
@@ -37,7 +24,7 @@ export const usePetitionsFeedWidget = () => {
         {
           kinds: [30023],
           limit: 10,
-          /*authors: [activeUser.pubkey, ...(follows || []).map((u) => u.pubkey)],*/
+          '#t': ['petition'],
         },
       ],
       opts: { groupableDelay: 500 },
