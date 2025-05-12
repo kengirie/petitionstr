@@ -73,8 +73,8 @@
       "endorsementsCount": "賛同数：{{count}}人",
       "endorse": "賛同する",
       "endorsed": "賛同済み",
-      "zaps": "Zap数",
-      "zapsCount": "Zap数：{{count}}sats",
+      "zaps": "Zap",
+      "zapsCount": "Zap：{{count}}sats",
       "zap": "Zapする",
       "zapped": "Zap済み"
     }
@@ -132,5 +132,25 @@
     "issueTracker": "課題トラッカー",
     "creator": "製作者",
     "viewCreatorProfile": "製作者のプロフィールを見る"
+  },
+  "zap": {
+    "button": "Zap",
+    "zapButton": "Zap",
+    "sendSatsTo": "送金先：",
+    "amountInSats": "Zap（Sats）：",
+    "comment": "コメント：",
+    "commentPlaceholder": "コメントを追加（任意）",
+    "amounts": {
+      "50": "50",
+      "1k": "1K",
+      "5k": "5K",
+      "10k": "10K",
+      "20k": "20K",
+      "50k": "50K",
+      "100k": "100K",
+      "1m": "1M",
+      "custom": "custom",
+      "customPlaceholder": "カスタム金額（Sats）"
+    }
   }
 }

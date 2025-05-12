@@ -2,41 +2,41 @@ export const ZAP_AMOUNTS = [
   {
     id: 1,
     amount: 50,
-    label: '50',
+    labelKey: 'zap.amounts.50',
   },
   {
     id: 2,
     amount: 1000,
-    label: '🤙 1K',
+    labelKey: 'zap.amounts.1k',
   },
   {
     id: 3,
     amount: 5000,
-    label: '💜 5K',
+    labelKey: 'zap.amounts.5k',
   },
   {
     id: 4,
     amount: 10_000,
-    label: '😍 10K',
+    labelKey: 'zap.amounts.10k',
   },
   {
     id: 5,
     amount: 20_000,
-    label: '🤩 20K',
+    labelKey: 'zap.amounts.20k',
   },
   {
     id: 6,
     amount: 50_000,
-    label: '🔥 50K',
+    labelKey: 'zap.amounts.50k',
   },
   {
     id: 7,
     amount: 100_000,
-    label: '🚀 100K',
+    labelKey: 'zap.amounts.100k',
   },
   {
     id: 8,
     amount: 1_000_000,
-    label: '🌙 1M',
+    labelKey: 'zap.amounts.1m',
   },
 ];

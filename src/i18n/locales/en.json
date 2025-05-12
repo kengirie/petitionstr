@@ -132,5 +132,25 @@
     "issueTracker": "Issue Tracker",
     "creator": "Creator",
     "viewCreatorProfile": "View Creator Profile"
+  },
+  "zap": {
+    "button": "Zap",
+    "zapButton": "Zap",
+    "sendSatsTo": "Send sats to",
+    "amountInSats": "Zap amount in Sats:",
+    "comment": "Comment:",
+    "commentPlaceholder": "Add a comment (optional)",
+    "amounts": {
+      "50": "50",
+      "1k": "1K",
+      "5k": "5K",
+      "10k": "10K",
+      "20k": "20K",
+      "50k": "50K",
+      "100k": "100K",
+      "1m": "1M",
+      "custom": "Custom",
+      "customPlaceholder": "Custom amount in Sats"
+    }
   }
 }
