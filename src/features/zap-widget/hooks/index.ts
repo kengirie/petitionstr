@@ -7,9 +7,16 @@ import { useToast } from '@/shared/components/ui/use-toast';
 import { ZAP_AMOUNTS } from '../config';
 import { payInvoiceByWebln } from '../utils';
 
+// Define the ZapAmount type
+export type ZapAmount = {
+  id: number;
+  amount: number;
+  labelKey: string;
+};
+
 export const useZapWidget = (target: NDKEvent | NDKUser | undefined) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedAmount, setSelectedAmount] = useState(ZAP_AMOUNTS[0]);
+  const [selectedAmount, setSelectedAmount] = useState<ZapAmount>(ZAP_AMOUNTS[0]);
   const [comment, setComment] = useState('');
   const [processing, setProcessing] = useState(false);
 
