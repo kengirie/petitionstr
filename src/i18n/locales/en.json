@@ -35,7 +35,8 @@
     "edit": "Edit",
     "preview": "Preview",
     "about": "About",
-    "relays": "Relays"
+    "relays": "Relays",
+    "loadMore": "Load more"
   },
   "notifications": {
     "checkReactions": "Check reactions and mentions to your posts"
