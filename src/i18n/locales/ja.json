@@ -35,7 +35,8 @@
     "edit": "編集",
     "preview": "プレビュー",
     "about": "このサイトについて",
-    "relays": "リレー"
+    "relays": "リレー",
+    "loadMore": "もっと読み込む"
   },
   "notifications": {
     "checkReactions": "あなたの投稿に対する反応やメンションを確認できます"

@@ -1,57 +1,38 @@
 import { NDKEvent } from '@nostr-dev-kit/ndk';
-import { memo, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { memo } from 'react';
+import { Link } from 'react-router-dom';
 
-import { Avatar, AvatarImage } from '@/shared/components/ui/avatar';
+import { Card, CardContent, CardFooter } from '@/shared/components/ui/card';
+import { PetitionImage } from '../../../petition-widget/components/petition-image';
+import { PetitionTitle } from '../../../petition-widget/components/petition-title';
+import { PetitionSummary } from '../../../petition-widget/components/petition-summary';
+import { PetitionFooter } from '../../../petition-widget/components/petition-footer';
+import { useNoteHeader } from '../../../petition-widget/components/petition-header/hooks';
 
 export const PetitionSearchResultItem = memo(
   ({ event }: { event: NDKEvent }) => {
-    const navigate = useNavigate();
-
-    const petitionData = useMemo(() => {
-      try {
-        // タグからデータを取得
-        const titleTag = event.tags.find(tag => tag[0] === 'title');
-        const summaryTag = event.tags.find(tag => tag[0] === 'summary');
-        const imageTag = event.tags.find(tag => tag[0] === 'image');
-
-        return {
-          title: titleTag ? titleTag[1] : '無題の請願',
-          summary: summaryTag ? summaryTag[1] : '',
-          image: imageTag ? imageTag[1] : '',
-          content: event.content || ''
-        };
-      } catch (e) {
-        return {
-          title: '無題の請願',
-          summary: '',
-          image: '',
-          content: ''
-        };
-      }
-    }, [event.tags, event.content]);
-
-    const handleClick = () => {
-      navigate(`/petition/${event.id}`);
-    };
+    const { nevent } = useNoteHeader(event);
 
     return (
-      <div
-        className="p-4 border-b flex items-center gap-3 hover:cursor-pointer hover:bg-secondary"
-        onClick={handleClick}
-      >
-        {petitionData.image && (
-          <Avatar className="h-12 w-12 rounded-md bg-secondary">
-            <AvatarImage src={petitionData.image} alt={petitionData.title} className="object-cover" />
-          </Avatar>
-        )}
-
-        <div className="flex-1 overflow-hidden">
-          <div className="font-medium truncate">{petitionData.title}</div>
-          {petitionData.summary && (
-            <div className="text-sm text-muted-foreground line-clamp-2">{petitionData.summary}</div>
-          )}
-        </div>
+      <div className="px-2">
+        <Card className="border rounded-sm shadow-md bg-background transition-colors duration-500 ease-out hover:border-primary/30">
+          <Link to={`/petition/${nevent}`} className="block no-underline text-inherit">
+            <CardContent className="flex gap-4 p-4">
+              <div className="w-24 flex-shrink-0">
+                <PetitionImage event={event} />
+              </div>
+              <div className="flex-1 flex flex-col">
+                <PetitionTitle event={event}/>
+                <PetitionSummary event={event} />
+              </div>
+            </CardContent>
+          </Link>
+          <CardFooter className="justify-between">
+            <div className="w-full">
+              <PetitionFooter event={event} />
+            </div>
+          </CardFooter>
+        </Card>
       </div>
     );
   },
