@@ -11,6 +11,7 @@ export const useNewPetitionWidget = () => {
   const [content, setContent] = useState<string>('');
   const [isUploadingMedia, setIsUploadingMedia] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const mdEditorFileInputRef = useRef<HTMLInputElement>(null);
 
   const { activeUser } = useActiveUser();
   const { profile } = useRealtimeProfile(activeUser?.pubkey);
@@ -27,6 +28,128 @@ export const useNewPetitionWidget = () => {
       fileInputRef.current.click();
     }
   }, []);
+
+  // MDEditor用のファイル選択を開始する関数
+  const openMdEditorUploadDialog = useCallback(() => {
+    // mdEditorFileInputRefが存在すれば、クリックイベントをトリガー
+    if (mdEditorFileInputRef.current) {
+      mdEditorFileInputRef.current.click();
+    }
+  }, []);
+
+  // 画像をアップロードしてMarkdown形式のテキストを返す関数
+  const uploadImageAndGetMarkdown = useCallback(async (file: File): Promise<string> => {
+    try {
+      // アップロード中フラグを設定
+      setIsUploadingMedia(true);
+
+      // browser-image-compressionを使用して画像を処理
+      const imageCompression = await import('browser-image-compression');
+
+      // 圧縮オプション
+      const options = {
+        maxSizeMB: 1,              // 最大ファイルサイズ
+        maxWidthOrHeight: 1920,    // 最大幅/高さ
+        useWebWorker: true,        // WebWorkerを使用
+        initialQuality: 0.8,       // 初期品質
+        alwaysKeepResolution: true // 解像度を維持
+      };
+
+      // 画像を圧縮・処理
+      const compressedFile = await imageCompression.default(file, options);
+      console.log('Compressed file:', compressedFile);
+
+      // フォームデータを作成
+      const formData = new FormData();
+      formData.append('fileToUpload', compressedFile);
+
+      // NIP-98トークンを取得
+      const token = await getToken({
+        url: import.meta.env.VITE_NOSTR_BUILD_UPLOAD_API_ENDPOINT,
+        method: 'POST',
+      });
+
+      if (!token) {
+        throw new Error('Failed to get authorization token');
+      }
+
+      // ファイルをアップロード
+      const response = await fetch(import.meta.env.VITE_NOSTR_BUILD_UPLOAD_API_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      const data = await response.json();
+      console.log('Upload response:', data);
+
+      // レスポンスから画像URLを取得
+      let imageUrl = '';
+
+      if (data.status === 'success') {
+        if (data.nip94_event && Array.isArray(data.nip94_event.tags)) {
+          // URLタグを探す (通常は最初のタグ)
+          const urlTag = data.nip94_event.tags.find((tag: [string, string]) => tag[0] === 'url');
+          if (urlTag && urlTag[1]) {
+            imageUrl = urlTag[1];
+          }
+        }
+
+        if (imageUrl) {
+          toast({
+            title: 'Success',
+            description: 'Image uploaded successfully',
+          });
+          // Markdown形式の画像テキストを返す
+          return `![${file.name}](${imageUrl})`;
+        } else {
+          console.error('Could not find URL in response', data);
+          throw new Error('Could not find image URL in response');
+        }
+      } else {
+        console.error('Upload failed', data);
+        throw new Error(data.message || 'Upload failed');
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast({
+        title: 'Error',
+        description: error instanceof Error ? error.message : 'Failed to upload media',
+        variant: 'destructive',
+      });
+      return '';
+    } finally {
+      // 状態をリセット
+      setIsUploadingMedia(false);
+    }
+  }, [getToken, toast]);
+
+  // MDEditor用のファイル選択時のハンドラー
+  const handleMdEditorFileChange = useCallback(async (e: React.ChangeEvent<HTMLInputElement>, textApi?: any) => {
+    // ファイルがなければ処理を終了
+    if (!e.target.files || !e.target.files[0] || !textApi) {
+      return;
+    }
+
+    // 選択されたファイルを取得
+    const file = e.target.files[0];
+    console.log('Selected file for MDEditor:', file);
+
+    // 画像をアップロードしてMarkdown形式のテキストを取得
+    const markdownText = await uploadImageAndGetMarkdown(file);
+
+    if (markdownText) {
+      // エディターに画像のMarkdownテキストを挿入
+      textApi.replaceSelection(markdownText);
+    }
+
+    // 同じファイルを再選択できるように値をクリア
+    if (mdEditorFileInputRef.current) {
+      mdEditorFileInputRef.current.value = '';
+    }
+  }, [uploadImageAndGetMarkdown]);
 
   // ファイル選択時のハンドラー
   const handleFileChange = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -192,7 +315,10 @@ export const useNewPetitionWidget = () => {
     profile,
     isUploadingMedia,
     fileInputRef,
+    mdEditorFileInputRef,
     openUploadMediaDialog,
-    handleFileChange
+    openMdEditorUploadDialog,
+    handleFileChange,
+    handleMdEditorFileChange
   };
 };

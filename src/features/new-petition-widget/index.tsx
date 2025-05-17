@@ -2,10 +2,10 @@ import { Spinner } from '@/shared/components/spinner';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
 import { Textarea } from '@/shared/components/ui/textarea';
-import { UploadIcon } from '@radix-ui/react-icons';
+import { UploadIcon, ImageIcon } from '@radix-ui/react-icons';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import MDEditor from '@uiw/react-md-editor';
+import MDEditor, { commands, ICommand } from '@uiw/react-md-editor';
 
 import { cn } from '@/shared/utils';
 
@@ -24,8 +24,11 @@ export const NewPetitionWidget = () => {
     post,
     isUploadingMedia,
     fileInputRef,
+    mdEditorFileInputRef,
     openUploadMediaDialog,
-    handleFileChange
+    openMdEditorUploadDialog,
+    handleFileChange,
+    handleMdEditorFileChange
   } = useNewPetitionWidget();
   const { t } = useTranslation();
 
@@ -35,15 +38,56 @@ export const NewPetitionWidget = () => {
     }
   }, [setContent]);
 
+  // NIP-96画像アップロードのカスタムコマンド
+  const imageUploadCommand: ICommand = {
+    name: 'nip96-image-upload',
+    keyCommand: 'nip96-image-upload',
+    buttonProps: { 'aria-label': 'Upload image with NIP-96' },
+    icon: <ImageIcon />,
+    execute: (state, api) => {
+      // TextAPIを保存して後でファイル選択ハンドラーで使用できるようにする
+      const textApi = api;
+
+      // ファイル選択ダイアログを開く前にイベントリスナーを設定
+      if (mdEditorFileInputRef.current) {
+        const fileInput = mdEditorFileInputRef.current;
+
+        // 一度だけ実行されるイベントリスナーを追加
+        const handleChange = async (e: Event) => {
+          // イベントリスナーを削除
+          fileInput.removeEventListener('change', handleChange);
+
+          // ファイル選択イベントを処理
+          const event = e as unknown as React.ChangeEvent<HTMLInputElement>;
+          await handleMdEditorFileChange(event, textApi);
+        };
+
+        // changeイベントにリスナーを追加
+        fileInput.addEventListener('change', handleChange);
+
+        // ファイル選択ダイアログを開く
+        openMdEditorUploadDialog();
+      }
+    },
+  };
+
   return (
     <>
-      {/* 非表示のファイル入力要素 */}
+      {/* 非表示のファイル入力要素（メイン画像用） */}
       <input
         type="file"
         ref={fileInputRef}
         style={{ display: 'none' }}
         accept="image/*"
         onChange={handleFileChange}
+      />
+
+      {/* 非表示のファイル入力要素（MDEditor用） */}
+      <input
+        type="file"
+        ref={mdEditorFileInputRef}
+        style={{ display: 'none' }}
+        accept="image/*"
       />
       <div className="px-2">
         <div
@@ -135,7 +179,17 @@ export const NewPetitionWidget = () => {
               {t('petition.content')}
             </label>
             <div className="bg-background rounded-md" data-color-mode="light">
-              <MDEditor value={content} onChange={onChange} />
+              <MDEditor
+                value={content}
+                onChange={onChange}
+                commands={[
+                  commands.bold, commands.italic, commands.strikethrough,
+                  commands.hr, commands.title, commands.divider,
+                  commands.link, imageUploadCommand, commands.divider,
+                  commands.unorderedListCommand, commands.orderedListCommand, commands.checkedListCommand,
+                  commands.divider,
+                ]}
+              />
             </div>
           </div>
 
