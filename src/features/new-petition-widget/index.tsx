@@ -3,6 +3,7 @@ import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
 import { Textarea } from '@/shared/components/ui/textarea';
 import { UploadIcon, ImageIcon } from '@radix-ui/react-icons';
+import { Loader2Icon } from 'lucide-react';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import MDEditor, { commands, ICommand } from '@uiw/react-md-editor';
@@ -23,6 +24,7 @@ export const NewPetitionWidget = () => {
     setContent,
     post,
     isUploadingMedia,
+    isMdEditorUploadingMedia,
     fileInputRef,
     mdEditorFileInputRef,
     openUploadMediaDialog,
@@ -42,9 +44,15 @@ export const NewPetitionWidget = () => {
   const imageUploadCommand: ICommand = {
     name: 'nip96-image-upload',
     keyCommand: 'nip96-image-upload',
-    buttonProps: { 'aria-label': 'Upload image with NIP-96' },
-    icon: <ImageIcon />,
+    buttonProps: {
+      'aria-label': 'Upload image with NIP-96',
+      disabled: isMdEditorUploadingMedia
+    },
+    icon: isMdEditorUploadingMedia ? <Loader2Icon className="animate-spin" size={16} /> : <ImageIcon />,
     execute: (state, api) => {
+      // アップロード中は処理をスキップ
+      if (isMdEditorUploadingMedia) return;
+
       // TextAPIを保存して後でファイル選択ハンドラーで使用できるようにする
       const textApi = api;
 

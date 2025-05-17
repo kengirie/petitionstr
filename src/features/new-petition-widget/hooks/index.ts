@@ -10,6 +10,7 @@ export const useNewPetitionWidget = () => {
   const [image, setImage] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [isUploadingMedia, setIsUploadingMedia] = useState<boolean>(false);
+  const [isMdEditorUploadingMedia, setIsMdEditorUploadingMedia] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const mdEditorFileInputRef = useRef<HTMLInputElement>(null);
 
@@ -40,8 +41,8 @@ export const useNewPetitionWidget = () => {
   // 画像をアップロードしてMarkdown形式のテキストを返す関数
   const uploadImageAndGetMarkdown = useCallback(async (file: File): Promise<string> => {
     try {
-      // アップロード中フラグを設定
-      setIsUploadingMedia(true);
+      // アップロード中フラグを設定（MDEditor用）
+      setIsMdEditorUploadingMedia(true);
 
       // browser-image-compressionを使用して画像を処理
       const imageCompression = await import('browser-image-compression');
@@ -121,8 +122,8 @@ export const useNewPetitionWidget = () => {
       });
       return '';
     } finally {
-      // 状態をリセット
-      setIsUploadingMedia(false);
+      // 状態をリセット（MDEditor用）
+      setIsMdEditorUploadingMedia(false);
     }
   }, [getToken, toast]);
 
@@ -314,6 +315,7 @@ export const useNewPetitionWidget = () => {
     post,
     profile,
     isUploadingMedia,
+    isMdEditorUploadingMedia,
     fileInputRef,
     mdEditorFileInputRef,
     openUploadMediaDialog,
