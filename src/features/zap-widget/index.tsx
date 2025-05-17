@@ -11,7 +11,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogDescription,
 } from '@/shared/components/ui/dialog';
 import { Input } from '@/shared/components/ui/input';
 import { Small } from '@/shared/components/ui/typography/small';
