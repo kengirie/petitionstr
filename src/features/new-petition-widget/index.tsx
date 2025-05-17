@@ -91,12 +91,7 @@ export const NewPetitionWidget = () => {
       />
 
       {/* 非表示のファイル入力要素（MDEditor用） */}
-      <input
-        type="file"
-        ref={mdEditorFileInputRef}
-        style={{ display: 'none' }}
-        accept="image/*"
-      />
+      <input type="file" ref={mdEditorFileInputRef} style={{ display: 'none' }} accept="image/*" />
       <div className="px-2">
         <div
           className={cn(
@@ -191,12 +186,21 @@ export const NewPetitionWidget = () => {
                 value={content}
                 onChange={onChange}
                 commands={[
-                  commands.bold, commands.italic, commands.strikethrough,
-                  commands.hr, commands.title, commands.divider,
-                  commands.link, imageUploadCommand, commands.divider,
-                  commands.unorderedListCommand, commands.orderedListCommand, commands.checkedListCommand,
+                  commands.bold,
+                  commands.italic,
+                  commands.strikethrough,
+                  commands.hr,
+                  commands.title,
+                  commands.divider,
+                  commands.link,
+                  imageUploadCommand,
+                  commands.divider,
+                  commands.unorderedListCommand,
+                  commands.orderedListCommand,
+                  commands.checkedListCommand,
                   commands.divider,
                 ]}
+                highlightEnable={false}
               />
             </div>
           </div>
