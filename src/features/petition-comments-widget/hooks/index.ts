@@ -3,14 +3,8 @@ import { useSubscription } from 'nostr-hooks';
 import { useEffect, useMemo } from 'react';
 
 export const usePetitionCommentsWidget = (event: NDKEvent) => {
-  const rootEventId = useMemo(() => {
-    const dTag = event.getMatchingTags('d');
-    const kind = event.kind;
-    const pubkey = event.pubkey;
-    return `${kind}:${pubkey}:${dTag[0][1]}`;
-  }, [event]);
 
-  const subId = `petition-comments-${rootEventId}`;
+  const subId = `petition-comments-${event.tagAddress()}`;
 
   const { createSubscription, events, loadMore, hasMore, isLoading } = useSubscription(subId);
 
@@ -20,12 +14,11 @@ export const usePetitionCommentsWidget = (event: NDKEvent) => {
   );
 
   useEffect(() => {
-    rootEventId &&
       createSubscription({
-        filters: [{ kinds: [1111], '#A': [rootEventId], limit: 10 }],
+        filters: [{ kinds: [1111], '#A': [event.tagAddress()], limit: 10 }],
         opts: { groupableDelay: 500 },
       });
-  }, [createSubscription, rootEventId]);
+  }, [createSubscription]);
 
   return {
     processedEvents,

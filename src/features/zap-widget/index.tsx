@@ -45,7 +45,7 @@ export const ZapWidget = ({
     <Dialog open={isModalOpen} onOpenChange={(open) => setIsModalOpen(open)}>
       <DialogTrigger asChild>{children || <Button>{t('zap.button')} ⚡️</Button>}</DialogTrigger>
 
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent aria-describedby="zap-dialog-description">
         <DialogHeader>
           <DialogTitle className="flex gap-4 items-center">
             <Avatar>

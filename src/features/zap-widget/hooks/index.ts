@@ -64,10 +64,14 @@ export const useZapWidget = (target: NDKEvent | NDKUser | undefined) => {
         lnPay,
         tags:
           target instanceof NDKEvent
-            ? [target.isParamReplaceable() ? ['a', target.tagAddress()] : ['e', target.id]]
+             ? [
+                ['e', target.id],
+                ...(target.isParamReplaceable() ? [['a', target.tagAddress()]] : [])
+              ]
             : undefined,
       },
     );
+    console.log(zapper);
 
     zapper.zap();
   }, [target, ndk, selectedAmount, comment, toast, setIsModalOpen, setProcessing]);
