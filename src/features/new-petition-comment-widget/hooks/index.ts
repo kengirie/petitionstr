@@ -43,18 +43,16 @@ export const useNewPetitionCommentWidget = ({
       // });
 
       // Extract the 'd' tag value
-      const dTag = replyingToEvent.tags.find(tag => tag[0] === 'd');
-      const combinedValue = `${replyingToEvent.kind}:${replyingToEvent.pubkey}:${dTag ? dTag[1] : ''}`;
 
       // Top-level comments scope to event addresses or ids
-      e.tags.push(['A', combinedValue, replyingToEvent.onRelays[0]?.url || '']);
+      e.tags.push(['A', replyingToEvent.tagAddress(), replyingToEvent.onRelays[0]?.url || '']);
       // The root kind
       e.tags.push(['K', replyingToEvent.kind?.toString() || '']);
       // Author of root event
     e.tags.push(['P', replyingToEvent.pubkey, replyingToEvent.onRelays[0]?.url || '']);
 
       // The parent event address (same as root for top-level comments)
-      e.tags.push(['a', combinedValue, replyingToEvent.onRelays[0]?.url || '']);
+      e.tags.push(['a', replyingToEvent.tagAddress(), replyingToEvent.onRelays[0]?.url || '']);
       // When the parent event is replaceable or addressable, also include an `e` tag referencing its id
       e.tags.push(['e', replyingToEvent.id, replyingToEvent.onRelays[0]?.url || '']);
       // The parent event kind

@@ -1,11 +1,20 @@
 import { NDKEvent, NDKKind } from '@nostr-dev-kit/ndk';
-import { useActiveUser, useSubscription } from 'nostr-hooks';
+import { useActiveUser, useNdk, useSubscription } from 'nostr-hooks';
 import { useCallback, useEffect, useMemo } from 'react';
 
 export const usePetitionEndorseBtn = (event: NDKEvent | undefined) => {
   const { isEndorsedByMe } = useMyEndorsement(event);
-
-  const endorse = useCallback(() => !isEndorsedByMe && event?.react('+'), [event, isEndorsedByMe]);
+  const { ndk } = useNdk();
+ 
+  const endorse = useCallback(() => {
+    if (!isEndorsedByMe && event && ndk) {
+      const e = new NDKEvent(ndk);
+      e.kind = NDKKind.Reaction;
+      e.content = '+';
+      e.tags = [['k', event.kind?.toString() ?? ''], ['p', event.pubkey],['a', event.tagAddress()], ['e', event.id]];
+      e.publish();
+    }
+  }, [event, isEndorsedByMe, ndk]);
 
   return { isEndorsedByMe, endorse };
 };
