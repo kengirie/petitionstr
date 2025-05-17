@@ -3,10 +3,9 @@ import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
 import { Textarea } from '@/shared/components/ui/textarea';
 import { UploadIcon } from '@radix-ui/react-icons';
-import 'easymde/dist/easymde.min.css';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import SimpleMDE from 'react-simplemde-editor';
+import MDEditor from '@uiw/react-md-editor';
 
 import { cn } from '@/shared/utils';
 
@@ -30,9 +29,11 @@ export const NewPetitionWidget = () => {
   } = useNewPetitionWidget();
   const { t } = useTranslation();
 
-  const onChange = useCallback((content: string) => {
-    setContent(content);
-  }, []);
+  const onChange = useCallback((value?: string) => {
+    if (value !== undefined) {
+      setContent(value);
+    }
+  }, [setContent]);
 
   return (
     <>
@@ -133,8 +134,8 @@ export const NewPetitionWidget = () => {
             <label htmlFor="petition-content" className="text-sm font-medium">
               {t('petition.content')}
             </label>
-            <div className="bg-background rounded-md">
-              <SimpleMDE value={content} onChange={onChange} />
+            <div className="bg-background rounded-md" data-color-mode="light">
+              <MDEditor value={content} onChange={onChange} />
             </div>
           </div>
 
