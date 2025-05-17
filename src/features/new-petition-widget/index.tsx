@@ -49,7 +49,7 @@ export const NewPetitionWidget = () => {
       disabled: isMdEditorUploadingMedia
     },
     icon: isMdEditorUploadingMedia ? <Loader2Icon className="animate-spin" size={16} /> : <ImageIcon />,
-    execute: (state, api) => {
+    execute: (_state, api) => {
       // アップロード中は処理をスキップ
       if (isMdEditorUploadingMedia) return;
 
