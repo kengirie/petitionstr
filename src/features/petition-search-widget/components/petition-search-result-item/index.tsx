@@ -3,11 +3,11 @@ import { memo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Card, CardContent, CardFooter } from '@/shared/components/ui/card';
-import { PetitionImage } from '../../../petition-widget/components/petition-image';
-import { PetitionTitle } from '../../../petition-widget/components/petition-title';
-import { PetitionSummary } from '../../../petition-widget/components/petition-summary';
-import { PetitionFooter } from '../../../petition-widget/components/petition-footer';
-import { useNoteHeader } from '../../../petition-widget/components/petition-header/hooks';
+import { PetitionImage } from '@/features/petition-widget/components/petition-image';
+import { PetitionTitle } from '@/features/petition-widget/components/petition-title';
+import { PetitionSummary } from '@/features/petition-widget/components/petition-summary';
+import { PetitionFooter } from '@/features/petition-widget/components/petition-footer';
+import { useNoteHeader } from '@/features/petition-widget/components/petition-header/hooks';
 
 export const PetitionSearchResultItem = memo(
   ({ event }: { event: NDKEvent }) => {
