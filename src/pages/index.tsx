@@ -13,7 +13,7 @@ import {
 import { useActiveUser, useLogin, useRealtimeProfile } from 'nostr-hooks';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, Outlet, createBrowserRouter, useNavigate } from 'react-router-dom';
+import { Link, Navigate, Outlet, createBrowserRouter, useNavigate } from 'react-router-dom';
 
 import { ErrorBoundary } from './error';
 import { ErrorPage } from './error/error-page';
@@ -234,37 +234,6 @@ const Layout = () => {
                     <span>{t('common.about')}</span>
                   </Link>
                 </SheetClose>
-                {activeUser && (
-                  <SheetClose asChild>
-                    <Link
-                      to="/relays"
-                      className="flex items-center gap-3 px-2 py-1 rounded-md hover:bg-accent"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="h-5 w-5"
-                      >
-                        <path d="M12 2v20" />
-                        <path d="M2 5h20" />
-                        <path d="M3 3v2" />
-                        <path d="M7 3v2" />
-                        <path d="M17 3v2" />
-                        <path d="M21 3v2" />
-                        <path d="M22 19H2" />
-                        <path d="M18 12a6 6 0 0 0-12 0" />
-                      </svg>
-                      <span>{t('common.relays')}</span>
-                    </Link>
-                  </SheetClose>
-                )}
                 <Separator />
                 <SheetClose asChild>
                   <div
@@ -401,35 +370,6 @@ const Layout = () => {
                 </Link>
                 {activeUser && (
                   <Link
-                    to="/relays"
-                    className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-5 w-5"
-                    >
-                      <path d="M12 2v20" />
-                      <path d="M2 5h20" />
-                      <path d="M3 3v2" />
-                      <path d="M7 3v2" />
-                      <path d="M17 3v2" />
-                      <path d="M21 3v2" />
-                      <path d="M22 19H2" />
-                      <path d="M18 12a6 6 0 0 0-12 0" />
-                    </svg>
-                    <span>{t('common.relays')}</span>
-                  </Link>
-                )}
-                {activeUser && (
-                  <Link
                     to={`/profile/${activeUser.npub}`}
                     className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-accent transition-colors"
                   >
@@ -475,7 +415,7 @@ const SearchPage = () => import('./search');
 const AboutPage = () => import('./about');
 const LoginPage = () => import('./login');
 const SignupPage = () => import('./signup');
-const RelaysPage = () => import('./relays');
+//const RelaysPage = () => import('./relays');
 
 export const router = createBrowserRouter([
   {
@@ -555,9 +495,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/relays',
-        async lazy() {
-          return { Component: (await RelaysPage()).RelaysPage };
-        },
+        element: <Navigate to="/" replace />,
       },
       {
         path: '/about',
