@@ -148,3 +148,12 @@
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
     var(--tw-shadow);
 }
+
+/* Nostr link styling */
+.nostr-link {
+  @apply text-purple-700 hover:underline;
+}
+
+.dark .nostr-link {
+  @apply text-purple-400;
+}
