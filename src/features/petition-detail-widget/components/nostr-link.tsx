@@ -54,12 +54,20 @@ export const NostrLink = memo(({ className, ...props }: NostrLinkProps) => {
       break;
 
     case 'nevent':
-      if (nostrId && nostrKind === '30023') {
-        return (
-          <div className="-mx-2 py-2">
-            <PetitionByPetitionId petitionId={nostrId} />
-          </div>
-        );
+      if (nostrId) {
+        if (nostrKind === '30023') {
+          return (
+            <div className="-mx-2 py-2">
+              <PetitionByPetitionId petitionId={nostrId} />
+            </div>
+          );
+        } else if (nostrKind === '1') {
+          return (
+            <div className="-mx-2 py-2">
+              <NoteByNoteId noteId={nostrId} />
+            </div>
+          );
+        }
       }
       // For other kinds, fall through to regular link
       break;
