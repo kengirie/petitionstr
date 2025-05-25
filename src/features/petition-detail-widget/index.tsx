@@ -2,6 +2,7 @@ import { NDKEvent } from '@nostr-dev-kit/ndk';
 import { useNdk, useActiveUser } from 'nostr-hooks';
 import { memo, useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { useTranslation } from 'react-i18next';
 import { Spinner } from '@/shared/components/spinner';
 import { NoteHeader } from '@/features/note-widget/components/note-header';
@@ -15,6 +16,8 @@ import { PetitionEndorseBtn } from './components/petition-endorse-btn';
 import { PetitionEndorsementCount } from './components/petition-endorsement-count';
 import { PetitionZapBtn } from './components/petition-zap-btn';
 import { PetitionZapCount } from './components/petition-zap-count';
+import { remarkNostrLinks } from './utils/remark-nostr-links';
+import { NostrLink } from './components/nostr-link';
 
 export const PetitionDetailWidget = memo(
   ({ petitionId }: { petitionId: string | undefined }) => {
@@ -89,7 +92,14 @@ const PetitionDetail = memo(
           <div className="prose dark:prose-invert max-w-none mb-6">
             <h3 className="text-xl font-semibold">{t('petition.detail.content')}</h3>
             <div className="markdown-content">
-              <ReactMarkdown>{content}</ReactMarkdown>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm, remarkNostrLinks]}
+                components={{
+                  a: NostrLink
+                }}
+              >
+                {content}
+              </ReactMarkdown>
             </div>
           </div>
         )}
