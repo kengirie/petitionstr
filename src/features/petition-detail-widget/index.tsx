@@ -17,6 +17,7 @@ import { PetitionEndorsementCount } from './components/petition-endorsement-coun
 import { PetitionZapBtn } from './components/petition-zap-btn';
 import { PetitionZapCount } from './components/petition-zap-count';
 import { remarkNostrLinks } from './utils/remark-nostr-links';
+import { NostrLink } from './components/nostr-link';
 
 export const PetitionDetailWidget = memo(
   ({ petitionId }: { petitionId: string | undefined }) => {
@@ -93,6 +94,9 @@ const PetitionDetail = memo(
             <div className="markdown-content">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkNostrLinks]}
+                components={{
+                  a: NostrLink
+                }}
               >
                 {content}
               </ReactMarkdown>
