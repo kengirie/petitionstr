@@ -14,7 +14,10 @@ import { PetitionEndorseBtn } from './components/petition-endorse-btn';
 import { PetitionEndorsementCount } from './components/petition-endorsement-count';
 import { PetitionZapBtn } from './components/petition-zap-btn';
 import { PetitionZapCount } from './components/petition-zap-count';
-import { MDXContent } from './components/mdx-content';
+import MarkdownPreview from '@uiw/react-markdown-preview';
+import { NoteByNoteId } from '@/features/note-widget';
+import { PetitionByPetitionId } from '@/features/petition-widget';
+import { nip19 } from 'nostr-tools';
 
 export const PetitionDetailWidget = memo(
   ({ petitionId }: { petitionId: string | undefined }) => {
@@ -58,7 +61,8 @@ const PetitionDetail = memo(
           </div>
           {publishedAt && (
             <div className="text-sm text-gray-500 dark:text-gray-400">
-              {t('petition.detail.publishedDate')}: {new Date(publishedAt * 1000).toLocaleDateString()}
+              {t('petition.detail.publishedDate')}:{' '}
+              {new Date(publishedAt * 1000).toLocaleDateString()}
             </div>
           )}
           <div className="pt-2 mt-2">
@@ -89,7 +93,40 @@ const PetitionDetail = memo(
           <div className="prose dark:prose-invert max-w-none mb-6">
             <h3 className="text-xl font-semibold">{t('petition.detail.content')}</h3>
             <div className="markdown-content">
-              <MDXContent content={content} />
+              <MarkdownPreview
+                source={content}
+                rehypeRewrite={(node, _, parent) => {
+                  if ((node as any).tagName === 'a' && parent && /^h(1|2|3|4|5|6)/.test((parent as any).tagName)) {
+                    parent.children = parent.children.slice(1);
+                  }
+                }}
+                components={{
+                  p: ({ children }) => {
+                    return <>{getComponent(children)}</>;
+                  },
+                  h1: ({ children }) => {
+                    return <h1 dir="auto">{children}</h1>;
+                  },
+                  h2: ({ children }) => {
+                    return <h2 dir="auto">{children}</h2>;
+                  },
+                  h3: ({ children }) => {
+                    return <h3 dir="auto">{children}</h3>;
+                  },
+                  h4: ({ children }) => {
+                    return <h4 dir="auto">{children}</h4>;
+                  },
+                  h5: ({ children }) => {
+                    return <h5 dir="auto">{children}</h5>;
+                  },
+                  h6: ({ children }) => {
+                    return <h6 dir="auto">{children}</h6>;
+                  },
+                  li: ({ children }) => {
+                    return <li dir="auto">{children}</li>;
+                  },
+                }}
+              />
             </div>
           </div>
         )}
@@ -108,3 +145,112 @@ const PetitionDetail = memo(
   },
   (prev, next) => prev.event?.id === next.event?.id,
 );
+
+
+
+const getComponent = (children: any) => {
+  if (!children) return children;
+
+  // childrenが配列の場合、各要素を処理
+  if (Array.isArray(children)) {
+    return children.map((child, index) => {
+      if (typeof child === 'string') {
+        return processNostrLinks(child, index);
+      }
+      return child;
+    });
+  }
+
+  // childrenが文字列の場合、nostr:リンクを処理
+  if (typeof children === 'string') {
+    return processNostrLinks(children, 0);
+  }
+
+  return children;
+};
+
+// nostr:リンクを処理する関数
+const processNostrLinks = (text: string, key: number) => {
+  // nostr:で始まるリンクを検出する正規表現
+  const nostrLinkRegex = /nostr:([a-zA-Z0-9]+)/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = nostrLinkRegex.exec(text)) !== null) {
+    // マッチ前のテキストを追加
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+
+    const nostrId = match[1];
+
+    try {
+      // nip19でデコードしてタイプを判定
+      const decoded = nip19.decode(nostrId);
+
+      if (decoded.type === 'note') {
+        // kind1の場合はNoteByNoteIdを使用
+        parts.push(
+          <div key={`note-${key}-${match.index}`} className="-mx-2 py-2">
+            <NoteByNoteId noteId={decoded.data as string} />
+          </div>
+        );
+      } else if (decoded.type === 'nevent') {
+        const eventData = decoded.data as { id: string; kind?: number };
+
+        if (eventData.kind === 1) {
+          // kind1の場合はNoteByNoteIdを使用
+          parts.push(
+            <div key={`note-${key}-${match.index}`} className="-mx-2 py-2">
+              <NoteByNoteId noteId={eventData.id} />
+            </div>
+          );
+        } else if (eventData.kind === 30023) {
+          // kind30023の場合はPetitionByPetitionIdを使用
+          parts.push(
+            <div key={`petition-${key}-${match.index}`} className="-mx-2 py-2">
+              <PetitionByPetitionId petitionId={eventData.id} />
+            </div>
+          );
+        } else {
+          // その他のkindの場合は通常のリンクとして表示
+          parts.push(
+            <a key={`link-${key}-${match.index}`} href={match[0]} className="text-blue-500 hover:underline">
+              {match[0]}
+            </a>
+          );
+        }
+      } else {
+        // その他のタイプは通常のリンクとして表示
+        parts.push(
+          <a key={`link-${key}-${match.index}`} href={match[0]} className="text-blue-500 hover:underline">
+            {match[0]}
+          </a>
+        );
+      }
+    } catch (error) {
+      // デコードに失敗した場合は通常のリンクとして表示
+      parts.push(
+        <a key={`link-${key}-${match.index}`} href={match[0]} className="text-blue-500 hover:underline">
+          {match[0]}
+        </a>
+      );
+    }
+
+    lastIndex = nostrLinkRegex.lastIndex;
+  }
+
+  // 残りのテキストを追加
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  // パーツが1つだけで文字列の場合はそのまま返す
+  if (parts.length === 1 && typeof parts[0] === 'string') {
+    return parts[0];
+  }
+
+  // 複数のパーツがある場合はフラグメントで包む
+  return <>{parts}</>;
+};
