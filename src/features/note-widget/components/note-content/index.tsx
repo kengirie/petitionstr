@@ -15,7 +15,7 @@ export const NoteContent = memo(
     const { chunks, inView, ref } = useNoteContent(event.content);
 
     return (
-      <div ref={ref}>
+      <div ref={ref} key={event.id}>
         {chunks.map((chunk, index) => {
           switch (chunk.type) {
             case 'text':
@@ -68,7 +68,7 @@ export const NoteContent = memo(
               const parsedEvent = JSON.parse(chunk.content) as EventPointer;
               if (parsedEvent.kind === 1) {
                 return (
-                  <div className="-mx-2 py-2">
+                  <div className="-mx-2 py-2" key={index}>
                     <NoteByNoteId key={index} noteId={parsedEvent.id} />
                   </div>
                 );
@@ -82,7 +82,7 @@ export const NoteContent = memo(
             case 'note':
               if (inView) {
                 return (
-                  <div className="-mx-2 py-2">
+                  <div className="-mx-2 py-2" key={index}>
                     <NoteByNoteId key={index} noteId={chunk.content} />
                   </div>
                 );
