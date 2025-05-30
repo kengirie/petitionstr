@@ -1,7 +1,7 @@
 import { NDKUser } from '@nostr-dev-kit/ndk';
 import { memo } from 'react';
 import { Button } from '@/shared/components/ui/button';
-import { NoteByEvent } from '@/features/note-widget';
+import { PetitionByEvent } from '@/features/petition-widget';
 import { useProfileReactions } from './hooks';
 
 export const ProfileReactions = memo(
@@ -11,7 +11,7 @@ export const ProfileReactions = memo(
     user: NDKUser;
   }) => {
     const {
-      noteEvents,
+      petitionEvents,
       loadMore,
       hasMore,
       isLoading
@@ -22,9 +22,9 @@ export const ProfileReactions = memo(
     return (
       <>
         <div className="flex flex-col gap-2">
-          {/* Noteイベントの表示 */}
-          {noteEvents?.map((event) => (
-            <NoteByEvent key={event.id} event={event} />
+          {/* Petitionイベントの表示 */}
+          {petitionEvents?.map((event) => (
+            <PetitionByEvent key={event.id} event={event} />
           ))}
         </div>
 
