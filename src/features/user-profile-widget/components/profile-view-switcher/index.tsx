@@ -26,14 +26,6 @@ export const ProfileViewSwitcher = ({
           {t('profile.petitions')}
         </Button>
         <Button
-          onClick={() => setView('replies')}
-          size="sm"
-          variant="link"
-          className={cn(view == 'replies' ? 'underline underline-offset-8' : 'hover:no-underline')}
-        >
-          {t('profile.replies')}
-        </Button>
-        <Button
           onClick={() => setView('notes')}
           size="sm"
           variant="link"
