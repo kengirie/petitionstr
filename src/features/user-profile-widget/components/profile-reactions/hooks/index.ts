@@ -9,12 +9,12 @@ export const useProfileReactions = ({
 }) => {
   const subId = `user-reactions-${user.pubkey}`;
   const { ndk } = useNdk();
-  const [noteEvents, setNoteEvents] = useState<NDKEvent[]>([]);
+  const [petitionEvents, setPetitionEvents] = useState<NDKEvent[]>([]);
   const [isLoadingEvents, setIsLoadingEvents] = useState<boolean>(false);
 
   const { events, createSubscription, loadMore, hasMore, isLoading } = useSubscription(subId);
 
-  // Reactionイベントからnoteイベントを取得する
+  // Reactionイベントからpetitionイベントを取得する
   useEffect(() => {
     if (!ndk || !events || events.length === 0) {
       return;
@@ -41,13 +41,13 @@ export const useProfileReactions = ({
 
       const fetchedEvents = await Promise.all(eventPromises);
 
-      // nullでないイベントのみをフィルタリングし、kind 1のイベント（note）のみを抽出
-      const notes = fetchedEvents
+      // nullでないイベントのみをフィルタリングし、kind 30023のイベント（petition）のみを抽出
+      const petitions = fetchedEvents
         .filter(Boolean)
-        .filter(event => event && event.kind === 1) as NDKEvent[];
+        .filter(event => event && event.kind === 30023) as NDKEvent[];
 
       // Reactionした順（eventsの順）に並べる
-      const orderedNotes: NDKEvent[] = [];
+      const orderedPetitions: NDKEvent[] = [];
 
       // eventsは古い順なので、逆順に処理して新しい順にする
       const reversedEvents = [...events].reverse();
@@ -56,14 +56,14 @@ export const useProfileReactions = ({
         const eTags = reaction.getMatchingTags('e');
         if (eTags.length > 0) {
           const eventId = eTags[eTags.length - 1][1];
-          const noteEvent = notes.find(event => event.id === eventId);
-          if (noteEvent && !orderedNotes.includes(noteEvent)) {
-            orderedNotes.push(noteEvent);
+          const petitionEvent = petitions.find(event => event.id === eventId);
+          if (petitionEvent && !orderedPetitions.includes(petitionEvent)) {
+            orderedPetitions.push(petitionEvent);
           }
         }
       }
 
-      setNoteEvents(orderedNotes);
+      setPetitionEvents(orderedPetitions);
       setIsLoadingEvents(false);
     };
 
@@ -82,7 +82,7 @@ export const useProfileReactions = ({
   }, [createSubscription, user.pubkey]);
 
   return {
-    noteEvents,
+    petitionEvents,
     loadMore,
     hasMore,
     isLoading: isLoading || isLoadingEvents

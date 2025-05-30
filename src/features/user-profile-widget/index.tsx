@@ -54,7 +54,6 @@ export const UserProfileWidget = ({
 
             <div className="p-2">
                 {view == 'petitions' && <ProfilePetitions user={user} />}
-              {view == 'replies' && <ProfileNotes user={user} repliesOnly />}
               {view == 'notes' && <ProfileNotes user={user} notesOnly />}
               {view == 'reactions' && <ProfileReactions user={user} />}
             </div>
