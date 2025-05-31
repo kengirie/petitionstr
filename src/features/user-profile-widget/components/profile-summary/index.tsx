@@ -20,9 +20,6 @@ export const ProfileSummary = ({
 
           <div className="ml-auto flex items-center gap-2">
             <Muted>
-              <span className="font-bold">{0}</span> Followers
-            </Muted>
-            <Muted>
               <span className="font-bold">{follows?.length || 0}</span> Following
             </Muted>
           </div>
