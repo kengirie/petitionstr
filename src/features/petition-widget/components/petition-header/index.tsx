@@ -23,7 +23,7 @@ import {
 import { useNoteHeader } from './hooks';
 
 export const NoteHeader = ({ event }: { event: NDKEvent }) => {
-  const { copy, navigate, profile, nevent, ref } = useNoteHeader(event);
+  const { copy, navigate, profile, naddr, ref } = useNoteHeader(event);
 
   return (
     <>
@@ -65,7 +65,7 @@ export const NoteHeader = ({ event }: { event: NDKEvent }) => {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent align="end" sideOffset={8}>
-              <DropdownMenuItem onClick={() => navigate(`/note/${nevent}`)}>
+              <DropdownMenuItem onClick={() => navigate(`/note/${naddr}`)}>
                 <SquareArrowOutUpRight className="w-4 h-4 mr-2" />
                 Open
               </DropdownMenuItem>
@@ -79,7 +79,7 @@ export const NoteHeader = ({ event }: { event: NDKEvent }) => {
                 Reactions
               </DropdownMenuItem>
 
-              <DropdownMenuItem onClick={() => copy(`${window.location.origin}/note/${nevent}`)}>
+              <DropdownMenuItem onClick={() => copy(`${window.location.origin}/note/${naddr}`)}>
                 <LinkIcon className="w-4 h-4 mr-2" />
                 Copy note link
               </DropdownMenuItem>
@@ -89,7 +89,7 @@ export const NoteHeader = ({ event }: { event: NDKEvent }) => {
                 Copy note text
               </DropdownMenuItem>
 
-              <DropdownMenuItem onClick={() => copy(nevent)}>
+              <DropdownMenuItem onClick={() => copy(naddr)}>
                 <TagIcon className="w-4 h-4 mr-2" />
                 Copy note ID
               </DropdownMenuItem>

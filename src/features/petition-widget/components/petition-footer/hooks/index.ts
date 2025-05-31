@@ -1,6 +1,6 @@
 import { NDKEvent } from '@nostr-dev-kit/ndk';
 import { useRealtimeProfile } from 'nostr-hooks';
-import { neventEncode } from 'nostr-tools/nip19';
+import { naddrEncode } from 'nostr-tools/nip19';
 import { useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useNavigate } from 'react-router-dom';
@@ -18,12 +18,12 @@ export const usePetitionFooter = (event: NDKEvent) => {
 
   const navigate = useNavigate();
 
-  const nevent = useMemo(
+  const naddr = useMemo(
     () =>
-      neventEncode({
-        id: event.id,
-        author: event.author.pubkey,
-        kind: event.kind,
+      naddrEncode({
+        identifier: event.tagValue('d') || event.id,
+        pubkey: event.author.pubkey,
+        kind: event.kind!,
         relays: event.onRelays.map((relay) => relay.url),
       }),
     [event],
@@ -34,6 +34,6 @@ export const usePetitionFooter = (event: NDKEvent) => {
     profile,
     copy,
     navigate,
-    nevent,
+    naddr,
   };
 };
