@@ -263,6 +263,7 @@ export const useNewPetitionWidget = () => {
     e.kind = 30023;
     e.content = content;
 
+
     // タグを設定
     e.tags = [
       ["title", title],

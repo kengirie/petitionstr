@@ -11,12 +11,12 @@ import { useNoteHeader } from '@/features/petition-widget/components/petition-he
 
 export const PetitionSearchResultItem = memo(
   ({ event }: { event: NDKEvent }) => {
-    const { nevent } = useNoteHeader(event);
+    const { naddr } = useNoteHeader(event);
 
     return (
       <div className="px-2">
         <Card className="border rounded-sm shadow-md bg-background transition-colors duration-500 ease-out hover:border-primary/30">
-          <Link to={`/petition/${nevent}`} className="block no-underline text-inherit">
+          <Link to={`/petition/${naddr}`} className="block no-underline text-inherit">
             <CardContent className="flex gap-4 p-4">
               <div className="w-24 flex-shrink-0">
                 <PetitionImage event={event} />

@@ -24,7 +24,7 @@ import {
 import { usePetitionFooter } from './hooks';
 
 export const PetitionFooter = ({ event }: { event: NDKEvent }) => {
-  const { copy, navigate, profile, nevent, ref } = usePetitionFooter(event);
+  const { copy, navigate, profile, naddr, ref } = usePetitionFooter(event);
   const isMobile = useIsMobile();
 
   return (
@@ -70,7 +70,7 @@ export const PetitionFooter = ({ event }: { event: NDKEvent }) => {
           </DropdownMenuTrigger>
 
           <DropdownMenuContent align="end" sideOffset={8}>
-            <DropdownMenuItem onClick={() => navigate(`/petition/${nevent}`)}>
+            <DropdownMenuItem onClick={() => navigate(`/petition/${naddr}`)}>
               <SquareArrowOutUpRight className="w-4 h-4 mr-2" />
               Open
             </DropdownMenuItem>
@@ -84,7 +84,7 @@ export const PetitionFooter = ({ event }: { event: NDKEvent }) => {
               Reactions
             </DropdownMenuItem>
 
-            <DropdownMenuItem onClick={() => copy(`${window.location.origin}/petition/${nevent}`)}>
+            <DropdownMenuItem onClick={() => copy(`${window.location.origin}/petition/${naddr}`)}>
               <LinkIcon className="w-4 h-4 mr-2" />
               Copy petition link
             </DropdownMenuItem>
@@ -94,7 +94,7 @@ export const PetitionFooter = ({ event }: { event: NDKEvent }) => {
               Copy petition text
             </DropdownMenuItem>
 
-            <DropdownMenuItem onClick={() => copy(nevent)}>
+            <DropdownMenuItem onClick={() => copy(naddr)}>
               <TagIcon className="w-4 h-4 mr-2" />
               Copy petition ID
             </DropdownMenuItem>
