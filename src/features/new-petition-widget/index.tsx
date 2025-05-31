@@ -4,13 +4,56 @@ import { Input } from '@/shared/components/ui/input';
 import { Textarea } from '@/shared/components/ui/textarea';
 import { UploadIcon, ImageIcon } from '@radix-ui/react-icons';
 import { Loader2Icon } from 'lucide-react';
-import { useCallback } from 'react';
+import { useCallback, useMemo, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import MDEditor, { commands, ICommand } from '@uiw/react-md-editor';
-
+import MarkdownPreview from '@uiw/react-markdown-preview';
+import { getComponent } from '@/features/petition-detail-widget';
 import { cn } from '@/shared/utils';
 
 import { useNewPetitionWidget } from './hooks';
+
+// メモ化されたMarkdownPreviewコンポーネント
+const MemoizedMarkdownPreview = memo(({ content }: { content: string }) => (
+  <MarkdownPreview
+    source={content}
+    rehypeRewrite={(node, _, parent) => {
+      if (
+        (node as any).tagName === 'a' &&
+        parent &&
+        /^h(1|2|3|4|5|6)/.test((parent as any).tagName)
+      ) {
+        parent.children = parent.children.slice(1);
+      }
+    }}
+    components={{
+      p: ({ children }) => {
+        return <>{getComponent(children)}</>;
+      },
+      h1: ({ children }) => {
+        return <h1 dir="auto">{children}</h1>;
+      },
+      h2: ({ children }) => {
+        return <h2 dir="auto">{children}</h2>;
+      },
+      h3: ({ children }) => {
+        return <h3 dir="auto">{children}</h3>;
+      },
+      h4: ({ children }) => {
+        return <h4 dir="auto">{children}</h4>;
+      },
+      h5: ({ children }) => {
+        return <h5 dir="auto">{children}</h5>;
+      },
+      h6: ({ children }) => {
+        return <h6 dir="auto">{children}</h6>;
+      },
+      li: ({ children }) => {
+        return <li dir="auto">{children}</li>;
+      },
+    }}
+  />
+));
 
 export const NewPetitionWidget = () => {
   const {
@@ -202,6 +245,9 @@ export const NewPetitionWidget = () => {
                 ]}
                 highlightEnable={false}
               />
+            </div>
+            <div className="markdown-content">
+              <MemoizedMarkdownPreview content={content} />
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 import { NDKEvent } from '@nostr-dev-kit/ndk';
 import { useNdk, useActiveUser } from 'nostr-hooks';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import { Spinner } from '@/shared/components/spinner';
 import { NoteHeader } from '@/features/note-widget/components/note-header';
@@ -148,7 +148,26 @@ const PetitionDetail = memo(
 
 
 
-const getComponent = (children: any) => {
+// メモ化されたNostrエンベッドコンポーネント
+const MemoizedNoteEmbed = memo(({ noteId, embedKey }: { noteId: string; embedKey: string }) => (
+  <div key={embedKey} className="-mx-2 py-2">
+    <NoteByNoteId noteId={noteId} />
+  </div>
+));
+
+const MemoizedPetitionEmbed = memo(({ petitionId, embedKey }: { petitionId: string; embedKey: string }) => (
+  <div key={embedKey} className="-mx-2 py-2">
+    <PetitionByPetitionId petitionId={petitionId} />
+  </div>
+));
+
+const MemoizedLink = memo(({ href, embedKey }: { href: string; embedKey: string }) => (
+  <a key={embedKey} href={href} className="text-blue-500 hover:underline">
+    {href}
+  </a>
+));
+
+export const getComponent = (children: any) => {
   if (!children) return children;
 
   // childrenが配列の場合、各要素を処理
@@ -169,7 +188,7 @@ const getComponent = (children: any) => {
   return children;
 };
 
-// nostr:リンクを処理する関数
+// nostr:リンクを処理する関数（メモ化対応）
 const processNostrLinks = (text: string, key: number) => {
   // nostr:で始まるリンクを検出する正規表現
   const nostrLinkRegex = /nostr:([a-zA-Z0-9]+)/g;
@@ -184,57 +203,70 @@ const processNostrLinks = (text: string, key: number) => {
     }
 
     const nostrId = match[1];
+    const embedKey = `embed-${nostrId}-${key}-${match.index}`;
 
     try {
       // nip19でデコードしてタイプを判定
       const decoded = nip19.decode(nostrId);
 
       if (decoded.type === 'note') {
-        // kind1の場合はNoteByNoteIdを使用
+        // kind1の場合はMemoizedNoteEmbedを使用
         parts.push(
-          <div key={`note-${key}-${match.index}`} className="-mx-2 py-2">
-            <NoteByNoteId noteId={decoded.data as string} />
-          </div>
+          <MemoizedNoteEmbed
+            key={embedKey}
+            noteId={decoded.data as string}
+            embedKey={embedKey}
+          />
         );
       } else if (decoded.type === 'nevent') {
         const eventData = decoded.data as { id: string; kind?: number };
 
         if (eventData.kind === 1) {
-          // kind1の場合はNoteByNoteIdを使用
+          // kind1の場合はMemoizedNoteEmbedを使用
           parts.push(
-            <div key={`note-${key}-${match.index}`} className="-mx-2 py-2">
-              <NoteByNoteId noteId={eventData.id} />
-            </div>
+            <MemoizedNoteEmbed
+              key={embedKey}
+              noteId={eventData.id}
+              embedKey={embedKey}
+            />
           );
         } else if (eventData.kind === 30023) {
-          // kind30023の場合はPetitionByPetitionIdを使用
+          // kind30023の場合はMemoizedPetitionEmbedを使用
           parts.push(
-            <div key={`petition-${key}-${match.index}`} className="-mx-2 py-2">
-              <PetitionByPetitionId petitionId={eventData.id} />
-            </div>
+            <MemoizedPetitionEmbed
+              key={embedKey}
+              petitionId={eventData.id}
+              embedKey={embedKey}
+            />
           );
         } else {
           // その他のkindの場合は通常のリンクとして表示
           parts.push(
-            <a key={`link-${key}-${match.index}`} href={match[0]} className="text-blue-500 hover:underline">
-              {match[0]}
-            </a>
+            <MemoizedLink
+              key={embedKey}
+              href={match[0]}
+              embedKey={embedKey}
+            />
           );
         }
       } else {
         // その他のタイプは通常のリンクとして表示
         parts.push(
-          <a key={`link-${key}-${match.index}`} href={match[0]} className="text-blue-500 hover:underline">
-            {match[0]}
-          </a>
+          <MemoizedLink
+            key={embedKey}
+            href={match[0]}
+            embedKey={embedKey}
+          />
         );
       }
     } catch (error) {
       // デコードに失敗した場合は通常のリンクとして表示
       parts.push(
-        <a key={`link-${key}-${match.index}`} href={match[0]} className="text-blue-500 hover:underline">
-          {match[0]}
-        </a>
+        <MemoizedLink
+          key={embedKey}
+          href={match[0]}
+          embedKey={embedKey}
+        />
       );
     }
 
