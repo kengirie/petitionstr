@@ -4,13 +4,16 @@ import { Input } from '@/shared/components/ui/input';
 import { Textarea } from '@/shared/components/ui/textarea';
 import { UploadIcon, ImageIcon } from '@radix-ui/react-icons';
 import { Loader2Icon } from 'lucide-react';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import MDEditor, { commands, ICommand } from '@uiw/react-md-editor';
-
+import { getComponent } from '@/features/petition-detail-widget';
 import { cn } from '@/shared/utils';
 
 import { useNewPetitionWidget } from './hooks';
+
+// メモ化されたMarkdownPreviewコンポーネント
+
 
 export const NewPetitionWidget = () => {
   const {
@@ -39,6 +42,36 @@ export const NewPetitionWidget = () => {
       setContent(value);
     }
   }, [setContent]);
+
+  // previewOptionsをメモ化して再レンダリングを防ぐ
+  const previewOptions = useMemo(() => ({
+    components: {
+      p: (props: any) => {
+        return <>{getComponent(props.children)}</>;
+      },
+      h1: (props: any) => {
+        return <h1 dir="auto" {...props}>{props.children}</h1>;
+      },
+      h2: (props: any) => {
+        return <h2 dir="auto" {...props}>{props.children}</h2>;
+      },
+      h3: (props: any) => {
+        return <h3 dir="auto" {...props}>{props.children}</h3>;
+      },
+      h4: (props: any) => {
+        return <h4 dir="auto" {...props}>{props.children}</h4>;
+      },
+      h5: (props: any) => {
+        return <h5 dir="auto" {...props}>{props.children}</h5>;
+      },
+      h6: (props: any) => {
+        return <h6 dir="auto" {...props}>{props.children}</h6>;
+      },
+      li: (props: any) => {
+        return <li dir="auto" {...props}>{props.children}</li>;
+      },
+    }
+  }), []);
 
   // NIP-96画像アップロードのカスタムコマンド
   const imageUploadCommand: ICommand = {
@@ -201,7 +234,8 @@ export const NewPetitionWidget = () => {
                   commands.divider,
                 ]}
                 highlightEnable={false}
-              />
+                previewOptions={previewOptions}
+                  />
             </div>
           </div>
 

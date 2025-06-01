@@ -1,6 +1,6 @@
 import { NDKEvent } from '@nostr-dev-kit/ndk';
 import { useNdk, useActiveUser } from 'nostr-hooks';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Spinner } from '@/shared/components/spinner';
 import { NoteHeader } from '@/features/note-widget/components/note-header';
@@ -148,14 +148,136 @@ const PetitionDetail = memo(
 
 
 
-const getComponent = (children: any) => {
+// メモ化されたNostrエンベッドコンポーネント
+const MemoizedNoteEmbed = memo(({ noteId, embedKey }: { noteId: string; embedKey: string }) => (
+  <div key={embedKey} className="-mx-2 py-2">
+    <NoteByNoteId noteId={noteId} />
+  </div>
+));
+
+const MemoizedPetitionEmbed = memo(({ petitionId, embedKey }: { petitionId: string; embedKey: string }) => (
+  <div key={embedKey} className="-mx-2 py-2">
+    <PetitionByPetitionId petitionId={petitionId} />
+  </div>
+));
+
+const MemoizedLink = memo(({ href, embedKey }: { href: string; embedKey: string }) => (
+  <a key={embedKey} href={href} className="text-blue-500 hover:underline">
+    {href}
+  </a>
+));
+
+// メモ化されたテキスト処理コンポーネント
+const MemoizedTextProcessor = memo(({ text, keyIndex }: { text: string; keyIndex: number }) => {
+  const processedContent = useMemo(() => {
+    // nostr:で始まるリンクを検出する正規表現
+    const nostrLinkRegex = /nostr:([a-zA-Z0-9]+)/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = nostrLinkRegex.exec(text)) !== null) {
+      // マッチ前のテキストを追加
+      if (match.index > lastIndex) {
+        parts.push(text.slice(lastIndex, match.index));
+      }
+
+      const nostrId = match[1];
+      const embedKey = `embed-${nostrId}-${keyIndex}-${match.index}`;
+
+      try {
+        // nip19でデコードしてタイプを判定
+        const decoded = nip19.decode(nostrId);
+
+        if (decoded.type === 'note') {
+          // kind1の場合はMemoizedNoteEmbedを使用
+          parts.push(
+            <MemoizedNoteEmbed
+              key={embedKey}
+              noteId={decoded.data as string}
+              embedKey={embedKey}
+            />
+          );
+        } else if (decoded.type === 'nevent') {
+          const eventData = decoded.data as { id: string; kind?: number };
+
+          if (eventData.kind === 1) {
+            // kind1の場合はMemoizedNoteEmbedを使用
+            parts.push(
+              <MemoizedNoteEmbed
+                key={embedKey}
+                noteId={eventData.id}
+                embedKey={embedKey}
+              />
+            );
+          } else if (eventData.kind === 30023) {
+            // kind30023の場合はMemoizedPetitionEmbedを使用
+            parts.push(
+              <MemoizedPetitionEmbed
+                key={embedKey}
+                petitionId={eventData.id}
+                embedKey={embedKey}
+              />
+            );
+          } else {
+            // その他のkindの場合は通常のリンクとして表示
+            parts.push(
+              <MemoizedLink
+                key={embedKey}
+                href={match[0]}
+                embedKey={embedKey}
+              />
+            );
+          }
+        } else {
+          // その他のタイプは通常のリンクとして表示
+          parts.push(
+            <MemoizedLink
+              key={embedKey}
+              href={match[0]}
+              embedKey={embedKey}
+            />
+          );
+        }
+      } catch (error) {
+        // デコードに失敗した場合は通常のリンクとして表示
+        parts.push(
+          <MemoizedLink
+            key={embedKey}
+            href={match[0]}
+            embedKey={embedKey}
+          />
+        );
+      }
+
+      lastIndex = nostrLinkRegex.lastIndex;
+    }
+
+    // 残りのテキストを追加
+    if (lastIndex < text.length) {
+      parts.push(text.slice(lastIndex));
+    }
+
+    return parts;
+  }, [text, keyIndex]);
+
+  // パーツが1つだけで文字列の場合はそのまま返す
+  if (processedContent.length === 1 && typeof processedContent[0] === 'string') {
+    return <>{processedContent[0]}</>;
+  }
+
+  // 複数のパーツがある場合はフラグメントで包む
+  return <>{processedContent}</>;
+});
+
+export const getComponent = (children: any) => {
   if (!children) return children;
 
   // childrenが配列の場合、各要素を処理
   if (Array.isArray(children)) {
     return children.map((child, index) => {
       if (typeof child === 'string') {
-        return processNostrLinks(child, index);
+        return <MemoizedTextProcessor key={index} text={child} keyIndex={index} />;
       }
       return child;
     });
@@ -163,94 +285,8 @@ const getComponent = (children: any) => {
 
   // childrenが文字列の場合、nostr:リンクを処理
   if (typeof children === 'string') {
-    return processNostrLinks(children, 0);
+    return <MemoizedTextProcessor text={children} keyIndex={0} />;
   }
 
   return children;
-};
-
-// nostr:リンクを処理する関数
-const processNostrLinks = (text: string, key: number) => {
-  // nostr:で始まるリンクを検出する正規表現
-  const nostrLinkRegex = /nostr:([a-zA-Z0-9]+)/g;
-  const parts = [];
-  let lastIndex = 0;
-  let match;
-
-  while ((match = nostrLinkRegex.exec(text)) !== null) {
-    // マッチ前のテキストを追加
-    if (match.index > lastIndex) {
-      parts.push(text.slice(lastIndex, match.index));
-    }
-
-    const nostrId = match[1];
-
-    try {
-      // nip19でデコードしてタイプを判定
-      const decoded = nip19.decode(nostrId);
-
-      if (decoded.type === 'note') {
-        // kind1の場合はNoteByNoteIdを使用
-        parts.push(
-          <div key={`note-${key}-${match.index}`} className="-mx-2 py-2">
-            <NoteByNoteId noteId={decoded.data as string} />
-          </div>
-        );
-      } else if (decoded.type === 'nevent') {
-        const eventData = decoded.data as { id: string; kind?: number };
-
-        if (eventData.kind === 1) {
-          // kind1の場合はNoteByNoteIdを使用
-          parts.push(
-            <div key={`note-${key}-${match.index}`} className="-mx-2 py-2">
-              <NoteByNoteId noteId={eventData.id} />
-            </div>
-          );
-        } else if (eventData.kind === 30023) {
-          // kind30023の場合はPetitionByPetitionIdを使用
-          parts.push(
-            <div key={`petition-${key}-${match.index}`} className="-mx-2 py-2">
-              <PetitionByPetitionId petitionId={eventData.id} />
-            </div>
-          );
-        } else {
-          // その他のkindの場合は通常のリンクとして表示
-          parts.push(
-            <a key={`link-${key}-${match.index}`} href={match[0]} className="text-blue-500 hover:underline">
-              {match[0]}
-            </a>
-          );
-        }
-      } else {
-        // その他のタイプは通常のリンクとして表示
-        parts.push(
-          <a key={`link-${key}-${match.index}`} href={match[0]} className="text-blue-500 hover:underline">
-            {match[0]}
-          </a>
-        );
-      }
-    } catch (error) {
-      // デコードに失敗した場合は通常のリンクとして表示
-      parts.push(
-        <a key={`link-${key}-${match.index}`} href={match[0]} className="text-blue-500 hover:underline">
-          {match[0]}
-        </a>
-      );
-    }
-
-    lastIndex = nostrLinkRegex.lastIndex;
-  }
-
-  // 残りのテキストを追加
-  if (lastIndex < text.length) {
-    parts.push(text.slice(lastIndex));
-  }
-
-  // パーツが1つだけで文字列の場合はそのまま返す
-  if (parts.length === 1 && typeof parts[0] === 'string') {
-    return parts[0];
-  }
-
-  // 複数のパーツがある場合はフラグメントで包む
-  return <>{parts}</>;
 };
