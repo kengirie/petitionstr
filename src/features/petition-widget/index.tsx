@@ -1,6 +1,7 @@
 import { NDKEvent } from '@nostr-dev-kit/ndk';
 import { useNdk } from 'nostr-hooks';
 import { memo, useEffect, useState } from 'react';
+import { nip19 } from 'nostr-tools';
 
 import { Spinner } from '@/shared/components/spinner';
 import { Link } from 'react-router-dom';
@@ -65,9 +66,36 @@ export const PetitionByPetitionId = memo(
         return;
       }
 
-      ndk.fetchEvent(petitionId).then((event) => {
-        setEvent(event);
-      });
+
+
+      const fetchPetition = async () => {
+        try {
+          let event: NDKEvent | null = null;
+
+          // petitionIdがnaddr形式かどうかを判定
+
+            const decoded = nip19.decode(petitionId);
+            if (decoded.type === 'naddr') {
+              const { identifier, pubkey, kind } = decoded.data;
+
+              // 置換可能イベント用のフィルターを作成
+              const filter = {
+                kinds: [kind],
+                authors: [pubkey],
+                '#d': [identifier],
+              };
+
+              // イベントを検索
+              event = await ndk.fetchEvent(filter);
+            }
+          setEvent(event);
+        } catch (error) {
+          console.error('Failed to fetch petition:', error);
+          setEvent(null);
+        }
+      };
+
+      fetchPetition();
     }, [petitionId, ndk, setEvent]);
 
     return (
