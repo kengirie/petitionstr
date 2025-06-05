@@ -29,9 +29,34 @@ export const PetitionDetailWidget = memo(
         return;
       }
 
-      ndk.fetchEvent(petitionId).then((event) => {
-        setEvent(event);
-      });
+      const fetchPetition = async () => {
+        try {
+          let event: NDKEvent | null = null;
+
+          // naddrをデコード
+            const decoded = nip19.decode(petitionId);
+            if (decoded.type === 'naddr') {
+              const { identifier, pubkey, kind } = decoded.data;
+
+              // 置換可能イベント用のフィルターを作成
+              const filter = {
+                kinds: [kind],
+                authors: [pubkey],
+                '#d': [identifier],
+              };
+
+              // イベントを検索
+              event = await ndk.fetchEvent(filter);
+            }
+          console.log('event', event);
+          setEvent(event);
+        } catch (error) {
+          console.error('Failed to fetch petition:', error);
+          setEvent(null);
+        }
+      };
+
+      fetchPetition();
     }, [petitionId, ndk, setEvent]);
 
     if (event === undefined) {
